@@ -6,371 +6,409 @@
   <title>HR·노무 데일리 브리핑</title>
   <style>
     :root {
-      --blue:  #1e40af;
-      --blue2: #2563eb;
-      --green: #15803d;
-      --amber: #b45309;
-      --red:   #b91c1c;
-      --bg:    #f1f5f9;
-      --card:  #ffffff;
+      --bg:       #f4f5f7;
+      --card:     #ffffff;
+      --border:   #e5e7eb;
+      --t1:       #111827;
+      --t2:       #6b7280;
+      --t3:       #9ca3af;
+      --blue:     #1d4ed8;
+      --green:    #065f46;
+      --amber:    #92400e;
+      --red:      #9b1c1c;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Apple SD Gothic Neo',
+                   'Noto Sans KR', sans-serif;
       background: var(--bg);
-      color: #1e293b;
+      color: var(--t1);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      font-size: 14px;
+      line-height: 1.6;
     }
 
-    /* ── 헤더 ── */
+    /* ── 헤더 ────────────────────────────────────────── */
     header {
-      background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
-      color: white;
-      padding: 18px 32px;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      height: 56px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
     }
-    header h1 { font-size: 1.35rem; font-weight: 800; letter-spacing: -.3px; }
-    header h1 span { opacity: .7; font-size: .8rem; font-weight: 400; display: block; margin-bottom: 2px; }
-    .header-meta { font-size: .75rem; opacity: .7; text-align: right; line-height: 1.6; }
-
-    /* ── 안내 바 ── */
-    .notice-bar {
-      background: #fef9c3;
-      border-left: 4px solid #eab308;
-      padding: 9px 24px;
-      font-size: .81rem;
-      color: #713f12;
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
+    .logo-box {
+      width: 30px; height: 30px;
+      background: var(--blue);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; color: #fff;
+    }
+    .logo-text { font-size: .95rem; font-weight: 800; letter-spacing: -.3px; }
+    #header-meta { font-size: .75rem; color: var(--t3); }
 
-    /* ══════════════════════════════════
-       ── 랜딩 배너 ──
-    ══════════════════════════════════ */
-    #landing-section {
+    /* ── 랜딩 ────────────────────────────────────────── */
+    #landing {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 60px 20px;
+      padding: 80px 20px;
     }
-    .landing-wrap { text-align: center; max-width: 540px; }
-    .today-chip {
+    .landing-inner {
+      text-align: center;
+      max-width: 420px;
+    }
+    .date-tag {
       display: inline-block;
-      background: #e0e7ff; color: #3730a3;
-      font-size: .8rem; font-weight: 700;
-      padding: 5px 16px; border-radius: 99px;
-      margin-bottom: 22px;
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--blue);
+      background: #eff6ff;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 28px;
     }
     .landing-title {
-      font-size: 2.1rem; font-weight: 800;
-      color: #0f172a; line-height: 1.25; margin-bottom: 14px;
+      font-size: 1.9rem;
+      font-weight: 800;
+      letter-spacing: -.5px;
+      line-height: 1.25;
+      color: var(--t1);
+      margin-bottom: 14px;
     }
-    .landing-sub {
-      font-size: .95rem; color: #475569; line-height: 1.75; margin-bottom: 36px;
+    .landing-desc {
+      font-size: .88rem;
+      color: var(--t2);
+      line-height: 1.75;
+      margin-bottom: 40px;
     }
-    .landing-sub strong { color: #1e293b; }
+    .btn-start {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 13px 34px;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(29,78,216,.28);
+      transition: background .18s, box-shadow .18s, transform .18s;
+    }
+    .btn-start:hover:not(:disabled) {
+      background: #1e40af;
+      box-shadow: 0 6px 22px rgba(29,78,216,.38);
+      transform: translateY(-1px);
+    }
+    .btn-start:disabled { opacity: .65; cursor: not-allowed; transform: none; }
+    .landing-hint { margin-top: 16px; font-size: .72rem; color: var(--t3); }
 
-    /* 메인 버튼 */
-    .briefing-btn {
-      position: relative;
-      display: inline-flex; align-items: center; gap: 12px;
-      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-      color: white; border: none; border-radius: 16px;
-      padding: 18px 44px; font-size: 1.15rem; font-weight: 700;
-      cursor: pointer; box-shadow: 0 6px 24px rgba(37,99,235,.38);
-      transition: transform .18s, box-shadow .18s; letter-spacing: -.2px;
-    }
-    .briefing-btn:hover:not(:disabled) {
-      transform: translateY(-3px); box-shadow: 0 10px 32px rgba(37,99,235,.48);
-    }
-    .briefing-btn:active:not(:disabled) { transform: translateY(0); }
-    .briefing-btn:disabled { opacity: .75; cursor: not-allowed; }
-    .briefing-btn .btn-icon { font-size: 1.4rem; }
-    .briefing-btn::before {
-      content: ''; position: absolute; inset: -4px;
-      border-radius: 20px; border: 2px solid rgba(37,99,235,.4);
-      animation: pulse-ring 2.2s ease-out infinite;
-    }
-    @keyframes pulse-ring {
-      0%   { transform: scale(1); opacity: .8; }
-      70%  { transform: scale(1.06); opacity: 0; }
-      100% { opacity: 0; }
-    }
-    .landing-hint { margin-top: 18px; font-size: .76rem; color: #94a3b8; }
-
-    /* ══════════════════════════════════
-       ── 뉴스 그리드 ──
-    ══════════════════════════════════ */
+    /* ── 그리드 ──────────────────────────────────────── */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 22px; padding: 24px 28px;
-      max-width: 1440px; margin: 0 auto; width: 100%;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 18px;
+      padding: 22px 28px 40px;
+      max-width: 1440px;
+      margin: 0 auto;
+      width: 100%;
     }
 
-    /* ── 카드 ── */
+    /* ── 카드 ────────────────────────────────────────── */
     .card {
-      background: var(--card); border-radius: 14px;
-      box-shadow: 0 1px 6px rgba(0,0,0,.08);
-      overflow: hidden; display: flex; flex-direction: column;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 1px 3px rgba(0,0,0,.05);
     }
-    .card-header {
-      padding: 14px 16px 12px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .card-header .icon {
-      width: 34px; height: 34px; border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; flex-shrink: 0;
-    }
-    .card-header h2 { font-size: .93rem; font-weight: 700; flex: 1; }
-    .count { font-size: .73rem; padding: 2px 9px; border-radius: 99px; font-weight: 600; flex-shrink: 0; }
 
-    .refresh-btn {
-      width: 30px; height: 30px; border: none; border-radius: 8px;
-      background: #f1f5f9; color: #64748b; font-size: 1.05rem;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: background .15s, color .15s; flex-shrink: 0; font-weight: 700;
+    /* 카드 헤더 */
+    .card-head {
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      border-bottom: 1px solid var(--border);
     }
-    .refresh-btn:hover:not(:disabled) { background: #e2e8f0; color: #1e293b; }
-    .refresh-btn:disabled { opacity: .5; cursor: not-allowed; }
-    .refresh-btn.spinning { animation: spin .65s linear infinite; }
+    .cat-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+    }
+    .cat-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .card-law  .cat-dot { background: var(--blue); }
+    .card-case .cat-dot { background: var(--green); }
+    .card-hr   .cat-dot { background: var(--amber); }
+    .card-gov  .cat-dot { background: var(--red); }
+
+    .card-head h2 {
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--t1);
+    }
+    .cnt {
+      font-size: .7rem;
+      font-weight: 600;
+      color: var(--t3);
+      background: var(--bg);
+      padding: 2px 8px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .rbtn {
+      width: 28px; height: 28px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      color: var(--t3);
+      font-size: .95rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .15s;
+      flex-shrink: 0;
+    }
+    .rbtn:hover:not(:disabled) { background: var(--bg); color: var(--t1); }
+    .rbtn:disabled { opacity: .35; cursor: not-allowed; }
+    .rbtn.spinning { animation: spin .65s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* 카드 색상 */
-    .card-law  .card-header { background: #eff6ff; border-bottom: 2px solid #bfdbfe; }
-    .card-law  .icon        { background: #dbeafe; color: var(--blue2); }
-    .card-law  .count       { background: #dbeafe; color: var(--blue2); }
-    .card-law  h2           { color: var(--blue); }
-
-    .card-case .card-header { background: #f0fdf4; border-bottom: 2px solid #bbf7d0; }
-    .card-case .icon        { background: #dcfce7; color: var(--green); }
-    .card-case .count       { background: #dcfce7; color: var(--green); }
-    .card-case h2           { color: var(--green); }
-
-    .card-hr   .card-header { background: #fffbeb; border-bottom: 2px solid #fde68a; }
-    .card-hr   .icon        { background: #fef3c7; color: var(--amber); }
-    .card-hr   .count       { background: #fef3c7; color: var(--amber); }
-    .card-hr   h2           { color: var(--amber); }
-
-    .card-gov  .card-header { background: #fff1f2; border-bottom: 2px solid #fecdd3; }
-    .card-gov  .icon        { background: #fee2e2; color: var(--red); }
-    .card-gov  .count       { background: #fee2e2; color: var(--red); }
-    .card-gov  h2           { color: var(--red); }
-
-    /* 타임스탬프 바 */
-    .rts-bar {
-      padding: 4px 14px; font-size: .7rem; color: #94a3b8;
-      background: #f8fafc; border-bottom: 1px solid #f1f5f9;
-      min-height: 22px; display: flex; align-items: center;
+    /* 상태바 */
+    .sbar {
+      padding: 4px 18px;
+      font-size: .68rem;
+      color: var(--t3);
+      background: #fafafa;
+      border-bottom: 1px solid #f3f4f6;
+      min-height: 22px;
+      line-height: 22px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    /* ══════════════════════════════════
-       ── 기사 카드 아이템 ──
-    ══════════════════════════════════ */
-    .items { padding: 6px 0; flex: 1; }
+    /* 아이템 목록 */
+    .items { flex: 1; }
 
-    .item {
-      padding: 14px 16px;
-      border-bottom: 1px solid #f1f5f9;
+    /* 개별 뉴스 아이템 */
+    .nitem {
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid #f3f4f6;
     }
-    .item:last-child { border-bottom: none; }
+    .nitem:last-child { border-bottom: none; }
 
-    /* 제목 줄 */
-    .item-top {
-      display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px;
-    }
-    .badge {
-      font-size: .68rem; padding: 2px 7px; border-radius: 4px;
-      font-weight: 700; white-space: nowrap; flex-shrink: 0; margin-top: 2px;
-    }
-    .badge-kr { background: #e0e7ff; color: #3730a3; }
-    .badge-gl { background: #f3f4f6; color: #374151; }
-
-    .item-title {
-      font-size: .92rem; font-weight: 700; color: #0f172a; line-height: 1.45;
+    /* 제목 */
+    .ntitle {
+      font-size: .92rem;
+      font-weight: 700;
+      color: var(--t1);
+      line-height: 1.45;
+      margin-bottom: 14px;
     }
 
-    /* ── 요약 블록 (배경/주요내용/시사점) ── */
-    .item-summary {
-      background: #f8fafc; border-radius: 10px;
-      padding: 10px 12px; margin-bottom: 10px;
-      display: flex; flex-direction: column; gap: 8px;
+    /* 요약 블록 */
+    .summary-block {
+      border-top: 1px solid #f3f4f6;
+      margin-bottom: 12px;
     }
-    .sum-row {
-      display: flex; gap: 10px; align-items: flex-start;
+    .srow {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid #f3f4f6;
     }
-    .sum-label {
-      font-size: .7rem; font-weight: 700;
-      padding: 3px 8px; border-radius: 5px;
-      white-space: nowrap; flex-shrink: 0; margin-top: 1px;
-      letter-spacing: -.2px;
+    .srow:last-child { border-bottom: none; }
+    .slabel {
+      font-size: .68rem;
+      font-weight: 700;
+      color: var(--t3);
+      white-space: nowrap;
+      flex-shrink: 0;
+      width: 52px;
+      padding-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: .3px;
     }
-    .sum-bg   { background: #dbeafe; color: #1e40af; }
-    .sum-main { background: #dcfce7; color: #15803d; }
-    .sum-impl { background: #fef3c7; color: #b45309; }
-    .sum-text { font-size: .82rem; color: #374151; line-height: 1.6; }
-
-    /* desc fallback */
-    .item-desc {
-      font-size: .82rem; color: #475569; line-height: 1.55; margin-bottom: 10px;
-    }
-
-    /* 하단 메타 + 원문 버튼 */
-    .item-footer {
-      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-    }
-    .item-source { font-size: .72rem; color: #94a3b8; }
-    .item-date   { font-size: .72rem; color: #94a3b8; }
-    .item-date::before { content: '·'; margin-right: 4px; }
-
-    .read-more {
-      margin-left: auto;
-      display: inline-flex; align-items: center; gap: 4px;
-      font-size: .78rem; font-weight: 600;
-      color: var(--blue2); text-decoration: none;
-      padding: 4px 12px; border: 1.5px solid var(--blue2);
-      border-radius: 7px; transition: all .15s; white-space: nowrap;
-    }
-    .read-more:hover { background: var(--blue2); color: white; }
-
-    /* ── 상태 박스 ── */
-    .state-box {
-      padding: 32px 16px; text-align: center;
-      color: #94a3b8; font-size: .85rem; line-height: 1.7;
-    }
-    .state-box .icon { font-size: 2rem; display: block; margin-bottom: 8px; }
-    .state-box.error {
-      color: #b91c1c; background: #fff1f2;
-      margin: 10px 14px; border-radius: 8px; padding: 14px;
+    .stext {
+      font-size: .84rem;
+      color: #374151;
+      line-height: 1.65;
     }
 
-    .spin-inline { display: inline-block; animation: spin .65s linear infinite; }
+    /* desc 폴백 */
+    .ndesc {
+      font-size: .84rem;
+      color: var(--t2);
+      line-height: 1.65;
+      margin-bottom: 12px;
+      padding-top: 4px;
+    }
 
     /* 푸터 */
-    footer {
-      text-align: center; padding: 22px;
-      font-size: .74rem; color: #94a3b8; margin-top: auto;
+    .nfooter {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
     }
-    footer a { color: #94a3b8; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+    .nmeta {
+      font-size: .7rem;
+      color: var(--t3);
+    }
+    .nlink {
+      margin-left: auto;
+      font-size: .74rem;
+      font-weight: 600;
+      color: var(--blue);
+      text-decoration: none;
+      padding: 3px 10px;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      background: #eff6ff;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .nlink:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+    /* 상태 박스 */
+    .statebox {
+      padding: 44px 20px;
+      text-align: center;
+      color: var(--t3);
+      font-size: .84rem;
+      line-height: 1.8;
+    }
+    .statebox .si { font-size: 1.8rem; display: block; margin-bottom: 10px; }
+    .statebox.err { color: #9b1c1c; background: #fef2f2; }
+    .spin-i { display: inline-block; animation: spin .65s linear infinite; }
+
+    /* 페이지 푸터 */
+    footer {
+      border-top: 1px solid var(--border);
+      background: #fff;
+      text-align: center;
+      padding: 20px;
+      font-size: .72rem;
+      color: var(--t3);
+    }
 
     @media (max-width: 640px) {
-      header { padding: 14px 16px; }
-      header h1 { font-size: 1.1rem; }
-      .grid { padding: 12px; gap: 14px; }
+      header { padding: 0 16px; }
+      .grid { padding: 12px 12px 32px; gap: 12px; grid-template-columns: 1fr; }
       .landing-title { font-size: 1.55rem; }
-      .briefing-btn { padding: 15px 28px; font-size: 1rem; }
+      .btn-start { padding: 12px 28px; }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>
-    <span>⚖️ HR · 노무관리</span>
-    데일리 브리핑
-  </h1>
-  <div class="header-meta" id="header-meta">매일 오전 9시 자동 업데이트</div>
+  <div class="logo">
+    <div class="logo-box">⚖</div>
+    <span class="logo-text">HR · 노무 데일리 브리핑</span>
+  </div>
+  <span id="header-meta">매일 오전 9시 자동 업데이트</span>
 </header>
 
-<div class="notice-bar">
-  📌 매일 오전 9시 자동 수집·AI 요약됩니다. 중요 사안은 반드시 전문가 확인 후 활용하세요.
-</div>
-
-<!-- ══════════════════════════════════════════
-     랜딩 배너
-══════════════════════════════════════════ -->
-<div id="landing-section">
-  <div class="landing-wrap">
-    <div class="today-chip" id="today-chip">📅 로딩 중...</div>
-    <h2 class="landing-title">오늘의 HR · 노무<br>데일리 브리핑</h2>
-    <p class="landing-sub">
-      <strong>노동법 개정</strong> · <strong>판례</strong> · <strong>HR 트렌드</strong> · <strong>고용부 가이드</strong><br>
-      카테고리별 최신 기사 5건, 배경·주요내용·시사점으로 요약
+<!-- 랜딩 -->
+<div id="landing">
+  <div class="landing-inner">
+    <div class="date-tag" id="date-tag">📅 로딩 중...</div>
+    <h1 class="landing-title">오늘의 HR · 노무<br>핵심 브리핑</h1>
+    <p class="landing-desc">
+      노동법 개정 · 판례 · HR 트렌드 · 고용부 가이드<br>
+      국내 기사 실시간 수집 후 배경·주요내용·시사점으로 요약
     </p>
-    <button class="briefing-btn" id="briefing-btn" onclick="startBriefing()">
-      <span class="btn-icon">📰</span>
-      데일리 브리핑 시작
+    <button class="btn-start" id="btn-start" onclick="startBriefing()">
+      📰&nbsp; 브리핑 시작
     </button>
-    <div class="landing-hint">출처: 매일노동뉴스 · HR Dive · HR Morning · Google 뉴스</div>
+    <p class="landing-hint">출처 : 매일노동뉴스 · Google 뉴스 (국내)</p>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════
-     뉴스 그리드
-══════════════════════════════════════════ -->
+<!-- 뉴스 그리드 -->
 <div class="grid" id="news-grid" style="display:none">
 
   <div class="card card-law">
-    <div class="card-header">
-      <div class="icon">📋</div>
-      <h2>노동법 개정 · 입법 동향</h2>
-      <span class="count" id="count-law">-</span>
-      <button class="refresh-btn" id="rbtn-law" onclick="refreshCategory('law')" title="새로고침">↻</button>
+    <div class="card-head">
+      <div class="cat-pill"><div class="cat-dot"></div><h2>노동법 개정 · 입법 동향</h2></div>
+      <span class="cnt" id="cnt-law">-</span>
+      <button class="rbtn" id="rb-law" onclick="refreshCat('law')" title="새로고침">↻</button>
     </div>
-    <div class="rts-bar" id="rts-law"></div>
-    <div class="items" id="items-law">
-      <div class="state-box"><span class="icon spin-inline">↻</span>불러오는 중...</div>
+    <div class="sbar" id="sb-law"></div>
+    <div class="items" id="it-law">
+      <div class="statebox"><span class="si spin-i">↻</span>수집 중...</div>
     </div>
   </div>
 
   <div class="card card-case">
-    <div class="card-header">
-      <div class="icon">⚖️</div>
-      <h2>대법원 · 행정법원 판례</h2>
-      <span class="count" id="count-cases">-</span>
-      <button class="refresh-btn" id="rbtn-cases" onclick="refreshCategory('cases')" title="새로고침">↻</button>
+    <div class="card-head">
+      <div class="cat-pill"><div class="cat-dot"></div><h2>대법원 · 행정법원 판례</h2></div>
+      <span class="cnt" id="cnt-cases">-</span>
+      <button class="rbtn" id="rb-cases" onclick="refreshCat('cases')" title="새로고침">↻</button>
     </div>
-    <div class="rts-bar" id="rts-cases"></div>
-    <div class="items" id="items-cases">
-      <div class="state-box"><span class="icon spin-inline">↻</span>불러오는 중...</div>
+    <div class="sbar" id="sb-cases"></div>
+    <div class="items" id="it-cases">
+      <div class="statebox"><span class="si spin-i">↻</span>수집 중...</div>
     </div>
   </div>
 
   <div class="card card-hr">
-    <div class="card-header">
-      <div class="icon">💼</div>
-      <h2>HR 트렌드 · 인사관리</h2>
-      <span class="count" id="count-hr">-</span>
-      <button class="refresh-btn" id="rbtn-hr" onclick="refreshCategory('hr')" title="새로고침">↻</button>
+    <div class="card-head">
+      <div class="cat-pill"><div class="cat-dot"></div><h2>HR 트렌드 · 인사관리</h2></div>
+      <span class="cnt" id="cnt-hr">-</span>
+      <button class="rbtn" id="rb-hr" onclick="refreshCat('hr')" title="새로고침">↻</button>
     </div>
-    <div class="rts-bar" id="rts-hr"></div>
-    <div class="items" id="items-hr">
-      <div class="state-box"><span class="icon spin-inline">↻</span>불러오는 중...</div>
+    <div class="sbar" id="sb-hr"></div>
+    <div class="items" id="it-hr">
+      <div class="statebox"><span class="si spin-i">↻</span>수집 중...</div>
     </div>
   </div>
 
   <div class="card card-gov">
-    <div class="card-header">
-      <div class="icon">🏛️</div>
-      <h2>고용부 행정해석 · 가이드</h2>
-      <span class="count" id="count-gov">-</span>
-      <button class="refresh-btn" id="rbtn-gov" onclick="refreshCategory('gov')" title="새로고침">↻</button>
+    <div class="card-head">
+      <div class="cat-pill"><div class="cat-dot"></div><h2>고용부 행정해석 · 가이드</h2></div>
+      <span class="cnt" id="cnt-gov">-</span>
+      <button class="rbtn" id="rb-gov" onclick="refreshCat('gov')" title="새로고침">↻</button>
     </div>
-    <div class="rts-bar" id="rts-gov"></div>
-    <div class="items" id="items-gov">
-      <div class="state-box"><span class="icon spin-inline">↻</span>불러오는 중...</div>
+    <div class="sbar" id="sb-gov"></div>
+    <div class="items" id="it-gov">
+      <div class="statebox"><span class="si spin-i">↻</span>수집 중...</div>
     </div>
   </div>
 
 </div>
 
-<footer>
-  HR Daily Briefing · 매일노동뉴스 · HR Dive · HR Morning · Google 뉴스 · AI 요약 by Claude ·
-  <a href="https://github.com/hjk77246-png/hr-daily" target="_blank">GitHub</a>
-</footer>
+<footer>HR 데일리 브리핑 · 출처: 매일노동뉴스, Google 뉴스 (국내) · AI 요약: Pollinations AI</footer>
 
 <script>
-// ══════════════════════════════════════════════════════════
-// 상수 & 설정
-// ══════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════
+// 설정
+// ══════════════════════════════════════════════════
 
-const CORS_PROXIES = [
+const PROXIES = [
   u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
   u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
 ];
@@ -382,137 +420,131 @@ const CAT_LABEL = {
   gov:   '고용부 행정해석·가이드',
 };
 
-const CAT_KEYWORDS = {
-  cases: ['판결','판례','대법원','고등법원','지방법원','행정법원','노동위원회','판정',
-          '부당해고','부당노동행위','소송','선고','원고','피고','취소 판결'],
-  gov:   ['고용노동부','노동부','행정해석','가이드라인','지침','고시','공고','보도자료',
-          '근로감독','노동청','지원사업','지원금','일자리','장관','차관'],
+const CAT_KW = {
+  cases: ['판결','판례','대법원','고등법원','지방법원','행정법원','노동위원회',
+          '판정','부당해고','부당노동행위','소송','선고','취소 판결'],
+  gov:   ['고용노동부','노동부','행정해석','가이드라인','지침','고시','공고',
+          '보도자료','근로감독','노동청','지원금','일자리','장관','차관'],
   law:   ['개정','입법','법안','제정','법률안','시행령','최저임금법','근로기준법',
-          '비정규직','보호법','최저임금','주52시간','탄력근로','선택근로','연장근로','국회'],
+          '비정규직','보호법','최저임금','주52시간','탄력근로','연장근로','국회'],
   hr:    ['채용','인사','복리후생','유연근무','재택근무','직무','역량','승진','연봉',
-          '조직문화','인재','리더십','MZ세대','번아웃','몰입','성과관리','다양성'],
+          '조직문화','인재','리더십','MZ세대','번아웃','몰입','성과관리'],
 };
 
-const CAT_EXTRA = {
-  hr: [
-    { url: 'https://www.hrdive.com/feeds/news/',  label: 'HR Dive',    region: '글로벌' },
-    { url: 'https://www.hrmorning.com/feed/',      label: 'HR Morning', region: '글로벌' },
-  ],
+// 국내 소스만 사용
+const LABORTODAY = 'http://www.labortoday.co.kr/rss/allArticle.xml';
+const GNEWS = {
+  law:   'https://news.google.com/rss/search?q=노동법+개정+입법+법안&hl=ko&gl=KR&ceid=KR:ko',
+  cases: 'https://news.google.com/rss/search?q=대법원+노동+판결+부당해고&hl=ko&gl=KR&ceid=KR:ko',
+  hr:    'https://news.google.com/rss/search?q=HR+인사관리+조직문화+채용&hl=ko&gl=KR&ceid=KR:ko',
+  gov:   'https://news.google.com/rss/search?q=고용노동부+행정해석+지침+가이드라인&hl=ko&gl=KR&ceid=KR:ko',
 };
 
-const LABORTODAY_URL = 'http://www.labortoday.co.kr/rss/allArticle.xml';
+// ══════════════════════════════════════════════════
+// 유틸
+// ══════════════════════════════════════════════════
 
-// ══════════════════════════════════════════════════════════
-// 유틸리티
-// ══════════════════════════════════════════════════════════
+const esc = s => String(s)
+  .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
-function todayKST() {
-  return new Date().toLocaleDateString('ko-KR', {
-    timeZone: 'Asia/Seoul', year:'numeric', month:'long', day:'numeric', weekday:'long'
+function todayStr() {
+  return new Date().toLocaleDateString('ko-KR',
+    { timeZone:'Asia/Seoul', year:'numeric', month:'long', day:'numeric', weekday:'long' });
+}
+
+function isRecent(iso) {
+  if (!iso) return true;
+  const d = Date.now() - new Date(iso).getTime();
+  return d >= -(12*3600000) && d <= 48*3600000;
+}
+
+function dedup(arr) {
+  const s = new Set();
+  return arr.filter(x => {
+    const k = x.title.slice(0,40).toLowerCase();
+    return s.has(k) ? false : (s.add(k), true);
   });
 }
 
-function isRecent(isoDate) {
-  if (!isoDate) return true;
-  const diff = Date.now() - new Date(isoDate).getTime();
-  return diff >= -(12 * 3600000) && diff <= 48 * 3600000;
+// 외국어 제목 판별 (한글 포함 여부)
+function isKorean(title) {
+  return /[가-힣]/.test(title);
 }
 
-function esc(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+// ══════════════════════════════════════════════════
+// RSS
+// ══════════════════════════════════════════════════
 
-function dedup(items) {
-  const seen = new Set();
-  return items.filter(item => {
-    const key = item.title.slice(0,40).toLowerCase();
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
-}
-
-// ══════════════════════════════════════════════════════════
-// RSS 파싱
-// ══════════════════════════════════════════════════════════
-
-function parseRSS(xml, region, sourceLabel) {
-  const items = [];
-  const re = /<item>([\s\S]*?)<\/item>/g;
-  let m;
-  while ((m = re.exec(xml)) !== null) {
-    const block = m[1];
-    const get = tag => {
-      const r = block.match(new RegExp(`<${tag}[^>]*>(?:<!\\[CDATA\\[)?([\\s\\S]*?)(?:\\]\\]>)?<\\/${tag}>`, 'i'));
-      return r ? r[1].trim() : '';
-    };
-    const clean = s => s
-      .replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<')
-      .replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'")
-      .replace(/\s+/g,' ').trim();
-
-    const rawTitle = clean(get('title'));
-    if (!rawTitle || rawTitle.length < 4) continue;
-
-    const parts = rawTitle.split(' - ');
-    const title  = parts.length > 1 ? parts.slice(0,-1).join(' - ') : rawTitle;
-    const source = parts.length > 1 ? parts[parts.length-1] : '';
-    const link   = clean(get('link') || get('guid'));
-    const desc   = clean(get('description')).slice(0, 300);
-    const pubStr = get('pubDate');
-
-    let date = '', isoDate = '';
-    if (pubStr) {
-      try {
-        const d = new Date(pubStr);
-        isoDate = d.toISOString();
-        date = d.toLocaleDateString('ko-KR', { timeZone:'Asia/Seoul', year:'numeric', month:'long', day:'numeric' });
-      } catch(_) {}
-    }
-    items.push({ title, url: link, desc, date, isoDate, source, region, sourceLabel });
-  }
-  return items;
-}
-
-// ══════════════════════════════════════════════════════════
-// CORS 프록시 RSS 가져오기
-// ══════════════════════════════════════════════════════════
-
-async function fetchWithProxy(url) {
-  for (const makeProxy of CORS_PROXIES) {
+async function fetchProxy(url) {
+  for (const mk of PROXIES) {
     try {
-      const res = await fetch(makeProxy(url), { signal: AbortSignal.timeout(14000) });
-      if (res.ok) {
-        const text = await res.text();
-        if (text.includes('<item>')) return text;
-      }
-    } catch(e) { /* 다음 프록시 시도 */ }
+      const r = await fetch(mk(url), { signal: AbortSignal.timeout(14000) });
+      if (r.ok) { const t = await r.text(); if (t.includes('<item>')) return t; }
+    } catch(_) {}
   }
   return null;
 }
 
-// ══════════════════════════════════════════════════════════
-// 카테고리별 실시간 기사 수집
-// ══════════════════════════════════════════════════════════
+function parseRSS(xml, label) {
+  const items = [], re = /<item>([\s\S]*?)<\/item>/g;
+  let m;
+  while ((m = re.exec(xml)) !== null) {
+    const b = m[1];
+    const get = tag => {
+      const r = b.match(new RegExp(`<${tag}[^>]*>(?:<!\\[CDATA\\[)?([\\s\\S]*?)(?:\\]\\]>)?<\\/${tag}>`, 'i'));
+      return r ? r[1].trim() : '';
+    };
+    const clean = s => s.replace(/<[^>]+>/g,'')
+      .replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>')
+      .replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/\s+/g,' ').trim();
 
-async function collectForCategory(catId) {
+    const rawTitle = clean(get('title'));
+    if (!rawTitle || rawTitle.length < 4) continue;
+    if (!isKorean(rawTitle)) continue;   // 한글 없으면 제외
+
+    const parts = rawTitle.split(' - ');
+    const title  = parts.length > 1 ? parts.slice(0,-1).join(' - ') : rawTitle;
+    const link   = clean(get('link') || get('guid'));
+    const desc   = clean(get('description')).slice(0, 350);
+    const pubStr = get('pubDate');
+
+    let date='', iso='';
+    if (pubStr) {
+      try {
+        const d = new Date(pubStr);
+        iso  = d.toISOString();
+        date = d.toLocaleDateString('ko-KR',
+          { timeZone:'Asia/Seoul', year:'numeric', month:'long', day:'numeric' });
+      } catch(_) {}
+    }
+    items.push({ title, url: link, desc, date, iso, sourceLabel: label });
+  }
+  return items;
+}
+
+// ══════════════════════════════════════════════════
+// 기사 수집
+// ══════════════════════════════════════════════════
+
+async function collect(catId) {
+  const kws = CAT_KW[catId] || [];
   const all = [];
-  const kws = CAT_KEYWORDS[catId] || [];
 
-  // 매일노동뉴스 (키워드 필터)
-  const ltXml = await fetchWithProxy(LABORTODAY_URL);
+  // 1) 매일노동뉴스 — 키워드 매칭
+  const ltXml = await fetchProxy(LABORTODAY);
   if (ltXml) {
-    parseRSS(ltXml, '국내', '매일노동뉴스')
-      .filter(i => isRecent(i.isoDate) && kws.some(k => i.title.includes(k)))
+    parseRSS(ltXml, '매일노동뉴스')
+      .filter(i => isRecent(i.iso) && kws.some(k => i.title.includes(k)))
       .forEach(i => all.push(i));
   }
 
-  // 카테고리 전용 추가 소스
-  for (const src of (CAT_EXTRA[catId] || [])) {
-    const xml = await fetchWithProxy(src.url);
-    if (xml) {
-      parseRSS(xml, src.region, src.label)
-        .filter(i => isRecent(i.isoDate))
+  // 2) Google 뉴스 국내
+  const gnUrl = GNEWS[catId];
+  if (gnUrl) {
+    const gnXml = await fetchProxy(gnUrl);
+    if (gnXml) {
+      parseRSS(gnXml, 'Google 뉴스')
+        .filter(i => isRecent(i.iso))
         .forEach(i => all.push(i));
     }
   }
@@ -520,19 +552,20 @@ async function collectForCategory(catId) {
   return dedup(all).slice(0, 5);
 }
 
-// ══════════════════════════════════════════════════════════
-// AI 요약 — Pollinations (완전 무료, 키 불필요)
-// ══════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════
+// AI 요약 (Pollinations — 무료, 키 불필요)
+// ══════════════════════════════════════════════════
 
-async function summarizeAI(article, catId) {
-  const prompt = `HR·노무 전문가입니다. JSON만 출력하세요. 설명 없이 순수 JSON만.
+async function aiSummarize(article, catId) {
+  const prompt =
+`당신은 HR·노무 전문가입니다. 아래 기사를 분석하여 순수 JSON만 출력하세요. 다른 말 없이 JSON만.
 
 카테고리: ${CAT_LABEL[catId]}
 제목: ${article.title}
-내용: ${article.desc || ''}
+내용: ${article.desc || '(내용 없음)'}
 
-형식 (한국어, 각 1~2문장):
-{"background":"배경","main":"주요내용","implication":"시사점"}`;
+【필수】아래 세 항목을 빠짐없이 완성된 문장(1~2문장)으로 작성하세요:
+{"background":"이 이슈가 등장한 사회적·정책적 배경","main":"기사의 핵심 사실과 내용","implication":"HR/노무 실무자가 주목해야 할 시사점과 대응 방향"}`;
 
   try {
     const res = await fetch('https://text.pollinations.ai/openai', {
@@ -545,7 +578,7 @@ async function summarizeAI(article, catId) {
         private: true,
         jsonMode: true,
       }),
-      signal: AbortSignal.timeout(30000),
+      signal: AbortSignal.timeout(35000),
     });
     if (!res.ok) throw new Error('HTTP ' + res.status);
 
@@ -555,150 +588,148 @@ async function summarizeAI(article, catId) {
     let jsonStr = '';
     const cb = text.match(/```(?:json)?\s*([\s\S]*?)```/);
     if (cb) jsonStr = cb[1].trim();
-    else { const raw = text.match(/\{[\s\S]*\}/); if (raw) jsonStr = raw[0]; }
-
+    else { const rw = text.match(/\{[\s\S]*\}/); if (rw) jsonStr = rw[0]; }
     if (!jsonStr) throw new Error('JSON 없음');
-    const json = JSON.parse(jsonStr);
+
+    const j = JSON.parse(jsonStr);
     return {
       ...article,
-      background:  (json.background  || '').trim(),
-      main:        (json.main        || article.desc || '').trim(),
-      implication: (json.implication || '').trim(),
+      background:  (j.background  || '').trim(),
+      main:        (j.main        || article.desc || '').trim(),
+      implication: (j.implication || '').trim(),
     };
   } catch(e) {
-    console.warn('AI 요약 실패:', e.message);
+    console.warn('[AI]', e.message);
     return { ...article, background:'', main: article.desc||'', implication:'' };
   }
 }
 
-// ══════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════
 // 렌더링
-// ══════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════
 
 function renderItems(catId, items) {
-  const el = document.getElementById('items-' + catId);
-  const ct = document.getElementById('count-' + catId);
+  const wrap = document.getElementById('it-' + catId);
+  const cnt  = document.getElementById('cnt-' + catId);
 
-  if (!items || !items.length) {
-    el.innerHTML = `<div class="state-box">
-      <span class="icon">📭</span>
-      오늘 수집된 기사가 없습니다<br>
-      <small style="color:#b0bec5">↻ 새로고침 버튼을 눌러 다시 확인하세요</small>
+  if (!items?.length) {
+    wrap.innerHTML = `<div class="statebox">
+      <span class="si">📭</span>
+      오늘 해당 카테고리 기사가 없습니다<br>
+      <small>↻ 새로고침을 눌러 다시 확인하세요</small>
     </div>`;
-    ct.textContent = '0건';
+    cnt.textContent = '0건';
     return;
   }
 
-  ct.textContent = items.length + '건';
-  el.innerHTML = items.map(item => {
+  cnt.textContent = items.length + '건';
+  wrap.innerHTML = items.map(item => {
     const hasAI = item.background || item.implication;
-    const summaryHtml = hasAI ? `
-      <div class="item-summary">
-        ${item.background  ? `<div class="sum-row"><span class="sum-label sum-bg">📌 배경</span><span class="sum-text">${esc(item.background)}</span></div>`  : ''}
-        ${item.main        ? `<div class="sum-row"><span class="sum-label sum-main">📋 주요내용</span><span class="sum-text">${esc(item.main)}</span></div>`       : ''}
-        ${item.implication ? `<div class="sum-row"><span class="sum-label sum-impl">💡 시사점</span><span class="sum-text">${esc(item.implication)}</span></div>` : ''}
-      </div>` : (item.desc ? `<div class="item-desc">${esc(item.desc)}</div>` : '');
+    let summaryHtml = '';
 
-    return `
-    <div class="item">
-      <div class="item-top">
-        <span class="badge ${item.region === '국내' ? 'badge-kr' : 'badge-gl'}">${esc(item.region||'국내')}</span>
-        <span class="item-title">${esc(item.title)}</span>
-      </div>
+    if (hasAI) {
+      summaryHtml = `<div class="summary-block">
+        ${item.background  ? `<div class="srow"><span class="slabel">배경</span><span class="stext">${esc(item.background)}</span></div>`  : ''}
+        ${item.main        ? `<div class="srow"><span class="slabel">주요내용</span><span class="stext">${esc(item.main)}</span></div>`       : ''}
+        ${item.implication ? `<div class="srow"><span class="slabel">시사점</span><span class="stext">${esc(item.implication)}</span></div>` : ''}
+      </div>`;
+    } else if (item.desc) {
+      summaryHtml = `<p class="ndesc">${esc(item.desc)}</p>`;
+    }
+
+    return `<div class="nitem">
+      <p class="ntitle">${esc(item.title)}</p>
       ${summaryHtml}
-      <div class="item-footer">
-        <span class="item-source">${esc(item.sourceLabel||item.source||'')}</span>
-        ${item.date ? `<span class="item-date">${item.date}</span>` : ''}
-        ${item.url  ? `<a href="${esc(item.url)}" target="_blank" rel="noopener" class="read-more">원문 보기 →</a>` : ''}
+      <div class="nfooter">
+        <span class="nmeta">${esc(item.sourceLabel||'')}${item.date ? ' · ' + item.date : ''}</span>
+        ${item.url ? `<a class="nlink" href="${esc(item.url)}" target="_blank" rel="noopener">원문 보기 →</a>` : ''}
       </div>
     </div>`;
   }).join('');
 }
 
+function setSbar(catId, txt) { document.getElementById('sb-' + catId).textContent = txt; }
+function setSpin(catId, on) {
+  const b = document.getElementById('rb-' + catId);
+  b.disabled = on;
+  on ? b.classList.add('spinning') : b.classList.remove('spinning');
+}
 function setLoading(catId, msg) {
-  document.getElementById('items-' + catId).innerHTML =
-    `<div class="state-box"><span class="icon spin-inline">↻</span>${msg||'불러오는 중...'}</div>`;
-  document.getElementById('count-' + catId).textContent = '-';
+  document.getElementById('it-' + catId).innerHTML =
+    `<div class="statebox"><span class="si spin-i">↻</span>${msg||'수집 중...'}</div>`;
+  document.getElementById('cnt-' + catId).textContent = '-';
 }
 
-function setRts(catId, text) {
-  document.getElementById('rts-' + catId).textContent = text;
-}
-
-function setSpinning(catId, on) {
-  const btn = document.getElementById('rbtn-' + catId);
-  btn.disabled = on;
-  on ? btn.classList.add('spinning') : btn.classList.remove('spinning');
-}
-
-// ══════════════════════════════════════════════════════════
-// 브리핑 시작 — 4개 카테고리 동시 실시간 수집
-// ══════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════
+// 브리핑 시작
+// ══════════════════════════════════════════════════
 
 async function startBriefing() {
-  const btn = document.getElementById('briefing-btn');
+  const btn = document.getElementById('btn-start');
   btn.disabled = true;
-  btn.innerHTML = '<span class="btn-icon spin-inline">↻</span> 수집 중...';
+  btn.textContent = '⏳  수집 중...';
 
-  document.getElementById('landing-section').style.display = 'none';
+  document.getElementById('landing').style.display = 'none';
   document.getElementById('news-grid').style.display = 'grid';
-  document.getElementById('header-meta').textContent = '🔄 실시간 수집 중...';
+  document.getElementById('header-meta').textContent = '실시간 수집 중...';
 
-  // 4개 카테고리 동시 실행
-  await Promise.all(['law','cases','hr','gov'].map(cat => refreshCategory(cat)));
+  await Promise.all(['law','cases','hr','gov'].map(c => refreshCat(c)));
 
-  const now = new Date().toLocaleTimeString('ko-KR', { timeZone:'Asia/Seoul', hour:'2-digit', minute:'2-digit' });
-  document.getElementById('header-meta').textContent = `✅ ${now} 실시간 수집 완료 · 🤖 AI 요약 적용`;
+  const now = new Date().toLocaleTimeString('ko-KR',
+    { timeZone:'Asia/Seoul', hour:'2-digit', minute:'2-digit' });
+  document.getElementById('header-meta').textContent = `${now} 업데이트 · 🤖 AI 요약`;
 }
 
-// ══════════════════════════════════════════════════════════
-// 카테고리 실시간 새로고침 (RSS 수집 + AI 요약)
-// ══════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════
+// 카테고리 새로고침 (실시간 수집 + AI 요약)
+// ══════════════════════════════════════════════════
 
-async function refreshCategory(catId) {
+async function refreshCat(catId) {
   setLoading(catId, '📡 기사 수집 중...');
-  setSpinning(catId, true);
-  setRts(catId, '📡 RSS 실시간 수집 중...');
+  setSpin(catId, true);
+  setSbar(catId, '📡 실시간 수집 중...');
 
   try {
-    // 1) 기사 수집
-    const articles = await collectForCategory(catId);
+    const articles = await collect(catId);
 
     if (!articles.length) {
       renderItems(catId, []);
-      setRts(catId, '오늘 해당 카테고리 기사 없음');
-      setSpinning(catId, false);
+      setSbar(catId, '오늘 해당 카테고리 기사 없음');
+      setSpin(catId, false);
       return;
     }
 
-    // 2) AI 요약 — 3건씩 병렬 처리
-    setRts(catId, `🤖 AI 요약 생성 중... (0/${articles.length}건)`);
+    setSbar(catId, `🤖 AI 요약 생성 중... (0 / ${articles.length}건)`);
     const results = [];
+
+    // 3건씩 병렬 처리
     for (let i = 0; i < articles.length; i += 3) {
       const batch = await Promise.all(
-        articles.slice(i, i + 3).map(a => summarizeAI(a, catId))
+        articles.slice(i, i + 3).map(a => aiSummarize(a, catId))
       );
       results.push(...batch);
-      setRts(catId, `🤖 AI 요약 생성 중... (${results.length}/${articles.length}건)`);
-      // 진행 중 결과를 먼저 표시
-      renderItems(catId, results);
+      renderItems(catId, results);   // 진행 중 표시
+      setSbar(catId, `🤖 AI 요약 중... (${results.length} / ${articles.length}건)`);
     }
 
-    const now = new Date().toLocaleTimeString('ko-KR', { timeZone:'Asia/Seoul', hour:'2-digit', minute:'2-digit' });
-    setRts(catId, `✅ ${now} 실시간 수집·AI 요약 완료`);
+    const now = new Date().toLocaleTimeString('ko-KR',
+      { timeZone:'Asia/Seoul', hour:'2-digit', minute:'2-digit' });
+    setSbar(catId, `✅ ${now} 수집·요약 완료`);
 
   } catch(e) {
     console.error(catId, e);
-    document.getElementById('items-' + catId).innerHTML =
-      '<div class="state-box error">⚠️ 수집 오류<br><small>잠시 후 다시 시도해주세요</small></div>';
-    setRts(catId, '');
+    document.getElementById('it-' + catId).innerHTML =
+      '<div class="statebox err">⚠️ 수집 중 오류 발생<br><small>잠시 후 다시 시도해 주세요</small></div>';
+    setSbar(catId, '');
   }
 
-  setSpinning(catId, false);
+  setSpin(catId, false);
 }
 
-// ──────────────────────────────────────────────────
-document.getElementById('today-chip').textContent = '📅 ' + todayKST();
+// ══════════════════════════════════════════════════
+// 초기화
+// ══════════════════════════════════════════════════
+document.getElementById('date-tag').textContent = '📅 ' + todayStr();
 </script>
 </body>
 </html>
