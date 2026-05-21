@@ -170,24 +170,17 @@ async function summarize(article, category) {
     return { background: '', main: article.desc || '', implication: '' };
   }
 
-  const prompt = `당신은 HR·노무 전문가입니다.
-아래 기사를 분석하여 한국 HR/노무 실무자에게 유용한 요약을 제공하세요.
+  const prompt = `당신은 HR·노무 전문가입니다. 아래 기사를 분석하여 JSON만 출력하세요. 다른 설명 없이 JSON만.
 
 카테고리: ${CAT_LABEL[category]}
-지역: ${article.region}
-출처: ${article.sourceLabel || article.source || ''}
 제목: ${article.title}
 내용: ${article.desc || '(제공 없음)'}
 
-JSON 형식으로 한국어로 응답하세요. 각 항목 1~2문장:
-{
-  "background":  "배경 — 이 이슈가 등장한 맥락과 이유",
-  "main":        "주요내용 — 기사의 핵심 사실·내용",
-  "implication": "시사점 — HR/노무 실무자가 주목해야 할 점"
-}`;
+반드시 아래 형식의 JSON만 출력 (한국어, 각 항목 1~2문장):
+{"background":"배경설명","main":"주요내용","implication":"시사점"}`;
 
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 25000);
+  const timer = setTimeout(() => controller.abort(), 30000);
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -198,7 +191,7 @@ JSON 형식으로 한국어로 응답하세요. 각 항목 1~2문장:
       },
       body: JSON.stringify({
         model: 'claude-haiku-4-5',
-        max_tokens: 500,
+        max_tokens: 600,
         messages: [{ role: 'user', content: prompt }],
       }),
       signal: controller.signal,
@@ -207,16 +200,31 @@ JSON 형식으로 한국어로 응답하세요. 각 항목 1~2문장:
 
     if (!res.ok) {
       const err = await res.text();
-      console.warn(`  ⚠ Claude API ${res.status}:`, err.slice(0, 120));
+      console.warn(`  ⚠ Claude API 오류 HTTP ${res.status}:`, err.slice(0, 200));
       return { background: '', main: article.desc || '', implication: '' };
     }
 
-    const data  = await res.json();
-    const text  = data.content?.[0]?.text || '';
-    const match = text.match(/\{[\s\S]*?\}/);
-    if (!match) return { background: '', main: article.desc || '', implication: '' };
+    const data = await res.json();
+    const text = data.content?.[0]?.text || '';
+    console.log(`     [응답미리보기] ${text.slice(0, 80).replace(/\n/g,' ')}`);
 
-    const json = JSON.parse(match[0]);
+    /* JSON 추출: 마크다운 코드블록 또는 raw JSON 모두 처리 */
+    let jsonStr = '';
+    const codeBlock = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+    if (codeBlock) {
+      jsonStr = codeBlock[1].trim();
+    } else {
+      // 첫 { 부터 마지막 } 까지 (greedy)
+      const raw = text.match(/\{[\s\S]*\}/);
+      if (raw) jsonStr = raw[0];
+    }
+
+    if (!jsonStr) {
+      console.warn('  ⚠ JSON 추출 실패, 원문 사용');
+      return { background: '', main: article.desc || '', implication: '' };
+    }
+
+    const json = JSON.parse(jsonStr);
     return {
       background:  (json.background  || '').trim(),
       main:        (json.main        || article.desc || '').trim(),
