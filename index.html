@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HR·노무 데일리 브리핑</title>
+  <style>
+    :root {
+      --blue:  #1e40af;
+      --blue2: #2563eb;
+      --green: #15803d;
+      --amber: #b45309;
+      --red:   #b91c1c;
+      --gray:  #6b7280;
+      --bg:    #f1f5f9;
+      --card:  #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: #1e293b;
+      min-height: 100vh;
+    }
+
+    /* ── 헤더 ── */
+    header {
+      background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
+      color: white;
+      padding: 28px 32px 24px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header h1 { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.5px; }
+    header h1 span { opacity: .7; font-size: 1rem; font-weight: 400; display: block; margin-bottom: 4px; }
+    .meta { font-size: .82rem; opacity: .75; text-align: right; line-height: 1.6; }
+
+    /* ── 배너 ── */
+    .notice {
+      background: #fef9c3;
+      border-left: 4px solid #eab308;
+      padding: 10px 20px;
+      font-size: .85rem;
+      color: #713f12;
+    }
+
+    /* ── 그리드 ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 20px;
+      padding: 24px 28px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* ── 카드 ── */
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-header {
+      padding: 16px 20px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-header .icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .card-header h2 { font-size: 1rem; font-weight: 700; }
+    .card-header .count {
+      margin-left: auto;
+      font-size: .78rem;
+      padding: 2px 9px;
+      border-radius: 99px;
+      font-weight: 600;
+    }
+
+    /* 카드 색상 */
+    .card-law   .card-header { background: #eff6ff; border-bottom: 2px solid #bfdbfe; }
+    .card-law   .icon        { background: #dbeafe; color: var(--blue2); }
+    .card-law   .count       { background: #dbeafe; color: var(--blue2); }
+    .card-law   h2           { color: var(--blue); }
+
+    .card-case  .card-header { background: #f0fdf4; border-bottom: 2px solid #bbf7d0; }
+    .card-case  .icon        { background: #dcfce7; color: var(--green); }
+    .card-case  .count       { background: #dcfce7; color: var(--green); }
+    .card-case  h2           { color: var(--green); }
+
+    .card-hr    .card-header { background: #fffbeb; border-bottom: 2px solid #fde68a; }
+    .card-hr    .icon        { background: #fef3c7; color: var(--amber); }
+    .card-hr    .count       { background: #fef3c7; color: var(--amber); }
+    .card-hr    h2           { color: var(--amber); }
+
+    .card-gov   .card-header { background: #fff1f2; border-bottom: 2px solid #fecdd3; }
+    .card-gov   .icon        { background: #fee2e2; color: var(--red); }
+    .card-gov   .count       { background: #fee2e2; color: var(--red); }
+    .card-gov   h2           { color: var(--red); }
+
+    /* 아이템 */
+    .items { padding: 8px 0; flex: 1; }
+    .item {
+      padding: 13px 20px;
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .item:last-child { border-bottom: none; }
+    .item-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .badge {
+      font-size: .7rem;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .badge-kr  { background: #e0e7ff; color: #3730a3; }
+    .badge-gl  { background: #f3f4f6; color: #374151; }
+    .badge-new { background: #fce7f3; color: #9d174d; }
+
+    .item-title {
+      font-size: .92rem;
+      font-weight: 600;
+      color: #1e293b;
+      line-height: 1.45;
+    }
+    .item-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .item-title a:hover { text-decoration: underline; color: var(--blue2); }
+
+    .item-desc {
+      font-size: .82rem;
+      color: #475569;
+      line-height: 1.55;
+    }
+    .item-meta {
+      font-size: .75rem;
+      color: #94a3b8;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .item-meta .dot::before { content: '·'; }
+
+    /* 빈 상태 */
+    .empty {
+      padding: 32px 20px;
+      text-align: center;
+      color: #94a3b8;
+      font-size: .88rem;
+    }
+    .empty .emoji { font-size: 2rem; display: block; margin-bottom: 8px; }
+
+    /* 푸터 */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: .78rem;
+      color: #94a3b8;
+    }
+
+    /* 반응형 */
+    @media (max-width: 600px) {
+      header { padding: 20px 16px; }
+      header h1 { font-size: 1.3rem; }
+      .grid { padding: 16px 12px; gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>
+      <span>⚖️ HR · 노무관리</span>
+      데일리 브리핑
+    </h1>
+  </div>
+  <div class="meta" id="meta-info">
+    마지막 업데이트: 초기화 중...<br>
+    다음 업데이트: 매일 오전 9시 (KST)
+  </div>
+</header>
+
+<div class="notice">
+  📌 본 페이지는 Claude AI가 매일 자동 수집·요약한 HR/노무 정보입니다. 중요 사안은 반드시 전문가 확인 후 활용하세요.
+</div>
+
+<div class="grid" id="grid">
+
+  <!-- 카드 1: 노동법 개정/입법 -->
+  <div class="card card-law">
+    <div class="card-header">
+      <div class="icon">📋</div>
+      <h2>노동법 개정 · 입법 동향</h2>
+      <span class="count" id="count-law">0건</span>
+    </div>
+    <div class="items" id="items-law">
+      <div class="empty"><span class="emoji">⏳</span>데이터 수집 중...</div>
+    </div>
+  </div>
+
+  <!-- 카드 2: 판례 -->
+  <div class="card card-case">
+    <div class="card-header">
+      <div class="icon">⚖️</div>
+      <h2>대법원 · 행정법원 판례</h2>
+      <span class="count" id="count-case">0건</span>
+    </div>
+    <div class="items" id="items-case">
+      <div class="empty"><span class="emoji">⏳</span>데이터 수집 중...</div>
+    </div>
+  </div>
+
+  <!-- 카드 3: HR 트렌드 -->
+  <div class="card card-hr">
+    <div class="card-header">
+      <div class="icon">💼</div>
+      <h2>HR 트렌드 · 인사관리</h2>
+      <span class="count" id="count-hr">0건</span>
+    </div>
+    <div class="items" id="items-hr">
+      <div class="empty"><span class="emoji">⏳</span>데이터 수집 중...</div>
+    </div>
+  </div>
+
+  <!-- 카드 4: 고용부 행정해석 -->
+  <div class="card card-gov">
+    <div class="card-header">
+      <div class="icon">🏛️</div>
+      <h2>고용부 행정해석 · 가이드</h2>
+      <span class="count" id="count-gov">0건</span>
+    </div>
+    <div class="items" id="items-gov">
+      <div class="empty"><span class="emoji">⏳</span>데이터 수집 중...</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  HR Daily Briefing · Powered by Claude AI · <a href="https://github.com/hjk77246-png/hr-daily" target="_blank">GitHub</a>
+</footer>
+
+<script>
+// 뉴스 데이터 로드 (data.json)
+async function loadData() {
+  try {
+    const res = await fetch('data.json?t=' + Date.now());
+    if (!res.ok) throw new Error('no data');
+    const data = await res.json();
+
+    document.getElementById('meta-info').innerHTML =
+      '마지막 업데이트: ' + (data.updated || '알 수 없음') + '<br>다음 업데이트: 매일 오전 9시 (KST)';
+
+    renderItems('items-law',  'count-law',  data.law   || []);
+    renderItems('items-case', 'count-case', data.cases || []);
+    renderItems('items-hr',   'count-hr',   data.hr    || []);
+    renderItems('items-gov',  'count-gov',  data.gov   || []);
+  } catch(e) {
+    console.log('data.json 없음 — 초기 상태');
+  }
+}
+
+function renderItems(containerId, countId, items) {
+  const el = document.getElementById(containerId);
+  const ct = document.getElementById(countId);
+  if (!items || items.length === 0) {
+    el.innerHTML = '<div class="empty"><span class="emoji">📭</span>오늘 수집된 항목이 없습니다</div>';
+    ct.textContent = '0건';
+    return;
+  }
+  ct.textContent = items.length + '건';
+  el.innerHTML = items.map(item => `
+    <div class="item">
+      <div class="item-top">
+        <span class="badge ${item.region === '국내' ? 'badge-kr' : 'badge-gl'}">${item.region || '국내'}</span>
+        ${item.isNew ? '<span class="badge badge-new">NEW</span>' : ''}
+        <span class="item-title">
+          ${item.url ? '<a href="'+item.url+'" target="_blank" rel="noopener">'+item.title+'</a>' : item.title}
+        </span>
+      </div>
+      ${item.desc ? '<div class="item-desc">'+item.desc+'</div>' : ''}
+      <div class="item-meta">
+        <span>${item.source || ''}</span>
+        ${item.date ? '<span class="dot"></span><span>'+item.date+'</span>' : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+loadData();
+</script>
+</body>
+</html>
