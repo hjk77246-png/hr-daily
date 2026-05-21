@@ -1,227 +1,93 @@
 {
-  "updated": "2026년 5월 21일 목요일 AM 09:53",
-  "law": [
-    {
-      "title": "\"870만 프리랜서·플랫폼 노동자 '근로자' 인정\"…노동법 대개편 추진",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE8weUtFNS12V1ZVVHdvTV9Rb3ZlWmZqVm1uZDNXQjBoTnh4c0tCT3ZqZUdhNU9DeHQ3MVZfWU5KeHZqa0dFTE00NUhSN0JwUTNKT1JKT2ZJVWR4YzkyNWhJLW9kWQ?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMiY0FVX3lxTE8weUtFNS12V1ZVVHdvTV9Rb3ZlWmZqVm1uZDNXQjBoTnh4c0tCT3ZqZUdhNU9DeHQ3MVZfWU5KeHZqa0dFTE00NUhSN0JwUTNKT1JKT2ZJVWR4YzkyNWhJLW9kWQ?oc=5\" target=\"_",
-      "date": "2026년 1월 20일",
-      "source": "뉴스1",
-      "region": "국내",
-      "isNew": true
-    },
-    {
-      "title": "근로자 추정제가 가져올 미래",
-      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5FNFVBX2tCeXRoSk1UNHVwVGI2aUtuSUsweFFScW1hTmZiUGYtTVdpazhwV040blFNNnhLeUJoMFE1N3Y5b0c3eXdNS3dQVC1kSl9hRGE1ZU5uQdIBVEFVX3lxTE52Wjk2VklBenZRaWVXSVlCSS1razFxd3A2QU1sQUhhZ19Sd2JERVhDdlBrSEVOS01NM3c5NWtmbzBHSGNlSzFLSDBuLVhZVktTZTNoLQ?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMiWkFVX3lxTE5FNFVBX2tCeXRoSk1UNHVwVGI2aUtuSUsweFFScW1hTmZiUGYtTVdpazhwV040blFNNnhLeUJoMFE1N3Y5b0c3eXdNS3dQVC1kSl9hRGE1ZU5uQdIBVEFVX3lxTE52Wjk2VklBenZRaW",
-      "date": "2026년 1월 20일",
-      "source": "한국경제",
-      "region": "국내",
-      "isNew": true
-    },
-    {
-      "title": "하청 노조, 원청과 분리교섭 가능…노란봉투법 시행령 개정안 입법예고",
-      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFBSYnNvdnBxS191bkpVbTdYUWRad0dfckNYcS1JTWRiZDRPcnYwNXIyYWxHLTVXaFhXRzhPN1FreXpWODlrRzVsTTZyMzM4Z0dWa0piNFRmOEZXU2R1WkU2cnRXa0c?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMiZEFVX3lxTFBSYnNvdnBxS191bkpVbTdYUWRad0dfckNYcS1JTWRiZDRPcnYwNXIyYWxHLTVXaFhXRzhPN1FreXpWODlrRzVsTTZyMzM4Z0dWa0piNFRmOEZXU2R1WkU2cnRXa0c?oc=5\" target=\"",
-      "date": "2025년 11월 24일",
-      "source": "한겨레",
-      "region": "국내",
-      "isNew": true
-    },
-    {
-      "title": "한국골프장경영협회, 이사회서 세제개선·노동입법 대응 논의",
-      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9WNVQ0UUgwdHZNamFDZjFjeXN4LXFIVy1KVFFGc3FwYVA2REQyVWlCSDlPZlppT3FVSTJDREpXcDJZOVBxVUFYWEZrNG9KT2xoZnpXcU9ISkItd9IBVEFVX3lxTFBqSVh0VEFKU1RQeGdFYzUydjlMUmRCZno0WnVydjUyZ1VlQjJhYXNpamJkTHFqSEJYT25xT2M2RkxRSEtVdkk1VGFWYzRMUHJKd3NKZA?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMiWkFVX3lxTE9WNVQ0UUgwdHZNamFDZjFjeXN4LXFIVy1KVFFGc3FwYVA2REQyVWlCSDlPZlppT3FVSTJDREpXcDJZOVBxVUFYWEZrNG9KT2xoZnpXcU9ISkItd9IBVEFVX3lxTFBqSVh0VEFKU1RQeG",
-      "date": "2026년 2월 26일",
-      "source": "한국경제",
-      "region": "국내",
-      "isNew": true
-    },
-    {
-      "title": "[노동법학회 노란봉투법 토론회③] 사회적 논의 생략한 법 개정, 후폭풍은 누구 몫?",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE55blRqdk8zNEx6OEtIMXVCYXYxU0F1SWpHbmV3dTc3NXF1UnhncVNjTkwzbDNQektYV3NpMmNzWm1ZVHd1ZmpYM0JKRFpLbTBFNmhfVEszXzFMMVZ6VTJfRVBRUUZyYmc0NERHQjdVMA?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMib0FVX3lxTE55blRqdk8zNEx6OEtIMXVCYXYxU0F1SWpHbmV3dTc3NXF1UnhncVNjTkwzbDNQektYV3NpMmNzWm1ZVHd1ZmpYM0JKRFpLbTBFNmhfVEszXzFMMVZ6VTJfRVBRUUZyYmc0NERHQjdVMA",
-      "date": "2025년 8월 20일",
-      "source": "월간노동법률",
-      "region": "국내",
-      "isNew": true
-    },
-    {
-      "title": "최임위 결정만으론 특고ㆍ플랫폼 최저임금 못 받는다…법 개정 필수",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxONWNyVzJZSHlaZml4U2Z0bHFxZ0FBZkhUaFVCeTB2Ql9TWnp2VHJWakNqY3dMRUt4ZDBIb1N0VUpVRXllVlZzX1hUTVVzS3hIX3liNms5NEdmN2F0MUt5dUFpMkxlZUF4M3A4eFFtLUlUY2xuZUdBUTA5VDRrZWUwX29mU2hGQjF3QUtR?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMiiwFBVV95cUxONWNyVzJZSHlaZml4U2Z0bHFxZ0FBZkhUaFVCeTB2Ql9TWnp2VHJWakNqY3dMRUt4ZDBIb1N0VUpVRXllVlZzX1hUTVVzS3hIX3liNms5NEdmN2F0MUt5dUFpMkxlZUF4M3A4eFFtLU",
-      "date": "2026년 5월 17일",
-      "source": "월간노동법률",
-      "region": "국내",
-      "isNew": true
-    }
-  ],
+  "updated": "2026년 5월 21일 목요일 AM 11:26",
+  "sources": {
+    "korean": "매일노동뉴스, Google 뉴스",
+    "global": "HR Dive, HR Morning, Google News"
+  },
+  "law": [],
   "cases": [
     {
-      "title": "택시협동조합 ‘신종 정리해고’ 제동 건 대법원",
-      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE80R1lwUk1CMWpBNVotZk5xY0hNOWlXenNZMk50NzRMLVA1aTBPTHRFbkN2NG1LN0djMnhNemhhY21rRmZld2xkaDZHTjR1MEFtTkppeTcxaHh0c0ZaeWVCVUJtYnQxQTVIbUJ3RG1PdVE?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMicEFVX3lxTE80R1lwUk1CMWpBNVotZk5xY0hNOWlXenNZMk50NzRMLVA1aTBPTHRFbkN2NG1LN0djMnhNemhhY21rRmZld2xkaDZHTjR1MEFtTkppeTcxaHh0c0ZaeWVCVUJtYnQxQTVIbUJ3RG1PdV",
-      "date": "2026년 2월 4일",
-      "source": "매일노동뉴스",
+      "title": "노동위원회 일정",
+      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234451",
+      "desc": "5월20일 수요일중앙노동위원회 학교법인 조선대학교(쟁의조정) 오전 10시, 주식회사 프리죤, 케이티텔레캅 주식회사(부당해고) 사단법인 동물권행동 카라(부당징계) 오후 1시30분, 학교법인 조선대학교(쟁의조정) 오후 2시, 송정 농업협동조합(부당해고) 서울교통네트웍 주식회사(부당정직) 오후 2시30분, 삼성중공업 주식회사(부당징계) 광양불고기(부당해고) 오후",
+      "date": "2026년 5월 20일",
+      "isoDate": "2026-05-20T06:30:04.000Z",
+      "source": "",
       "region": "국내",
-      "isNew": true
+      "sourceLabel": "매일노동뉴스"
     },
     {
-      "title": "대법원 씨스포빌 부당 해고 ‘재차’ 확인",
-      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBuUTNsTXNFOVptVFRLTE9reTVqc05Ec25fQkNIRjVyTGV5eEhPcGcxS0JuMnRkdzhDTjk1QlpsUXNYUl9LVXFnOEtOSkxjazZSWlBvX28ybC02VC1PVzhZMlVpRW51T1psb1QwNzF3?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMibkFVX3lxTFBuUTNsTXNFOVptVFRLTE9reTVqc05Ec25fQkNIRjVyTGV5eEhPcGcxS0JuMnRkdzhDTjk1QlpsUXNYUl9LVXFnOEtOSkxjazZSWlBvX28ybC02VC1PVzhZMlVpRW51T1psb1QwNzF3?o",
-      "date": "2026년 1월 8일",
-      "source": "참여와혁신",
+      "title": "대법원 21일 현대중공업 ‘원청 사용자성’ 판단",
+      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234439",
+      "desc": "대법원 전원합의체가 21일 HD현대중공업의 원청 사용자성을 판결을 내린다.19일 대법원은 21일 오후 2시 금속노조 현대중공업지부 사내하청지회가 현대중공업을 상대로 낸 단체교섭 청구소송 상고심 판결을 생중계한다고 밝혔다. 이에 따라 판결은 네이버와 유튜브, 페이스북 등에서 시청할 수 있다.사건은 2016년 금속노조 현대중공업지부 사내하청지회가 원청인 현대중",
+      "date": "2026년 5월 20일",
+      "isoDate": "2026-05-20T06:30:03.000Z",
+      "source": "",
       "region": "국내",
-      "isNew": true
-    },
-    {
-      "title": "300일 넘게 고공농성, 대법원판결 난 '세종호텔 노동자'에게 한 질문",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE82aHFsMW1MbnI3TkR4bGwyOC1KWm9NeXk5TjVmNllHWU84UldkWnpTUDZ3NUdKMnJpOTFEOWtyckx3c1ZHRl9FYklqQVVuZ0hyY2RDeTJkMUl3alowUFBPaHdCTURwUngxMmtBZkltek9IZ2pDSVV4dGstWEJxdw?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMifkFVX3lxTE82aHFsMW1MbnI3TkR4bGwyOC1KWm9NeXk5TjVmNllHWU84UldkWnpTUDZ3NUdKMnJpOTFEOWtyckx3c1ZHRl9FYklqQVVuZ0hyY2RDeTJkMUl3alowUFBPaHdCTURwUngxMmtBZkltek",
-      "date": "2026년 1월 13일",
-      "source": "오마이스타",
-      "region": "국내",
-      "isNew": true
-    },
-    {
-      "title": "대법 “해고통지서, 구체적 사유 적지 않아도 적법”...실무상 변화는?",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9QNWQzQ3hOcGlhQXFfVmZadEM3aGc4SjRTYXZXNFM5YlpwbnZjRWlVc1dYSmM4RGFjdGpDSkdBSjNSUnpyRVh1djJ4NjhUOEhLcElod1ZRbzQtdWNOQnJlUEtlNk1GMUllLS1Hc29OYw?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMib0FVX3lxTE9QNWQzQ3hOcGlhQXFfVmZadEM3aGc4SjRTYXZXNFM5YlpwbnZjRWlVc1dYSmM4RGFjdGpDSkdBSjNSUnpyRVh1djJ4NjhUOEhLcElod1ZRbzQtdWNOQnJlUEtlNk1GMUllLS1Hc29OYw",
-      "date": "2023년 4월 2일",
-      "source": "월간노동법률",
-      "region": "국내",
-      "isNew": true
-    },
-    {
-      "title": "[변화] \"KT링커스 '모바일 서포터'는 노동자\"... 대법원 부당해고 인정",
-      "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE1oMk0yQmFjbENOeW9PVjhxekxPRHJBcG5WYkVYWDJxS3A5R3dDZ3BXdXZiWWFpcmN3MFNCTVFxb2FKSTJwbEwyWmFn?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMiSkFVX3lxTE1oMk0yQmFjbENOeW9PVjhxekxPRHJBcG5WYkVYWDJxS3A5R3dDZ3BXdXZiWWFpcmN3MFNCTVFxb2FKSTJwbEwyWmFn?oc=5\" target=\"_blank\">[변화] \"KT링커스 '모바일 서포터'는 노동자\"",
-      "date": "2022년 4월 29일",
-      "source": "NewsTapa",
-      "region": "국내",
-      "isNew": true
-    },
-    {
-      "title": "노동위원회의 구제명령을 받을 이익과 재심판정의 취소를 구할 소의 이익",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBNVUlXZUVlbS1NTnNFVmo1TkZvR2lPVHByemszTkVoQmszSW91UzZFZlpGeXNoY3BFZ1BId19rWllodjB4a0FFQUdmbmtfX2dzY3hyTjVMTzYtM1RMUHk2TzNsN3ZJem9DMUNIZTVlV3ZsUzNNUlllLUhRTFBJZw?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMifkFVX3lxTFBNVUlXZUVlbS1NTnNFVmo1TkZvR2lPVHByemszTkVoQmszSW91UzZFZlpGeXNoY3BFZ1BId19rWllodjB4a0FFQUdmbmtfX2dzY3hyTjVMTzYtM1RMUHk2TzNsN3ZJem9DMUNIZTVlV3",
-      "date": "2026년 1월 14일",
-      "source": "월간노동법률",
-      "region": "국내",
-      "isNew": true
+      "sourceLabel": "매일노동뉴스"
     }
   ],
   "hr": [
     {
-      "title": "AI가 바꾸는 인사관리 패러다임...채용부터 평가, 조직문화까지",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBsMTl2dUlnMy1RYlNPOUthMFd3Ym80RjJRRDAxZk9RSmJJWHNHRDkyaFNqZzZqYllMdEtoYjk2ODR1azVzNkFGS3BqMGVNS2pFZU5UN2JUMEFVS25yaF9ZV1hwLVI5YlRoQXdr0gFvQVVfeXFMTnd5VFl4MWFBWFBqRFRmSWFPdF9OejhQd3R3akdFZVBWWDVqUEN2QlJsRV9GbnRrQWpWRFd2SFlGa2l2aUdzZzFiTnNqb19EeFZZd3FZa0FQRTFMRlF0OTg0aUpmSDEyZzRNWk5fdmJN?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMia0FVX3lxTFBsMTl2dUlnMy1RYlNPOUthMFd3Ym80RjJRRDAxZk9RSmJJWHNHRDkyaFNqZzZqYllMdEtoYjk2ODR1azVzNkFGS3BqMGVNS2pFZU5UN2JUMEFVS25yaF9ZV1hwLVI5YlRoQXdr0gFvQV",
-      "date": "2025년 10월 14일",
-      "source": "사례뉴스",
+      "title": "[인사] 안전보건공단",
+      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234455",
+      "desc": "■ 경영기획이사 임명 △경영기획이사 김인우 2026년 5월20일 시행",
+      "date": "2026년 5월 20일",
+      "isoDate": "2026-05-20T06:30:04.000Z",
+      "source": "",
       "region": "국내",
-      "isNew": true
+      "sourceLabel": "매일노동뉴스"
     },
     {
-      "title": "SAP코리아, 젠틀몬스터 글로벌 통합 인사 관리 시스템 구축",
-      "url": "https://news.google.com/rss/articles/CBMiyAJBVV95cUxNZzRzbW5tQWlsdWJwY2xPX241eVRzT080bmNGYzBPYUUzLU9GcTRPMHNJSXpGUHlQYXcxVnF3YzBUajBfZG1YeGJLZzR6OG03dFZuSjZKRklqdkFka2hES2UyUDNWUm85SHo0ZEY2MFpsSk1IZ0ZPYUhyVjhOWHJ2UzJMVlFnLU5VeXlQQmpCckNyM0dMQmVWT1A0Skg3OE92SFZpTENDd2VZMGh2ZnlxMl90VTU4YlU2ekQ0NHhDQWdEd2VVOUZuYjF1TzFfZGc2cmhqXy1feGZ4VVJBXy1waXVWbHd5dHpUbEZyUVZKME1Ed09XcGZtNVhheTJGeVFjWkpsQW5jaVRxWGNlMjhkSGloMHo5YTctbF9NYm1YaTlBMkhYX0hNSVpud3NFU3ZZZDVjakVVNVdDSmEyS0JvZF9SYlhMaGV0?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMiyAJBVV95cUxNZzRzbW5tQWlsdWJwY2xPX241eVRzT080bmNGYzBPYUUzLU9GcTRPMHNJSXpGUHlQYXcxVnF3YzBUajBfZG1YeGJLZzR6OG03dFZuSjZKRklqdkFka2hES2UyUDNWUm85SHo0ZEY2MF",
-      "date": "2026년 3월 30일",
-      "source": "SAP News Center",
+      "title": "노동부 “성과급 배분 사회적 논의”",
+      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234434",
+      "desc": "고용노동부가 삼성전자 노조 파업과 관련해 성과급 배분과 관련한 사회적 대화를 하겠다는 뜻을 밝혔다. 권창준 노동부 차관은 19일 오전 열린 기후에너지환경노동위원회 전체회의에서 “(삼성전자) 사태가 이것으로 끝나는 게 아니라 향후 전체적으로 기업의 이익과 미래, 이것을 어떻게 배분할 것인지에 대한 사회적 논의도 필요하다”며 “현재의 교섭",
+      "date": "2026년 5월 20일",
+      "isoDate": "2026-05-20T06:30:02.000Z",
+      "source": "",
       "region": "국내",
-      "isNew": true
+      "sourceLabel": "매일노동뉴스"
     },
     {
-      "title": "영림원소프트랩, EPR 넘어 HR까지…기업문화 혁신 플랫폼 ‘에버인’ 공개",
-      "url": "https://news.google.com/rss/articles/CBMiREFVX3lxTE56NnR3OTV2SmJaNURvNW9LU3prM3NqVzFqcG1zZE9ucmV3bTUwLVlTTnk2cjBBQ2pNenc2cDJROWhoYS1r?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMiREFVX3lxTE56NnR3OTV2SmJaNURvNW9LU3prM3NqVzFqcG1zZE9ucmV3bTUwLVlTTnk2cjBBQ2pNenc2cDJROWhoYS1r?oc=5\" target=\"_blank\">영림원소프트랩, EPR 넘어 HR까지…기업문화 혁신 플랫폼 ‘에",
-      "date": "2025년 8월 21일",
-      "source": "산업일보",
-      "region": "국내",
-      "isNew": true
+      "title": "Women’s representation is slipping on corporate boards",
+      "url": "https://www.hrdive.com/news/womens-representation-is-slipping-on-corporate-boards/820733/",
+      "desc": "<figure><div><img src=\"https://imgproxy.divecdn.com/SI1BgMZx2Hq_qkyiiyezxQE8M9Zue8yoeurGCOCqAk8/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjczOTMxNDAwLmpwZw==",
+      "date": "2026년 5월 21일",
+      "isoDate": "2026-05-20T15:44:00.000Z",
+      "source": "",
+      "region": "글로벌",
+      "sourceLabel": "HR Dive"
     },
     {
-      "title": "함께 성장하는 HR! 부스트랩 인사총무팀이 만든 성장법 | (주)부스트랩의 생생한 인터뷰 확인하기, 제조/화학 3.3 평점",
-      "url": "https://news.google.com/rss/articles/CBMi4gJBVV95cUxOTS1UTDJQSGpjcHFqZTloUnpFS2RzOE9jcEpSdDh3YWtqQWFnU0JMbTYzd0dGdkVJM0dXSFBQUnpQRDlRaHBtQzZ5emlXVW5nTlE5aFlvb2laY3p5LXF2WGVqcFkxaGFseW0tMjJ6WWFhQ25BZjlKUlBRbWx1U2M4Q3o2c2JCUjU4MGpTZWVtNTVVdVp4ZlYwMUlFcHZ2VWZxWHAzVzNFajZMa0liLWd5OHB3eDlUOGVRaG5CNF9TQVRHZHdMb0FfR2tERkNaUU9Ibzd3bG16b0tlRmFfZFRCZm1Wc0JUSGtveFVMTVJuODd5a3gxcHQ5YkZmTEstenhkTzdxZm0wd0tpTDRUa1pzNUdMUlN0bjBzRUZGalNVSnZ0dTRsS3NNaGhBTVBRazVoRWtPNDR4ZUxqQzQ5UmRyX1JMZjh1eE9RSG9UZTFCMWtaUkxJQmV2MVUtcVBpNzRPZEE?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMi4gJBVV95cUxOTS1UTDJQSGpjcHFqZTloUnpFS2RzOE9jcEpSdDh3YWtqQWFnU0JMbTYzd0dGdkVJM0dXSFBQUnpQRDlRaHBtQzZ5emlXVW5nTlE5aFlvb2laY3p5LXF2WGVqcFkxaGFseW0tMjJ6WW",
-      "date": "2025년 10월 29일",
-      "source": "잡플래닛",
-      "region": "국내",
-      "isNew": true
+      "title": "Indeed parent company touts record growth driven by AI",
+      "url": "https://www.hrdive.com/news/indeed-parent-company-touts-record-growth-driven-by-ai/820710/",
+      "desc": "<figure><div><img src=\"https://imgproxy.divecdn.com/B9OhQo4rsmdxWslwsmrR1LKQKmWitrK0NQhi5Ynkxi8/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjcxNDg3MjM4LmpwZw==",
+      "date": "2026년 5월 20일",
+      "isoDate": "2026-05-20T14:34:00.000Z",
+      "source": "",
+      "region": "글로벌",
+      "sourceLabel": "HR Dive"
     },
     {
-      "title": "악사손보, 한불상공회의소 컨퍼런스서 ‘HR 혁신’ 노하우 공유",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFB6a1BlWGpYWWF5b2Rmb1NmSVpvdFRzamRsUUJWWlJpVXo2MF84dl8zaUdIYjVSRFNkM0V6VkpxRkp1am1fdjN1djlKcG1LZGVxaHRZbVE2bVdySHFnbHktN3dNREpjWVA2YmhB0gFvQVVfeXFMTkFLN1Rzcmg2a25FWmVFSjdoNHQ1VzA1b2cxVl9TUnNiZWFla3Iza3l4NFVWNUdwNzl4YWQyaUJYQTdaWG1qN3RpOW1sQndYeHFkTTZYNzFQLWRGWXJtVmptc3ZfM3JqVUhzN2cxMHlj?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMia0FVX3lxTFB6a1BlWGpYWWF5b2Rmb1NmSVpvdFRzamRsUUJWWlJpVXo2MF84dl8zaUdIYjVSRFNkM0V6VkpxRkp1am1fdjN1djlKcG1LZGVxaHRZbVE2bVdySHFnbHktN3dNREpjWVA2YmhB0gFvQV",
-      "date": "2026년 3월 11일",
-      "source": "한국보험신문",
-      "region": "국내",
-      "isNew": true
+      "title": "Employer to pay $4.25M to settle claims it failed to consider vaccine exemptions",
+      "url": "https://www.hrdive.com/news/eeoc-millions-for-unvaccinated-workers-affected-by-mass-firing-covid-vaccine/820632/",
+      "desc": "<figure><div><img src=\"https://imgproxy.divecdn.com/N1Nt13wmDgmbBO99VZhqKwhR_oj6uWgyljEVOA6AZgo/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjE3NzE1MDgxLmpwZw==",
+      "date": "2026년 5월 20일",
+      "isoDate": "2026-05-19T19:36:00.000Z",
+      "source": "",
+      "region": "글로벌",
+      "sourceLabel": "HR Dive"
     },
     {
-      "title": "TAAP",
-      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNaEFmVWpxcGptdHlWc3FhSlM4d2l0VzNCcjRRd2taUFVLTklUajRaOTlNMkFheWVhZTBlZDJaemlWYTdGLXhHa25nUXg2UEtvRkRZallZeEVjd1dBSHUzTFdjQzVKQkNFRS1ncTlNY0ZaempVanpKUmxQZFAyVjVPamhuU1NaREY1NUMwQi0xMzZhTGRyQktWYVhLVGZpUmRZejJxM1h3?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMipgFBVV95cUxNaEFmVWpxcGptdHlWc3FhSlM4d2l0VzNCcjRRd2taUFVLTklUajRaOTlNMkFheWVhZTBlZDJaemlWYTdGLXhHa25nUXg2UEtvRkRZallZeEVjd1dBSHUzTFdjQzVKQkNFRS1ncTlNY0",
-      "date": "2023년 9월 2일",
-      "source": "Mercer | Welcome to brighter",
-      "region": "국내",
-      "isNew": true
+      "title": "Supreme Court to determine if school employees can sue under Title IX",
+      "url": "https://www.hrdive.com/news/supreme-court-to-determine-if-school-employees-can-sue-under-title-ix/820552/",
+      "desc": "<figure><div><img src=\"https://imgproxy.divecdn.com/ziTZorQlSmji768zIR1l1ktFtiVk9NxBSdR62q8K0IA/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjA4NzE3Njg0LmpwZw==",
+      "date": "2026년 5월 20일",
+      "isoDate": "2026-05-19T19:35:00.000Z",
+      "source": "",
+      "region": "글로벌",
+      "sourceLabel": "HR Dive"
     }
   ],
-  "gov": [
-    {
-      "title": "노란봉투법 시행 첫 날…교섭 위한 노사 노력 ‘숙제’",
-      "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFA0MEYyd3Y4b0hiTml0aDFVcGtCLVVLSWtzZG5KNU9pc05iVDROZFRjOHRiU21Zd1N1QVkzMmstcnlTeDhvbU8yUldCRDRMN2J0Z083enNHOGVXOWZRTzlxaFNwSQ?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMiY0FVX3lxTFA0MEYyd3Y4b0hiTml0aDFVcGtCLVVLSWtzZG5KNU9pc05iVDROZFRjOHRiU21Zd1N1QVkzMmstcnlTeDhvbU8yUldCRDRMN2J0Z083enNHOGVXOWZRTzlxaFNwSQ?oc=5\" target=\"_",
-      "date": "2026년 5월 15일",
-      "source": "쿠키뉴스",
-      "region": "국내",
-      "isNew": true
-    },
-    {
-      "title": "‘포괄임금제 오남용’ 막는다...노동부, 현장 가이드라인 발표",
-      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTkNyU2FmaE00UGMzVnlLcjNmZG1wUnVhZU1XbFFLRVlmbWE5S1FvbDM4bkJncGpBUjduU2puN3c5RUVFLWdjcVlNTE94UGtuV2dFRTZkTGtxam9UTFNaazBGUEtRSmRYVGdGaHpNTF9XQjBuc3FwcWJSRWdVUjlGV09R?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMiggFBVV95cUxQTkNyU2FmaE00UGMzVnlLcjNmZG1wUnVhZU1XbFFLRVlmbWE5S1FvbDM4bkJncGpBUjduU2puN3c5RUVFLWdjcVlNTE94UGtuV2dFRTZkTGtxam9UTFNaazBGUEtRSmRYVGdGaHpNTF",
-      "date": "2026년 4월 8일",
-      "source": "조선일보",
-      "region": "국내",
-      "isNew": true
-    },
-    {
-      "title": "‘노란봉투법’ 가이드라인 발표한 고용노동부, 노동계·경영계가 또 반발하는 이유는? 😤",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE4tNVNwZEFSRksxcXJQUjlvWnkzVDROZHUtMjB2TThhYkZzQ3hvSWJYUkZtV0pGV3pId3lpUHNtb3R3alg3WGI3WF9qam1fUk5nU2pv?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMiU0FVX3lxTE4tNVNwZEFSRksxcXJQUjlvWnkzVDROZHUtMjB2TThhYkZzQ3hvSWJYUkZtV0pGV3pId3lpUHNtb3R3alg3WGI3WF9qam1fUk5nU2pv?oc=5\" target=\"_blank\">‘노란봉투법’ 가이드라인 발",
-      "date": "2025년 12월 26일",
-      "source": "뉴닉",
-      "region": "국내",
-      "isNew": true
-    },
-    {
-      "title": "\"진짜 사장 나와라\" 노란봉투법 본격 시행…당분간 혼란 불가피",
-      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9BQXVZS0lSME1VNG9KRkZmNG40LTB2bzNyaV9lT2ZWWDdXLTBSS2tkVDFiaVYzQ2NHdEtHeDZYdERrd1BQei1Jdm5rckhDTWwyeTVPVDhKOUdiWGPSAWBBVV95cUxQdWhzb2ttVUZTdjFkOFF0R1h3TjJvbzkzUm1FcGtkdkhXaXY2MkNhSWdQTWhnazJSajN6TmVvd1BBb3lkdGJienFUV0lhSlhXZnB4NmNkY0JPZ21pRzc1cmE?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMiW0FVX3lxTE9BQXVZS0lSME1VNG9KRkZmNG40LTB2bzNyaV9lT2ZWWDdXLTBSS2tkVDFiaVYzQ2NHdEtHeDZYdERrd1BQei1Jdm5rckhDTWwyeTVPVDhKOUdiWGPSAWBBVV95cUxQdWhzb2ttVUZTdj",
-      "date": "2026년 3월 10일",
-      "source": "연합뉴스",
-      "region": "국내",
-      "isNew": true
-    },
-    {
-      "title": "노란봉투법 석달 앞두고 첫 가이드라인 \"‘구조적 통제’하면 사용자\"...\"오해 여지 많아\" 노사 반발",
-      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1ZUG1iV0NqNFpRaGhPQm1PXzRCeThvZjNLUmNBUHJaQ0JGOFFjLUszNUswd3dVS2c1MUlwOWxjNEExWWswVmhpbjMzUmo3Z1NWbzFnRQ?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMiVEFVX3lxTE1ZUG1iV0NqNFpRaGhPQm1PXzRCeThvZjNLUmNBUHJaQ0JGOFFjLUszNUswd3dVS2c1MUlwOWxjNEExWWswVmhpbjMzUmo3Z1NWbzFnRQ?oc=5\" target=\"_blank\">노란봉투법 석달 앞두고 ",
-      "date": "2025년 12월 26일",
-      "source": "JTBC",
-      "region": "국내",
-      "isNew": true
-    },
-    {
-      "title": "‘단시간 근로자에 대한 휴게시간 부여’ 관련 실무적 검토",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5KQmhiVjg1S3d0YVJTWlZpVkJGTWU4VTlUaXcxM3lWV2RxNWxUN1ltVXphaHhDTEhnbGFySk5KQ1VobUxneE1MZUE0cHdpbFlCdVJvNXdFdzhxS3JaRVpMYUJRSnE2OGg3TUJCMnFFRQ?oc=5",
-      "desc": "<a href=\"https://news.google.com/rss/articles/CBMib0FVX3lxTE5KQmhiVjg1S3d0YVJTWlZpVkJGTWU4VTlUaXcxM3lWV2RxNWxUN1ltVXphaHhDTEhnbGFySk5KQ1VobUxneE1MZUE0cHdpbFlCdVJvNXdFdzhxS3JaRVpMYUJRSnE2OGg3TUJCMnFFRQ",
-      "date": "2026년 1월 14일",
-      "source": "월간노동법률",
-      "region": "국내",
-      "isNew": true
-    }
-  ]
+  "gov": []
 }
