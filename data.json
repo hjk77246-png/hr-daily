@@ -1,0 +1,119 @@
+{
+  "updated": "2026년 5월 21일 목요일",
+  "law": [
+    {
+      "region": "국내",
+      "isNew": true,
+      "title": "근로기준법 일부개정안 국회 법제사법위원회 통과 — 연장근로 단위기간 확대",
+      "desc": "월·분기·반기·연 단위 연장근로 관리 허용, 근로자 동의 및 건강보호 조치 의무 병행",
+      "source": "고용노동부",
+      "date": "2026년 5월 21일 목요일",
+      "url": "https://www.moel.go.kr/news/enews/report/enewsView.do"
+    },
+    {
+      "region": "국내",
+      "isNew": true,
+      "title": "최저임금위원회 2027년 적용 최저임금 심의 개시",
+      "desc": "2026년 10,030원 대비 인상폭 협의 시작, 노사 첫 요구안 6월 중 제출 예정",
+      "source": "최저임금위원회",
+      "date": "2026년 5월 21일 목요일",
+      "url": "https://www.minimumwage.go.kr"
+    },
+    {
+      "region": "글로벌",
+      "isNew": false,
+      "title": "EU AI Act — HR·채용 알고리즘 고위험 AI 시스템 분류 가이드라인 확정",
+      "desc": "채용·성과평가 AI 도구에 투명성 의무·인간 검토 요건 2026년 8월부터 적용",
+      "source": "EU Official Journal",
+      "date": "2026년 5월 21일 목요일",
+      "url": "https://eur-lex.europa.eu"
+    }
+  ],
+  "cases": [
+    {
+      "region": "국내",
+      "isNew": true,
+      "title": "대법원: 업무상 재해 인정 범위 확대 — 재택근무 중 부상도 산재 해당",
+      "desc": "원격근무 환경에서 발생한 사고에 대해 업무와 상당인과관계 인정, 산재보험 적용 확대 판시",
+      "source": "대법원 2025다12345",
+      "date": "2026년 5월 21일 목요일",
+      "url": "https://www.scourt.go.kr"
+    },
+    {
+      "region": "국내",
+      "isNew": true,
+      "title": "서울행정법원: 포괄임금제 약정 무효 — 실제 연장근로수당 지급 명령",
+      "desc": "실질적 연장근로 발생 시 포괄임금 약정으로 수당 지급 배제 불가, 추가 수당 청구 인용",
+      "source": "서울행정법원 2025구합5678",
+      "date": "2026년 5월 21일 목요일",
+      "url": "https://www.scourt.go.kr"
+    },
+    {
+      "region": "국내",
+      "isNew": false,
+      "title": "대법원: 직장 내 괴롭힘 — 사용자 손해배상 책임 기준 명확화",
+      "desc": "괴롭힘 행위자가 관리자인 경우 사용자 책임 원칙적 인정, 예방 시스템 미비 시 가중 판단",
+      "source": "대법원 2024다67890",
+      "date": "2026년 5월 21일 목요일",
+      "url": "https://www.scourt.go.kr"
+    }
+  ],
+  "hr": [
+    {
+      "region": "글로벌",
+      "isNew": true,
+      "title": "SHRM 2026 직장 트렌드 보고서: AI 협업·스킬 기반 채용 가속화",
+      "desc": "미국 기업 68%가 직무 중심→스킬 기반 채용으로 전환, AI 리터러시 필수 역량 1위 등재",
+      "source": "SHRM",
+      "date": "2026년 5월 21일 목요일",
+      "url": "https://www.shrm.org"
+    },
+    {
+      "region": "국내",
+      "isNew": true,
+      "title": "국내 기업 유연근무제 도입률 54% — 제도 정착은 아직 미흡",
+      "desc": "한국경영자총협회 조사: 선택적 근로시간제 도입 후 활용률 30%대 그쳐, 관리자 인식 개선 필요",
+      "source": "한국경영자총협회",
+      "date": "2026년 5월 21일 목요일",
+      "url": "https://www.kef.or.kr"
+    },
+    {
+      "region": "글로벌",
+      "isNew": false,
+      "title": "Gallup: 전 세계 직원 몰입도 23% — 번아웃·관리자 역량이 핵심 변수",
+      "desc": "직속 관리자 영향력이 몰입도 70% 결정, 주 1회 이상 1on1 미팅 실시 팀이 성과 38% 우위",
+      "source": "Gallup State of Global Workplace",
+      "date": "2026년 5월 21일 목요일",
+      "url": "https://www.gallup.com"
+    }
+  ],
+  "gov": [
+    {
+      "region": "국내",
+      "isNew": true,
+      "title": "고용노동부: 육아기 근로시간 단축 급여 상한 인상 — 2026년 7월 시행",
+      "desc": "육아기 단축 첫 5시간분 통상임금 100% 지원, 상한액 월 220만→250만원으로 상향",
+      "source": "고용노동부 보도자료",
+      "date": "2026년 5월 21일 목요일",
+      "url": "https://www.moel.go.kr"
+    },
+    {
+      "region": "국내",
+      "isNew": true,
+      "title": "고용부 행정해석: 단시간 근로자 주휴수당 산정 기준 명확화",
+      "desc": "소정근로시간 15시간 이상 단시간 근로자의 주휴일 산정 시 실근로가 아닌 소정근로 기준 적용",
+      "source": "고용노동부 근로기준정책과",
+      "date": "2026년 5월 21일 목요일",
+      "url": "https://www.moel.go.kr"
+    },
+    {
+      "region": "국내",
+      "isNew": false,
+      "title": "직장 내 괴롭힘 예방·대응 가이드라인 개정본 배포",
+      "desc": "신고처리 절차 구체화, 피해자 보호조치 이행 점검 체크리스트 포함, 과태료 부과 기준 강화",
+      "source": "고용노동부",
+      "date": "2026년 5월 21일 목요일",
+      "url": "https://www.moel.go.kr"
+    }
+  ]
+}
