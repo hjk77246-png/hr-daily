@@ -454,11 +454,12 @@ function todayKST() {
  * isRecent — 36시간 이내 기사 여부
  * strict=true  : isoDate 없으면 제외 (실시간 RSS 새로고침용)
  * strict=false : isoDate 없어도 포함 (data.json 로드용 — Actions이 이미 필터함)
+ * ±12h 허용: KST/UTC 혼용 파싱 오류 대응
  */
 function isRecent(isoDate, strict = true) {
   if (!isoDate) return !strict;
   const diff = Date.now() - new Date(isoDate).getTime();
-  return diff >= 0 && diff <= 36 * 60 * 60 * 1000;
+  return diff >= -(12 * 60 * 60 * 1000) && diff <= 36 * 60 * 60 * 1000;
 }
 
 /** HTML 이스케이프 */

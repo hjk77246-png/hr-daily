@@ -68,11 +68,14 @@ const EXTRA_FEEDS = {
 //  유틸리티
 // ══════════════════════════════════════════════════════════
 
-/** 36시간 이내 기사인지 확인 */
+/**
+ * 36시간 이내 기사인지 확인
+ * ±12h 여유: 매일노동뉴스 등 KST 날짜를 UTC로 잘못 파싱하는 경우 대응
+ */
 function isRecent(isoDate) {
   if (!isoDate) return false;
   const diff = Date.now() - new Date(isoDate).getTime();
-  return diff >= 0 && diff <= 36 * 60 * 60 * 1000;
+  return diff >= -(12 * 60 * 60 * 1000) && diff <= 36 * 60 * 60 * 1000;
 }
 
 /** 매일노동뉴스 기사를 키워드로 카테고리 분류 */
