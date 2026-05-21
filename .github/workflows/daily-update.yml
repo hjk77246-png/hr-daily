@@ -3,13 +3,13 @@ name: HR 데일리 뉴스 자동 업데이트
 on:
   schedule:
     - cron: '0 0 * * *'   # 매일 00:00 UTC = 오전 9시 KST
-  workflow_dispatch:        # GitHub에서 수동 실행 버튼도 제공
+  workflow_dispatch:        # GitHub에서 수동 실행 버튼
 
 jobs:
   update-news:
     runs-on: ubuntu-latest
     permissions:
-      contents: write       # data.json 커밋을 위해 필요
+      contents: write
 
     steps:
       - name: 저장소 체크아웃
@@ -20,7 +20,9 @@ jobs:
         with:
           node-version: '20'
 
-      - name: HR 뉴스 데이터 수집
+      - name: HR 뉴스 수집 & AI 요약 생성
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: node update-news.mjs
 
       - name: data.json 커밋 & 푸시
@@ -29,7 +31,7 @@ jobs:
           git config user.email "action@github.com"
           git add data.json
           if git diff --staged --quiet; then
-            echo "ℹ️  변경사항 없음 — 커밋 생략"
+            echo "ℹ️  변경사항 없음"
           else
             git commit -m "📰 $(date +'%Y-%m-%d') HR 데일리 업데이트"
             git push
