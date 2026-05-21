@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-// update-news.mjs — HR Daily News Updater v4
-// 전문 사이트 RSS 수집 → Gemini AI로 배경/주요내용/시사점 요약 → data.json 저장
+// update-news.mjs — HR Daily News Updater v5
+// 전문 사이트 RSS 수집 → GitHub Models AI(무료)로 배경/주요내용/시사점 요약 → data.json 저장
 
 import { writeFileSync } from 'fs';
 
-const GEMINI_API_KEY   = process.env.GEMINI_API_KEY || '';
+const GITHUB_TOKEN     = process.env.GITHUB_TOKEN || '';
 const MAX_PER_CATEGORY = 5;
 
 // ══════════════════════════════════════════════════════════
@@ -165,8 +165,8 @@ const CAT_LABEL = {
 };
 
 async function summarize(article, category) {
-  /* API 키 없으면 스킵 */
-  if (!GEMINI_API_KEY) {
+  /* GitHub Token 없으면 스킵 */
+  if (!GITHUB_TOKEN) {
     return { background: '', main: article.desc || '', implication: '' };
   }
 
@@ -182,13 +182,17 @@ async function summarize(article, category) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 30000);
   try {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
-    const res = await fetch(url, {
+    const res = await fetch('https://models.inference.ai.azure.com/chat/completions', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Authorization': `Bearer ${GITHUB_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { maxOutputTokens: 600, temperature: 0.3 },
+        model: 'meta-llama-3.1-8b-instruct',
+        messages: [{ role: 'user', content: prompt }],
+        max_tokens: 600,
+        temperature: 0.3,
       }),
       signal: controller.signal,
     });
@@ -196,12 +200,12 @@ async function summarize(article, category) {
 
     if (!res.ok) {
       const err = await res.text();
-      console.warn(`  ⚠ Gemini API 오류 HTTP ${res.status}:`, err.slice(0, 200));
+      console.warn(`  ⚠ GitHub Models 오류 HTTP ${res.status}:`, err.slice(0, 200));
       return { background: '', main: article.desc || '', implication: '' };
     }
 
     const data = await res.json();
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const text = data.choices?.[0]?.message?.content || '';
     console.log(`     [응답미리보기] ${text.slice(0, 80).replace(/\n/g,' ')}`);
 
     /* JSON 추출: 마크다운 코드블록 또는 raw JSON 모두 처리 */
@@ -242,7 +246,7 @@ async function main() {
     day: 'numeric', weekday: 'long', hour: '2-digit', minute: '2-digit',
   });
   console.log(`\n🚀 HR 데일리 수집 시작 (${nowKST})\n`);
-  console.log(`🤖 Gemini 요약: ${GEMINI_API_KEY ? '활성화' : '비활성화 (GEMINI_API_KEY 미설정)'}\n`);
+  console.log(`🤖 GitHub Models AI 요약: ${GITHUB_TOKEN ? '활성화' : '비활성화'}\n`);
 
   const buckets = { law: [], cases: [], hr: [], gov: [] };
 
@@ -277,9 +281,9 @@ async function main() {
     console.log(`\n✅ [${CAT_LABEL[cat]}] ${selected[cat].length}건 선택`);
   }
 
-  /* ── 4) Gemini AI 요약 ── */
-  if (GEMINI_API_KEY) {
-    console.log('\n🤖 Gemini AI 요약 생성 중...');
+  /* ── 4) GitHub Models AI 요약 ── */
+  if (GITHUB_TOKEN) {
+    console.log('\n🤖 GitHub Models AI 요약 생성 중...');
     for (const [cat, items] of Object.entries(selected)) {
       for (let i = 0; i < items.length; i++) {
         const item = items[i];
@@ -295,7 +299,7 @@ async function main() {
   /* ── 5) data.json 저장 ── */
   const data = {
     updated: nowKST,
-    aiSummary: !!GEMINI_API_KEY,
+    aiSummary: !!GITHUB_TOKEN,
     sources: {
       korean: '매일노동뉴스, Google 뉴스',
       global: 'HR Dive, HR Morning, Google News',
