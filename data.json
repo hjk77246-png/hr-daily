@@ -1,5 +1,5 @@
 {
-  "updated": "2026년 5월 21일 목요일 AM 11:26",
+  "updated": "2026년 5월 21일 목요일 AM 11:29",
   "sources": {
     "korean": "매일노동뉴스, Google 뉴스",
     "global": "HR Dive, HR Morning, Google News"
@@ -34,16 +34,6 @@
       "desc": "■ 경영기획이사 임명 △경영기획이사 김인우 2026년 5월20일 시행",
       "date": "2026년 5월 20일",
       "isoDate": "2026-05-20T06:30:04.000Z",
-      "source": "",
-      "region": "국내",
-      "sourceLabel": "매일노동뉴스"
-    },
-    {
-      "title": "노동부 “성과급 배분 사회적 논의”",
-      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234434",
-      "desc": "고용노동부가 삼성전자 노조 파업과 관련해 성과급 배분과 관련한 사회적 대화를 하겠다는 뜻을 밝혔다. 권창준 노동부 차관은 19일 오전 열린 기후에너지환경노동위원회 전체회의에서 “(삼성전자) 사태가 이것으로 끝나는 게 아니라 향후 전체적으로 기업의 이익과 미래, 이것을 어떻게 배분할 것인지에 대한 사회적 논의도 필요하다”며 “현재의 교섭",
-      "date": "2026년 5월 20일",
-      "isoDate": "2026-05-20T06:30:02.000Z",
       "source": "",
       "region": "국내",
       "sourceLabel": "매일노동뉴스"
@@ -87,7 +77,38 @@
       "source": "",
       "region": "글로벌",
       "sourceLabel": "HR Dive"
+    },
+    {
+      "title": "Don’t discount human skills or older workers in AI upskilling, expert warns",
+      "url": "https://www.hrdive.com/news/human-skills-age-of-ai/820587/",
+      "desc": "<figure><div><img src=\"https://imgproxy.divecdn.com/mj4qbW10Vb5A7rBr4VIjb2ozse4aWYN19lu5AlD4R2k/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjE3MzA3MTM0LmpwZw==",
+      "date": "2026년 5월 20일",
+      "isoDate": "2026-05-19T16:48:00.000Z",
+      "source": "",
+      "region": "글로벌",
+      "sourceLabel": "HR Dive"
     }
   ],
-  "gov": []
+  "gov": [
+    {
+      "title": "김영훈 장관 중재로 삼성전자 노사 ‘막판 교섭’",
+      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234513",
+      "desc": "삼성전자 노사가 중앙노동원회 조정이 결렬된 지 4시간 만에 교섭석상에 앉았다. 김영훈 고용노동부 장관이 직접 중재에 나섰다.최승호 삼성그룹 초기업노조 삼성전자지부 위원장과 여명구 삼성전자 DS부문 피플팀장은 20일 오후 4시부터 경기도 수원시에 있는 경기지방고용노동청에서 성과급 수준과 지급 방안 등을 놓고 교섭을 시작했다. 이번 교섭은 김영훈 장관이 중재해",
+      "date": "2026년 5월 21일",
+      "isoDate": "2026-05-20T16:20:57.000Z",
+      "source": "",
+      "region": "국내",
+      "sourceLabel": "매일노동뉴스"
+    },
+    {
+      "title": "노동부 “성과급 배분 사회적 논의”",
+      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234434",
+      "desc": "고용노동부가 삼성전자 노조 파업과 관련해 성과급 배분과 관련한 사회적 대화를 하겠다는 뜻을 밝혔다. 권창준 노동부 차관은 19일 오전 열린 기후에너지환경노동위원회 전체회의에서 “(삼성전자) 사태가 이것으로 끝나는 게 아니라 향후 전체적으로 기업의 이익과 미래, 이것을 어떻게 배분할 것인지에 대한 사회적 논의도 필요하다”며 “현재의 교섭",
+      "date": "2026년 5월 20일",
+      "isoDate": "2026-05-20T06:30:02.000Z",
+      "source": "",
+      "region": "국내",
+      "sourceLabel": "매일노동뉴스"
+    }
+  ]
 }
