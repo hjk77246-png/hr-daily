@@ -1,42 +1,86 @@
 #!/usr/bin/env node
-// update-news.mjs — HR Daily News Updater
-// GitHub Actions에서 매일 실행 → Google 뉴스 RSS 수집 → data.json 갱신
+// update-news.mjs — HR Daily News Updater v2
+// 검증된 전문 사이트에서 HR/노무 뉴스를 수집해 data.json을 갱신합니다.
 
 import { writeFileSync } from 'fs';
 
-// ── 카테고리별 RSS 피드 ──────────────────────────────────────
-const FEEDS = {
+// ══════════════════════════════════════════════════════════
+//  데이터 소스 정의
+//  · 매일노동뉴스: 한국 유일 노동 전문지 (키워드로 카테고리 분류)
+//  · HR Dive / HR Morning: 글로벌 HR 전문 미디어
+//  · Google News RSS: 카테고리별 보조 소스
+// ══════════════════════════════════════════════════════════
+
+/** 매일노동뉴스 RSS (전체 기사 → 키워드로 카테고리 배분) */
+const LABORTODAY_RSS = 'http://www.labortoday.co.kr/rss/allArticle.xml';
+
+/** 카테고리 키워드 (앞 항목일수록 우선순위 높음) */
+const CAT_KEYWORDS = [
+  {
+    cat: 'cases',
+    kw: ['판결','판례','대법원','고등법원','지방법원','행정법원','노동위원회',
+         '판정','부당해고','부당노동행위','근로자지위확인','심판','소송','선고'],
+  },
+  {
+    cat: 'gov',
+    kw: ['고용노동부','행정해석','가이드라인','지침','고시','공고','보도자료',
+         '근로감독','노동청','노동부 장관','행정예고','행정조치'],
+  },
+  {
+    cat: 'law',
+    kw: ['개정','입법','법안','제정','법률안','시행령','시행규칙','최저임금법',
+         '근로기준법','산안법','고평법','파견법','조례','국회','위원회'],
+  },
+  {
+    cat: 'hr',
+    kw: ['채용','인사','성과','복리후생','유연근무','재택근무','워크라이프','직무',
+         '역량','승진','연봉','조직문화','ESG','인재','리더십','구성원'],
+  },
+];
+
+/** 카테고리별 전용 추가 소스 */
+const EXTRA_FEEDS = {
   law: [
-    { url: 'https://news.google.com/rss/search?q=%EB%85%B8%EB%8F%99%EB%B2%95+%EA%B0%9C%EC%A0%95+%EC%9E%85%EB%B2%95&hl=ko&gl=KR&ceid=KR:ko',            region: '국내' },
-    { url: 'https://news.google.com/rss/search?q=%EA%B7%BC%EB%A1%9C%EA%B8%B0%EC%A4%80%EB%B2%95+%EC%B5%9C%EC%A0%80%EC%9E%84%EA%B8%88+%EA%B0%9C%EC%A0%95&hl=ko&gl=KR&ceid=KR:ko', region: '국내' },
-    { url: 'https://news.google.com/rss/search?q=labor+law+reform+employment+act+2026&hl=en&gl=US&ceid=US:en',                                              region: '글로벌' },
+    { url: 'https://news.google.com/rss/search?q=%EB%85%B8%EB%8F%99%EB%B2%95+%EA%B0%9C%EC%A0%95+%EC%9E%85%EB%B2%95+%EB%B2%95%EC%95%88&hl=ko&gl=KR&ceid=KR:ko', region: '국내', label: 'Google 뉴스' },
+    { url: 'https://news.google.com/rss/search?q=labor+law+reform+employment+legislation+2026&hl=en&gl=US&ceid=US:en', region: '글로벌', label: 'Google News' },
   ],
   cases: [
-    { url: 'https://news.google.com/rss/search?q=%EB%8C%80%EB%B2%95%EC%9B%90+%EB%85%B8%EB%8F%99+%ED%8C%90%EA%B2%B0+%ED%95%B4%EA%B3%A0&hl=ko&gl=KR&ceid=KR:ko', region: '국내' },
-    { url: 'https://news.google.com/rss/search?q=%EB%85%B8%EB%8F%99%EC%9C%84%EC%9B%90%ED%9A%8C+%ED%8C%90%EC%A0%95+%ED%8C%90%EB%A1%80&hl=ko&gl=KR&ceid=KR:ko',    region: '국내' },
-    { url: 'https://news.google.com/rss/search?q=%ED%96%89%EC%A0%95%EB%B2%95%EC%9B%90+%EA%B3%A0%EC%9A%A9+%EC%B7%A8%EC%86%8C+%ED%8C%90%EA%B2%B0&hl=ko&gl=KR&ceid=KR:ko', region: '국내' },
-    { url: 'https://news.google.com/rss/search?q=employment+court+ruling+wrongful+termination+labor&hl=en&gl=US&ceid=US:en',                                  region: '글로벌' },
+    { url: 'https://news.google.com/rss/search?q=%EB%8C%80%EB%B2%95%EC%9B%90+%EB%85%B8%EB%8F%99+%ED%8C%90%EA%B2%B0+%EB%B6%80%EB%8B%B9%ED%95%B4%EA%B3%A0&hl=ko&gl=KR&ceid=KR:ko', region: '국내', label: 'Google 뉴스' },
+    { url: 'https://news.google.com/rss/search?q=employment+court+ruling+labor+wrongful+termination&hl=en&gl=US&ceid=US:en', region: '글로벌', label: 'Google News' },
   ],
   hr: [
-    { url: 'https://news.google.com/rss/search?q=HR+%EC%9D%B8%EC%82%AC%EA%B4%80%EB%A6%AC+%EC%A1%B0%EC%A7%81%EB%AC%B8%ED%99%94&hl=ko&gl=KR&ceid=KR:ko',               region: '국내' },
-    { url: 'https://news.google.com/rss/search?q=%EC%9C%A0%EC%97%B0%EA%B7%BC%EB%AC%B4+%EC%9B%B0%EB%B9%99+%EB%B3%B5%EB%A6%AC%ED%9B%84%EC%83%9D+%EC%9D%B8%EC%9E%AC&hl=ko&gl=KR&ceid=KR:ko', region: '국내' },
-    { url: 'https://news.google.com/rss/search?q=HR+trends+workforce+talent+management+2026&hl=en&gl=US&ceid=US:en',                                           region: '글로벌' },
-    { url: 'https://news.google.com/rss/search?q=remote+work+AI+workplace+employee+engagement&hl=en&gl=US&ceid=US:en',                                         region: '글로벌' },
+    { url: 'https://www.hrdive.com/feeds/news/',   region: '글로벌', label: 'HR Dive' },
+    { url: 'https://www.hrmorning.com/feed/',       region: '글로벌', label: 'HR Morning' },
+    { url: 'https://news.google.com/rss/search?q=HR+%EC%9D%B8%EC%82%AC%EA%B4%80%EB%A6%AC+%EC%A1%B0%EC%A7%81%EB%AC%B8%ED%99%94+%EC%B1%84%EC%9A%A9&hl=ko&gl=KR&ceid=KR:ko', region: '국내', label: 'Google 뉴스' },
   ],
   gov: [
-    { url: 'https://news.google.com/rss/search?q=%EA%B3%A0%EC%9A%A9%EB%85%B8%EB%8F%99%EB%B6%80+%EC%A7%80%EC%B9%A8+%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8&hl=ko&gl=KR&ceid=KR:ko',    region: '국내' },
-    { url: 'https://news.google.com/rss/search?q=%EA%B3%A0%EC%9A%A9%EB%85%B8%EB%8F%99%EB%B6%80+%ED%96%89%EC%A0%95%ED%95%B4%EC%84%9D+%EB%B3%B4%EB%8F%84%EC%9E%90%EB%A3%8C&hl=ko&gl=KR&ceid=KR:ko', region: '국내' },
+    { url: 'https://news.google.com/rss/search?q=%EA%B3%A0%EC%9A%A9%EB%85%B8%EB%8F%99%EB%B6%80+%ED%96%89%EC%A0%95%ED%95%B4%EC%84%9D+%EC%A7%80%EC%B9%A8+%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8&hl=ko&gl=KR&ceid=KR:ko', region: '국내', label: 'Google 뉴스' },
+    { url: 'https://news.google.com/rss/search?q=%EA%B3%A0%EC%9A%A9%EB%85%B8%EB%8F%99%EB%B6%80+%EB%B3%B4%EB%8F%84%EC%9E%90%EB%A3%8C+%EC%8B%9C%ED%96%89&hl=ko&gl=KR&ceid=KR:ko', region: '국내', label: 'Google 뉴스' },
   ],
 };
 
-// ── 36시간 이내 기사인지 확인 ──────────────────────────────
+// ══════════════════════════════════════════════════════════
+//  유틸리티
+// ══════════════════════════════════════════════════════════
+
+/** 36시간 이내 기사인지 확인 */
 function isRecent(isoDate) {
   if (!isoDate) return false;
   const diff = Date.now() - new Date(isoDate).getTime();
   return diff >= 0 && diff <= 36 * 60 * 60 * 1000;
 }
 
-// ── RSS XML 파싱 ──────────────────────────────────────────
+/** 매일노동뉴스 기사를 키워드로 카테고리 분류 */
+function categorizeByKeyword(title) {
+  for (const { cat, kw } of CAT_KEYWORDS) {
+    if (kw.some(k => title.includes(k))) return cat;
+  }
+  return null; // 해당 없으면 제외
+}
+
+// ══════════════════════════════════════════════════════════
+//  RSS 파싱 (외부 패키지 불필요)
+// ══════════════════════════════════════════════════════════
 function parseRSS(xml) {
   const items = [];
   const re = /<item>([\s\S]*?)<\/item>/g;
@@ -58,20 +102,19 @@ function parseRSS(xml) {
     const rawTitle = clean(get('title'));
     if (!rawTitle || rawTitle.length < 4) continue;
 
-    // "제목 - 언론사" 분리
+    // "기사 제목 - 언론사" 분리
     const parts  = rawTitle.split(' - ');
     const title  = parts.length > 1 ? parts.slice(0, -1).join(' - ') : rawTitle;
     const source = parts.length > 1 ? parts[parts.length - 1] : '';
 
     const link = clean(get('link') || get('guid'));
     const desc = clean(get('description')).slice(0, 200);
-
     const pubStr = get('pubDate');
     let date = '', isoDate = '';
     if (pubStr) {
       try {
         const d = new Date(pubStr);
-        isoDate  = d.toISOString();
+        isoDate = d.toISOString();
         date = d.toLocaleDateString('ko-KR', {
           timeZone: 'Asia/Seoul', year: 'numeric', month: 'long', day: 'numeric'
         });
@@ -82,8 +125,10 @@ function parseRSS(xml) {
   return items;
 }
 
-// ── 피드 가져오기 ─────────────────────────────────────────
-async function fetchFeed(url, region) {
+// ══════════════════════════════════════════════════════════
+//  RSS 수집
+// ══════════════════════════════════════════════════════════
+async function fetchFeed(url, region, label) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 15000);
   try {
@@ -95,22 +140,18 @@ async function fetchFeed(url, region) {
       signal: controller.signal,
     });
     clearTimeout(timer);
-    if (!res.ok) { console.warn(`  ⚠ HTTP ${res.status}: ${url.slice(0, 60)}`); return []; }
+    if (!res.ok) { console.warn(`  ⚠ HTTP ${res.status} [${label}]`); return []; }
     const text = await res.text();
-
-    return parseRSS(text)
-      .filter(item => isRecent(item.isoDate))   // ← 오늘 기사만
-      .slice(0, 5)
-      .map(item => ({ ...item, region }));
+    return parseRSS(text).map(item => ({ ...item, region, sourceLabel: label || region }));
   } catch(e) {
     clearTimeout(timer);
-    console.warn(`  ⚠ 피드 오류: ${e.message}`);
+    console.warn(`  ⚠ 오류 [${label}]: ${e.message}`);
     return [];
   }
 }
 
-// ── 중복 제거 ──────────────────────────────────────────────
-function deduplicate(items) {
+/** 중복 제거 (제목 앞 40자 기준) */
+function dedup(items) {
   const seen = new Set();
   return items.filter(item => {
     const key = item.title.slice(0, 40).toLowerCase();
@@ -120,7 +161,9 @@ function deduplicate(items) {
   });
 }
 
-// ── 메인 ──────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════
+//  메인
+// ══════════════════════════════════════════════════════════
 async function main() {
   const nowKST = new Date().toLocaleString('ko-KR', {
     timeZone: 'Asia/Seoul',
@@ -129,24 +172,52 @@ async function main() {
   });
   console.log(`\n🚀 HR 데일리 뉴스 수집 시작 (${nowKST})\n`);
 
-  const result = {};
-  const labels = { law: '노동법 개정/입법', cases: '판례', hr: 'HR 트렌드', gov: '고용부 해석' };
+  const buckets = { law: [], cases: [], hr: [], gov: [] };
 
-  for (const [cat, feeds] of Object.entries(FEEDS)) {
-    console.log(`📂 [${labels[cat]}] 수집 중...`);
-    const bucket = [];
-    for (const { url, region } of feeds) {
-      const items = await fetchFeed(url, region);
-      bucket.push(...items);
-      await new Promise(r => setTimeout(r, 800));
+  // ── 1) 매일노동뉴스 수집 → 키워드 분류 ──────────────
+  console.log('📰 [매일노동뉴스] 수집 중...');
+  const laborItems = await fetchFeed(LABORTODAY_RSS, '국내', '매일노동뉴스');
+  let ltTotal = 0;
+  for (const item of laborItems) {
+    if (!isRecent(item.isoDate)) continue;
+    const cat = categorizeByKeyword(item.title);
+    if (cat) { buckets[cat].push(item); ltTotal++; }
+  }
+  console.log(`   → 오늘 기사 ${ltTotal}건 분류 완료`);
+
+  await new Promise(r => setTimeout(r, 800));
+
+  // ── 2) 카테고리별 추가 소스 수집 ─────────────────────
+  const labels = { law: '노동법 개정/입법', cases: '판례', hr: 'HR 트렌드', gov: '고용부 해석' };
+  for (const [cat, feeds] of Object.entries(EXTRA_FEEDS)) {
+    console.log(`📂 [${labels[cat]}] 추가 소스 수집 중...`);
+    for (const { url, region, label } of feeds) {
+      const items = await fetchFeed(url, region, label);
+      const recent = items.filter(i => isRecent(i.isoDate));
+      buckets[cat].push(...recent);
+      console.log(`   [${label}] → ${recent.length}건`);
+      await new Promise(r => setTimeout(r, 600));
     }
-    result[cat] = deduplicate(bucket).slice(0, 6);
-    console.log(`   → 오늘 기사 ${result[cat].length}건`);
   }
 
-  const data = { updated: nowKST, ...result };
+  // ── 3) 카테고리별 중복 제거 & 최대 6건 ───────────────
+  const result = {};
+  for (const [cat, items] of Object.entries(buckets)) {
+    result[cat] = dedup(items).slice(0, 6);
+    console.log(`✅ [${labels[cat]}] 최종 ${result[cat].length}건`);
+  }
+
+  // ── 4) data.json 저장 ────────────────────────────────
+  const data = {
+    updated: nowKST,
+    sources: {
+      korean: '매일노동뉴스, Google 뉴스',
+      global: 'HR Dive, HR Morning, Google News',
+    },
+    ...result,
+  };
   writeFileSync('data.json', JSON.stringify(data, null, 2), 'utf-8');
-  console.log(`\n✅ data.json 업데이트 완료 (${nowKST})\n`);
+  console.log(`\n🎉 data.json 업데이트 완료 (${nowKST})\n`);
 }
 
 main().catch(e => { console.error('❌ 오류:', e); process.exit(1); });

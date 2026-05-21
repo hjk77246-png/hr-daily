@@ -411,8 +411,32 @@ const FEEDS = {
   ],
 };
 
-// CORS 프록시 (Google News RSS 직접 호출용)
+// CORS 프록시 (직접 RSS 호출용)
 const CORS_PROXY = 'https://corsproxy.io/?';
+
+// 카테고리별 새로고침용 소스 (브라우저 직접 호출)
+const REFRESH_FEEDS = {
+  law: [
+    { url: 'http://www.labortoday.co.kr/rss/allArticle.xml',  region: '국내', label: '매일노동뉴스', kwFilter: ['개정','입법','법안','제정','법률안','시행령','근로기준법','최저임금법','산안법'] },
+    { url: 'https://news.google.com/rss/search?q=%EB%85%B8%EB%8F%99%EB%B2%95+%EA%B0%9C%EC%A0%95+%EC%9E%85%EB%B2%95+%EB%B2%95%EC%95%88&hl=ko&gl=KR&ceid=KR:ko', region: '국내', label: 'Google 뉴스' },
+    { url: 'https://news.google.com/rss/search?q=labor+law+reform+employment+legislation+2026&hl=en&gl=US&ceid=US:en', region: '글로벌', label: 'Google News' },
+  ],
+  cases: [
+    { url: 'http://www.labortoday.co.kr/rss/allArticle.xml',  region: '국내', label: '매일노동뉴스', kwFilter: ['판결','판례','대법원','행정법원','노동위원회','판정','부당해고','부당노동행위'] },
+    { url: 'https://news.google.com/rss/search?q=%EB%8C%80%EB%B2%95%EC%9B%90+%EB%85%B8%EB%8F%99+%ED%8C%90%EA%B2%B0+%EB%B6%80%EB%8B%B9%ED%95%B4%EA%B3%A0&hl=ko&gl=KR&ceid=KR:ko', region: '국내', label: 'Google 뉴스' },
+    { url: 'https://news.google.com/rss/search?q=employment+court+ruling+labor+wrongful+termination&hl=en&gl=US&ceid=US:en', region: '글로벌', label: 'Google News' },
+  ],
+  hr: [
+    { url: 'https://www.hrdive.com/feeds/news/',  region: '글로벌', label: 'HR Dive' },
+    { url: 'https://www.hrmorning.com/feed/',      region: '글로벌', label: 'HR Morning' },
+    { url: 'http://www.labortoday.co.kr/rss/allArticle.xml', region: '국내', label: '매일노동뉴스', kwFilter: ['채용','인사','성과','복리후생','유연근무','재택','조직문화','인재','리더십'] },
+    { url: 'https://news.google.com/rss/search?q=HR+%EC%9D%B8%EC%82%AC%EA%B4%80%EB%A6%AC+%EC%A1%B0%EC%A7%81%EB%AC%B8%ED%99%94+%EC%B1%84%EC%9A%A9&hl=ko&gl=KR&ceid=KR:ko', region: '국내', label: 'Google 뉴스' },
+  ],
+  gov: [
+    { url: 'http://www.labortoday.co.kr/rss/allArticle.xml', region: '국내', label: '매일노동뉴스', kwFilter: ['고용노동부','행정해석','가이드라인','지침','고시','보도자료','행정예고'] },
+    { url: 'https://news.google.com/rss/search?q=%EA%B3%A0%EC%9A%A9%EB%85%B8%EB%8F%99%EB%B6%80+%ED%96%89%EC%A0%95%ED%95%B4%EC%84%9D+%EC%A7%80%EC%B9%A8+%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8&hl=ko&gl=KR&ceid=KR:ko', region: '국내', label: 'Google 뉴스' },
+  ],
+};
 
 // ─────────────────────────────────────────────────
 // 유틸리티
@@ -426,9 +450,13 @@ function todayKST() {
   });
 }
 
-/** 36시간 이내 기사인지 확인 (오늘 기사 = 당일 KST 포함) */
-function isRecent(isoDate) {
-  if (!isoDate) return false;           // 날짜 없으면 제외
+/**
+ * isRecent — 36시간 이내 기사 여부
+ * strict=true  : isoDate 없으면 제외 (실시간 RSS 새로고침용)
+ * strict=false : isoDate 없어도 포함 (data.json 로드용 — Actions이 이미 필터함)
+ */
+function isRecent(isoDate, strict = true) {
+  if (!isoDate) return !strict;
   const diff = Date.now() - new Date(isoDate).getTime();
   return diff >= 0 && diff <= 36 * 60 * 60 * 1000;
 }
@@ -567,9 +595,11 @@ async function startBriefing() {
 
     const catMap = { law: data.law, cases: data.cases, hr: data.hr, gov: data.gov };
     for (const [cat, raw] of Object.entries(catMap)) {
-      const recent = (raw || []).filter(item => isRecent(item.isoDate));
+      // strict=false: isoDate 없는 기사도 표시 (Actions가 이미 날짜 필터 적용)
+      const recent = (raw || []).filter(item => isRecent(item.isoDate, false));
       renderItems(cat, recent, true);
-      setRts(cat, '데이터 기준: ' + (data.updated || '-') + ' · ↻ 새로고침으로 실시간 업데이트');
+      const src = data.sources ? `출처: ${data.sources.korean} / ${data.sources.global}` : '';
+      setRts(cat, `기준: ${data.updated || '-'}  ${src}`);
     }
   } catch(e) {
     console.error(e);
@@ -582,38 +612,44 @@ async function startBriefing() {
 }
 
 // ─────────────────────────────────────────────────
-// 카테고리 새로고침 (실시간 RSS 직접 수집)
+// 카테고리 새로고침 (전문 사이트 실시간 수집)
 // ─────────────────────────────────────────────────
 async function refreshCategory(catId) {
   setLoading(catId);
   setRefreshBtnSpinning(catId, true);
-  setRts(catId, '🔄 RSS 수집 중...');
+  setRts(catId, '🔄 전문 사이트에서 최신 기사 수집 중...');
 
-  const feeds  = FEEDS[catId];
+  const feeds  = REFRESH_FEEDS[catId] || [];
   const bucket = [];
+  const usedLabels = new Set();
 
-  for (const { url, region } of feeds) {
+  for (const { url, region, label, kwFilter } of feeds) {
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 12000);
+    const timer = setTimeout(() => controller.abort(), 14000);
     try {
       const proxyUrl = CORS_PROXY + encodeURIComponent(url);
       const res = await fetch(proxyUrl, { signal: controller.signal });
       clearTimeout(timer);
       if (!res.ok) continue;
       const text = await res.text();
-      const items = parseRSS(text)
-        .slice(0, 5)
-        .map(item => ({ ...item, region }));
+      let items = parseRSS(text).map(item => ({ ...item, region, source: item.source || label }));
+
+      // 매일노동뉴스는 키워드 필터로 이 카테고리에 맞는 기사만 선택
+      if (kwFilter && kwFilter.length > 0) {
+        items = items.filter(item => kwFilter.some(k => item.title.includes(k)));
+      }
+
+      items = items.slice(0, 5);
       bucket.push(...items);
+      usedLabels.add(label);
     } catch(e) {
       clearTimeout(timer);
-      console.warn('피드 오류:', e.message);
+      console.warn('피드 오류:', label, e.message);
     }
-    // 요청 간격
     await new Promise(r => setTimeout(r, 400));
   }
 
-  // 중복 제거 (제목 앞 40자 기준)
+  // 중복 제거
   const seen = new Set();
   const unique = bucket.filter(item => {
     const key = item.title.slice(0, 40).toLowerCase();
@@ -622,8 +658,8 @@ async function refreshCategory(catId) {
     return true;
   });
 
-  // 최근 36시간 필터 + 최대 6건
-  const recent = unique.filter(item => isRecent(item.isoDate)).slice(0, 6);
+  // 36시간 필터 (strict=true) + 최대 6건
+  const recent = unique.filter(item => isRecent(item.isoDate, true)).slice(0, 6);
 
   renderItems(catId, recent, false);
   setRefreshBtnSpinning(catId, false);
@@ -631,10 +667,11 @@ async function refreshCategory(catId) {
   const now = new Date().toLocaleTimeString('ko-KR', {
     timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit'
   });
+  const srcStr = [...usedLabels].join(' · ');
   if (recent.length > 0) {
-    setRts(catId, '✅ 새로고침 완료: ' + now + ' (실시간 RSS)');
+    setRts(catId, `✅ ${now} 새로고침 완료 · 출처: ${srcStr}`);
   } else {
-    setRts(catId, '⚠️ ' + now + ' · 오늘 기사 없음 — 내일 다시 확인하세요');
+    setRts(catId, `⚠️ ${now} · 오늘 기사 없음 (출처: ${srcStr})`);
   }
 }
 
