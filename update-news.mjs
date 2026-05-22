@@ -224,10 +224,10 @@ async function summarize(article, catId) {
 
 【형식 규칙 — 반드시 준수】
 - background : 이슈의 핵심 배경을 신문 소제목처럼 한 줄로 작성 (예: "삼성 노조, 성과급 요구 파업 준비...사측과 협의 무산")
-- main       : 기사의 핵심 사실과 경과를 1~2문장으로 설명
-- implication: background·main을 근거로 HR·노무 실무자가 주목해야 할 영향과 대응 방향 1~2문장
+- main       : 기사의 핵심 사실·경과·판결 내용을 1~2문장으로 정확하게 설명
+- implication: 【HR·노무 실무자 관점】 법적·정책적 위험 + 채용·보상·운영 정책 조정 필요성을 1~2문장으로 구체적으로 기술
 
-{"background":"한 줄 소제목 형식","main":"핵심 사실 1~2문장","implication":"실무 영향·대응 방향 1~2문장"}`;
+{"background":"한 줄 소제목 형식","main":"핵심 사실 1~2문장","implication":"HR 실무 위험·대응 방향 1~2문장"}`;
 
   // ──────── Gemini 재시도 2회 ────────
   for (let attempt = 0; attempt < 2; attempt++) {
