@@ -1,23 +1,23 @@
 {
-  "updated": "2026년 5월 21일 목요일 PM 02:52",
-  "aiSummary": true,
-  "sources": {
-    "korean": "매일노동뉴스, Google 뉴스",
-    "global": "HR Dive, HR Morning, Google News"
-  },
+  "updated": "2026년 5월 22일 금요일 AM 10:28",
+  "aiSummary": false,
+  "sources": "매일노동뉴스 · Google 뉴스 (고용노동부 / 대법원·중노위 / 법제처 / 경총 / 한국노동연구원)",
   "law": [
+    {
+      "title": "전태일·우분투재단, 활동가·비정규직에 장학금",
+      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234548",
+      "desc": "사무금융우분투재단(이사장 이창곤)과 전태일이소선장학재단(이사장 최종인), 전태일재단(이사장 박승흡)이 21일 오후 전태일기념관에서 ‘전태일with우분투 장학금 전달식’을 열고 15명에게 각 100만원의 장학금을 전달했다고 밝혔다. 3개 단체 장학사업은 올해로 4회째를 맞았다. 사회활동가와 불안정 노동자 당사자 및 자녀를 대상으로 지난",
+      "date": "2026년 5월 22일",
+      "isoDate": "2026-05-22T06:30:04.000Z",
+      "sourceLabel": "매일노동뉴스"
+    },
     {
       "title": "청년 노동자의 죽음과 ‘비정규직 보호법’",
       "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234534",
       "desc": "이달 26일이면 열아홉 살 청년노동자 김군이 서울지하철 2호선 구의역 스크린도어를 홀로 정비하다 전동차에 부딪혀 사망한 지 꼭 10주년이 된다. 위험작업시 ‘2인1조 작업’을 하라는 과업지시서가 존재했음에도 그는 왜 혼자 일하다가 희생당했는가. 정부와 서울시가 밀어붙인 공공기관 경영혁신정책의 일환으로 대대적 외주용역화가 진행됐으며, 그렇게 외부화된 업무에 필요한 적정규모의 인력이 배치되지 않아 2인1조 작업이 불가능했기 때문이다.구의역 사고 이후에도 비정규직 청년 노동자들의 노동재해 사망사고는 계속 이어져 왔다. 2018년 발전소",
       "date": "2026년 5월 21일",
       "isoDate": "2026-05-21T06:30:05.000Z",
-      "source": "",
-      "region": "국내",
-      "sourceLabel": "매일노동뉴스",
-      "background": "",
-      "main": "이달 26일이면 열아홉 살 청년노동자 김군이 서울지하철 2호선 구의역 스크린도어를 홀로 정비하다 전동차에 부딪혀 사망한 지 꼭 10주년이 된다. 위험작업시 ‘2인1조 작업’을 하라는 과업지시서가 존재했음에도 그는 왜 혼자 일하다가 희생당했는가. 정부와 서울시가 밀어붙인 공공기관 경영혁신정책의 일환으로 대대적 외주용역화가 진행됐으며, 그렇게 외부화된 업무에 필요한 적정규모의 인력이 배치되지 않아 2인1조 작업이 불가능했기 때문이다.구의역 사고 이후에도 비정규직 청년 노동자들의 노동재해 사망사고는 계속 이어져 왔다. 2018년 발전소",
-      "implication": ""
+      "sourceLabel": "매일노동뉴스"
     },
     {
       "title": "ILO 국제노동회의, 플랫폼 국제노동기준 제정할까",
@@ -25,148 +25,7 @@
       "desc": "국제노동기구(ILO)의 최고 의사결정기구인 국제노동회의(ILC)가 다음달 1일 스위스 제네바에서 개막해 12일 폐막한다. 187개 회원국 노사정 대표단이 참가하는 이번 114차 총회에서는 플랫폼 경제에서의 괜찮은 일자리, 직장내 성평등을 위한 전환적 의제, 사회적 대화와 삼자주의 등 세 가지 핵심 의제를 집중 논의한다.이번 총회의 최대 관심사는 플랫폼 경제 관련 국제노동기준 제정이다. 플랫폼 일자리 의제는 기준설정위원회에서 다뤄지며, 지난해 113차 총회 1차 논의에 이어 협약 및 권고 초안에 대한 2차 논의가 진행된다. ILO 협",
       "date": "2026년 5월 21일",
       "isoDate": "2026-05-21T06:30:05.000Z",
-      "source": "",
-      "region": "국내",
-      "sourceLabel": "매일노동뉴스",
-      "background": "",
-      "main": "국제노동기구(ILO)의 최고 의사결정기구인 국제노동회의(ILC)가 다음달 1일 스위스 제네바에서 개막해 12일 폐막한다. 187개 회원국 노사정 대표단이 참가하는 이번 114차 총회에서는 플랫폼 경제에서의 괜찮은 일자리, 직장내 성평등을 위한 전환적 의제, 사회적 대화와 삼자주의 등 세 가지 핵심 의제를 집중 논의한다.이번 총회의 최대 관심사는 플랫폼 경제 관련 국제노동기준 제정이다. 플랫폼 일자리 의제는 기준설정위원회에서 다뤄지며, 지난해 113차 총회 1차 논의에 이어 협약 및 권고 초안에 대한 2차 논의가 진행된다. ILO 협",
-      "implication": ""
-    }
-  ],
-  "cases": [
-    {
-      "title": "근로복지공단 소송고지 신청 자제해야",
-      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234532",
-      "desc": "얼마 전 동료 변호사에게 질문을 받았다. 정신질환 요양불승인처분 취소소송을 대리하는 그는 사업주에 대한 소송고지가 흔한 일이냐고 물어 왔다. 사정은 이러했다. 노조 대표인 A씨가 차별과 부당노동행위에 대응하는 과정에서 누적된 스트레스로 우울증 등을 진단받아 산재신청을 했다. 근로복지공단은 업무관련성이 낮다는 이유로 불승인했고, 이에 A씨가 행정소송을 제기하자 공단 소송수행자가 사업주에게 소송고지를 신청했다는 것이다. 동료 변호사는 사업주가 이 소송과 법률상 이해관계가 없으니 채택하지 말라고 요청했고 재판부 역시 소송고지 신청을 굳이",
-      "date": "2026년 5월 21일",
-      "isoDate": "2026-05-21T06:30:05.000Z",
-      "source": "",
-      "region": "국내",
-      "sourceLabel": "매일노동뉴스",
-      "background": "",
-      "main": "얼마 전 동료 변호사에게 질문을 받았다. 정신질환 요양불승인처분 취소소송을 대리하는 그는 사업주에 대한 소송고지가 흔한 일이냐고 물어 왔다. 사정은 이러했다. 노조 대표인 A씨가 차별과 부당노동행위에 대응하는 과정에서 누적된 스트레스로 우울증 등을 진단받아 산재신청을 했다. 근로복지공단은 업무관련성이 낮다는 이유로 불승인했고, 이에 A씨가 행정소송을 제기하자 공단 소송수행자가 사업주에게 소송고지를 신청했다는 것이다. 동료 변호사는 사업주가 이 소송과 법률상 이해관계가 없으니 채택하지 말라고 요청했고 재판부 역시 소송고지 신청을 굳이",
-      "implication": ""
-    },
-    {
-      "title": "노동위원회 일정",
-      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234451",
-      "desc": "5월20일 수요일중앙노동위원회 학교법인 조선대학교(쟁의조정) 오전 10시, 주식회사 프리죤, 케이티텔레캅 주식회사(부당해고) 사단법인 동물권행동 카라(부당징계) 오후 1시30분, 학교법인 조선대학교(쟁의조정) 오후 2시, 송정 농업협동조합(부당해고) 서울교통네트웍 주식회사(부당정직) 오후 2시30분, 삼성중공업 주식회사(부당징계) 광양불고기(부당해고) 오후 3시30분, 에스케이하이닉스시스템아이씨우시솔루션스 주식회사(부당강격) 여주쌈밥(부당해고) 오후 4시30분, 농업회사법인 주식회사 사조원(부당해고) 오후 5시30분서울지방노동위원회",
-      "date": "2026년 5월 20일",
-      "isoDate": "2026-05-20T06:30:04.000Z",
-      "source": "",
-      "region": "국내",
-      "sourceLabel": "매일노동뉴스",
-      "background": "",
-      "main": "5월20일 수요일중앙노동위원회 학교법인 조선대학교(쟁의조정) 오전 10시, 주식회사 프리죤, 케이티텔레캅 주식회사(부당해고) 사단법인 동물권행동 카라(부당징계) 오후 1시30분, 학교법인 조선대학교(쟁의조정) 오후 2시, 송정 농업협동조합(부당해고) 서울교통네트웍 주식회사(부당정직) 오후 2시30분, 삼성중공업 주식회사(부당징계) 광양불고기(부당해고) 오후 3시30분, 에스케이하이닉스시스템아이씨우시솔루션스 주식회사(부당강격) 여주쌈밥(부당해고) 오후 4시30분, 농업회사법인 주식회사 사조원(부당해고) 오후 5시30분서울지방노동위원회",
-      "implication": ""
-    },
-    {
-      "title": "대법원 21일 현대중공업 ‘원청 사용자성’ 판단",
-      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234439",
-      "desc": "대법원 전원합의체가 21일 HD현대중공업의 원청 사용자성을 판결을 내린다.19일 대법원은 21일 오후 2시 금속노조 현대중공업지부 사내하청지회가 현대중공업을 상대로 낸 단체교섭 청구소송 상고심 판결을 생중계한다고 밝혔다. 이에 따라 판결은 네이버와 유튜브, 페이스북 등에서 시청할 수 있다.사건은 2016년 금속노조 현대중공업지부 사내하청지회가 원청인 현대중공업에 단체교섭을 요구하며 시작됐다. 지회는 현대중공업이 하청노동자 근로조건을 실질적으로 결정하는 지위에 있다며 2016년 단체교섭을 요구했고, 현대중공업은 사용자가 아니라며 이를",
-      "date": "2026년 5월 20일",
-      "isoDate": "2026-05-20T06:30:03.000Z",
-      "source": "",
-      "region": "국내",
-      "sourceLabel": "매일노동뉴스",
-      "background": "",
-      "main": "대법원 전원합의체가 21일 HD현대중공업의 원청 사용자성을 판결을 내린다.19일 대법원은 21일 오후 2시 금속노조 현대중공업지부 사내하청지회가 현대중공업을 상대로 낸 단체교섭 청구소송 상고심 판결을 생중계한다고 밝혔다. 이에 따라 판결은 네이버와 유튜브, 페이스북 등에서 시청할 수 있다.사건은 2016년 금속노조 현대중공업지부 사내하청지회가 원청인 현대중공업에 단체교섭을 요구하며 시작됐다. 지회는 현대중공업이 하청노동자 근로조건을 실질적으로 결정하는 지위에 있다며 2016년 단체교섭을 요구했고, 현대중공업은 사용자가 아니라며 이를",
-      "implication": ""
-    }
-  ],
-  "hr": [
-    {
-      "title": "[인사] 안전보건공단",
-      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234455",
-      "desc": "■ 경영기획이사 임명 △경영기획이사 김인우 2026년 5월20일 시행",
-      "date": "2026년 5월 20일",
-      "isoDate": "2026-05-20T06:30:04.000Z",
-      "source": "",
-      "region": "국내",
-      "sourceLabel": "매일노동뉴스",
-      "background": "",
-      "main": "■ 경영기획이사 임명 △경영기획이사 김인우 2026년 5월20일 시행",
-      "implication": ""
-    },
-    {
-      "title": "Women’s representation is slipping on corporate boards",
-      "url": "https://www.hrdive.com/news/womens-representation-is-slipping-on-corporate-boards/820733/",
-      "desc": "<figure><div><img src=\"https://imgproxy.divecdn.com/SI1BgMZx2Hq_qkyiiyezxQE8M9Zue8yoeurGCOCqAk8/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjczOTMxNDAwLmpwZw==.webp\"/></div></figure><p>President Donald Trump&rsquo;s top-down attack on DEI has trickled into ev",
-      "date": "2026년 5월 21일",
-      "isoDate": "2026-05-20T15:44:00.000Z",
-      "source": "",
-      "region": "글로벌",
-      "sourceLabel": "HR Dive",
-      "background": "",
-      "main": "<figure><div><img src=\"https://imgproxy.divecdn.com/SI1BgMZx2Hq_qkyiiyezxQE8M9Zue8yoeurGCOCqAk8/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjczOTMxNDAwLmpwZw==.webp\"/></div></figure><p>President Donald Trump&rsquo;s top-down attack on DEI has trickled into ev",
-      "implication": ""
-    },
-    {
-      "title": "Indeed parent company touts record growth driven by AI",
-      "url": "https://www.hrdive.com/news/indeed-parent-company-touts-record-growth-driven-by-ai/820710/",
-      "desc": "<figure><div><img src=\"https://imgproxy.divecdn.com/B9OhQo4rsmdxWslwsmrR1LKQKmWitrK0NQhi5Ynkxi8/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjcxNDg3MjM4LmpwZw==.webp\"/></div></figure><p>Despite ongoing concerns about artificial intelligence disrupting job boar",
-      "date": "2026년 5월 20일",
-      "isoDate": "2026-05-20T14:34:00.000Z",
-      "source": "",
-      "region": "글로벌",
-      "sourceLabel": "HR Dive",
-      "background": "",
-      "main": "<figure><div><img src=\"https://imgproxy.divecdn.com/B9OhQo4rsmdxWslwsmrR1LKQKmWitrK0NQhi5Ynkxi8/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjcxNDg3MjM4LmpwZw==.webp\"/></div></figure><p>Despite ongoing concerns about artificial intelligence disrupting job boar",
-      "implication": ""
-    },
-    {
-      "title": "Employer to pay $4.25M to settle claims it failed to consider vaccine exemptions",
-      "url": "https://www.hrdive.com/news/eeoc-millions-for-unvaccinated-workers-affected-by-mass-firing-covid-vaccine/820632/",
-      "desc": "<figure><div><img src=\"https://imgproxy.divecdn.com/N1Nt13wmDgmbBO99VZhqKwhR_oj6uWgyljEVOA6AZgo/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjE3NzE1MDgxLmpwZw==.webp\"/></div></figure><p>Recent EEOC enforcement involving COVID-19 vaccines appears to go hand in ",
-      "date": "2026년 5월 20일",
-      "isoDate": "2026-05-19T19:36:00.000Z",
-      "source": "",
-      "region": "글로벌",
-      "sourceLabel": "HR Dive",
-      "background": "",
-      "main": "<figure><div><img src=\"https://imgproxy.divecdn.com/N1Nt13wmDgmbBO99VZhqKwhR_oj6uWgyljEVOA6AZgo/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjE3NzE1MDgxLmpwZw==.webp\"/></div></figure><p>Recent EEOC enforcement involving COVID-19 vaccines appears to go hand in ",
-      "implication": ""
-    },
-    {
-      "title": "Supreme Court to determine if school employees can sue under Title IX",
-      "url": "https://www.hrdive.com/news/supreme-court-to-determine-if-school-employees-can-sue-under-title-ix/820552/",
-      "desc": "<figure><div><img src=\"https://imgproxy.divecdn.com/ziTZorQlSmji768zIR1l1ktFtiVk9NxBSdR62q8K0IA/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjA4NzE3Njg0LmpwZw==.webp\"/></div></figure><p>The 11th U.S. Circuit Court of Appeals ruled in 2024 that Title IX's right",
-      "date": "2026년 5월 20일",
-      "isoDate": "2026-05-19T19:35:00.000Z",
-      "source": "",
-      "region": "글로벌",
-      "sourceLabel": "HR Dive",
-      "background": "",
-      "main": "<figure><div><img src=\"https://imgproxy.divecdn.com/ziTZorQlSmji768zIR1l1ktFtiVk9NxBSdR62q8K0IA/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjA4NzE3Njg0LmpwZw==.webp\"/></div></figure><p>The 11th U.S. Circuit Court of Appeals ruled in 2024 that Title IX's right",
-      "implication": ""
-    }
-  ],
-  "gov": [
-    {
-      "title": "“산재사망 감소” 보고에 이 대통령 “노동부 할 일 많다”",
-      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234529",
-      "desc": "고용노동부는 이재명 정부 1년 동안 성과로 산재사고 사망률 17.5% 감소, 비정규 노동자에 대한 적정임금·공정임금 지급을 꼽았다. 권창준 노동부 차관은 20일 오후 청와대에서 이재명 대통령 주재로 열린 국무회의 겸 비상경제점검회의에서 이같이 보고했다. 이날 국무회의에서는 관계부처 합동으로 ‘1주년 국정성과 보고’가 이어졌다. </p",
-      "date": "2026년 5월 21일",
-      "isoDate": "2026-05-21T06:30:05.000Z",
-      "source": "",
-      "region": "국내",
-      "sourceLabel": "매일노동뉴스",
-      "background": "",
-      "main": "고용노동부는 이재명 정부 1년 동안 성과로 산재사고 사망률 17.5% 감소, 비정규 노동자에 대한 적정임금·공정임금 지급을 꼽았다. 권창준 노동부 차관은 20일 오후 청와대에서 이재명 대통령 주재로 열린 국무회의 겸 비상경제점검회의에서 이같이 보고했다. 이날 국무회의에서는 관계부처 합동으로 ‘1주년 국정성과 보고’가 이어졌다. </p",
-      "implication": ""
-    },
-    {
-      "title": "[전재수 더불어민주당 부산시장 후보] “노동 존중받고 좋은 일자리 넘치는 부산 만들겠다”",
-      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234520",
-      "desc": "“부산 경제의 심장인 노동자 여러분, 이제 ‘일 잘하는 시장’과 함께 현장의 정당한 대우와 부산의 재도약을 일궈낼 때입니다. 지금껏 부산을 버텨온 힘은 현장에서 땀 흘려온 여러분의 손끝에서 나왔습니다. 이제는 여러분들과 함께 노동의 가치가 제대로 존중받는 부산, 대기업이 앞다퉈 찾아와 우리 청년들이 자부심을 느끼며 일하는 ‘기회 도시 부산’을 반드시 만들겠습니다. 여러분의 땀방울이 부산의 미래가 되는 시대를 반드시 열겠습니다.”부산 탈환에 나선 전재수(55·사진) 더불어민주당 부산시장 후보의 출사표다. 전재수 후보의 분투로 부산은",
-      "date": "2026년 5월 21일",
-      "isoDate": "2026-05-21T06:30:04.000Z",
-      "source": "",
-      "region": "국내",
-      "sourceLabel": "매일노동뉴스",
-      "background": "",
-      "main": "“부산 경제의 심장인 노동자 여러분, 이제 ‘일 잘하는 시장’과 함께 현장의 정당한 대우와 부산의 재도약을 일궈낼 때입니다. 지금껏 부산을 버텨온 힘은 현장에서 땀 흘려온 여러분의 손끝에서 나왔습니다. 이제는 여러분들과 함께 노동의 가치가 제대로 존중받는 부산, 대기업이 앞다퉈 찾아와 우리 청년들이 자부심을 느끼며 일하는 ‘기회 도시 부산’을 반드시 만들겠습니다. 여러분의 땀방울이 부산의 미래가 되는 시대를 반드시 열겠습니다.”부산 탈환에 나선 전재수(55·사진) 더불어민주당 부산시장 후보의 출사표다. 전재수 후보의 분투로 부산은",
-      "implication": ""
+      "sourceLabel": "매일노동뉴스"
     },
     {
       "title": "경사노위 ‘청년일자리 희망 위원회’ 발족",
@@ -174,12 +33,61 @@
       "desc": "경제사회노동위원회가 청년 일자리 문제를 논의하는 의제별위원회를 발족했다. 지난 7일 소규모 사업장 산업안전보건위원회 출범에 이어 두 번째다. 경사노위는 20일 오전 서울 종로구 경사노위 대회의실에서 ‘청년일자리 희망 위원회’ 출범식과 1차 회의를 열었다. 청년층의 일자리 진입과 경력개발 지원, 고용의 질 향상 및 일자리 격차 완화를",
       "date": "2026년 5월 21일",
       "isoDate": "2026-05-21T06:30:04.000Z",
-      "source": "",
-      "region": "국내",
-      "sourceLabel": "매일노동뉴스",
-      "background": "",
-      "main": "경제사회노동위원회가 청년 일자리 문제를 논의하는 의제별위원회를 발족했다. 지난 7일 소규모 사업장 산업안전보건위원회 출범에 이어 두 번째다. 경사노위는 20일 오전 서울 종로구 경사노위 대회의실에서 ‘청년일자리 희망 위원회’ 출범식과 1차 회의를 열었다. 청년층의 일자리 진입과 경력개발 지원, 고용의 질 향상 및 일자리 격차 완화를",
-      "implication": ""
+      "sourceLabel": "매일노동뉴스"
+    }
+  ],
+  "cases": [
+    {
+      "title": "현대중 하청 단체교섭 소송, 9년 기다림 끝에 ‘패소’ 확정",
+      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234540",
+      "desc": "HD현대중공업 사내하청 노조가 원청을 상대로 단체교섭을 요구하며 제기한 소송에서 대법원 전원합의체가 원청이 단체교섭에 응할 의무가 없다고 판단했다. 단체교섭 의무를 부담하는 사용자에 해당하지 않는다고 본 것이다. 개정 노동조합 및 노동관계조정법(노조법) 시행 전 사안의 경우 종전 법리에 따라 판단하는 것이 타당하다는 취지다. 노동계는 “낡은 법리에 갇혀 노동3권을 외면한 결과”라고 비판했다.대법원 전원합의체(주심 오경미 대법관)는 21일 금속노조 현대중공업지부 사내하청지회가 HD현대중공업을 상대로 낸 단체교섭 청구소송 상고심에서 원",
+      "date": "2026년 5월 22일",
+      "isoDate": "2026-05-22T06:30:03.000Z",
+      "sourceLabel": "매일노동뉴스"
+    },
+    {
+      "title": "근로복지공단 소송고지 신청 자제해야",
+      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234532",
+      "desc": "얼마 전 동료 변호사에게 질문을 받았다. 정신질환 요양불승인처분 취소소송을 대리하는 그는 사업주에 대한 소송고지가 흔한 일이냐고 물어 왔다. 사정은 이러했다. 노조 대표인 A씨가 차별과 부당노동행위에 대응하는 과정에서 누적된 스트레스로 우울증 등을 진단받아 산재신청을 했다. 근로복지공단은 업무관련성이 낮다는 이유로 불승인했고, 이에 A씨가 행정소송을 제기하자 공단 소송수행자가 사업주에게 소송고지를 신청했다는 것이다. 동료 변호사는 사업주가 이 소송과 법률상 이해관계가 없으니 채택하지 말라고 요청했고 재판부 역시 소송고지 신청을 굳이",
+      "date": "2026년 5월 21일",
+      "isoDate": "2026-05-21T06:30:05.000Z",
+      "sourceLabel": "매일노동뉴스"
+    }
+  ],
+  "hr": [
+    {
+      "title": "조선노연 “정규직 채용·AI도입 논의하자”",
+      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234552",
+      "desc": "조선업종 노조들이 한국조선해양플랜트협회에 교섭을 위한 협의체 구성을 요구했다. 청년 신규채용과 인공지능(AI) 도입을 의제로 논의하자고 제안했다. 금속노조(위원장 박상만)와 조선업종노조연대(공동의장 김유철, 이태현)는 21일 오전 서울 강남구 한국조선해양플핸트협회 앞에서 기자회견을 열고 “당면한 조선업 현실이 사업장 하나의 문제가 아니",
+      "date": "2026년 5월 22일",
+      "isoDate": "2026-05-22T06:30:04.000Z",
+      "sourceLabel": "매일노동뉴스"
+    }
+  ],
+  "gov": [
+    {
+      "title": "김영훈 장관 “사람 중심 AI 전환, ILO와 협력”",
+      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234545",
+      "desc": "김영훈 고용노동부 장관은 21일 질베르 웅보 국제노동기구(ILO) 사무총장을 만나 ‘사람 중심 인공지능(AI) 전환’을 위한 협력을 제안했다. 노동부는 이날 오후 김 장관이 서울 종로구 포시즌스 호텔에서 웅보 총장을 만나 한-ILO 간 전략적 협력 강화와 ILO 내 한국의 역할 확대 방안 등을 논의했다고 밝혔다. 웅보 총장이 2022",
+      "date": "2026년 5월 22일",
+      "isoDate": "2026-05-22T06:30:04.000Z",
+      "sourceLabel": "매일노동뉴스"
+    },
+    {
+      "title": "“산재사망 감소” 보고에 이 대통령 “노동부 할 일 많다”",
+      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234529",
+      "desc": "고용노동부는 이재명 정부 1년 동안 성과로 산재사고 사망률 17.5% 감소, 비정규 노동자에 대한 적정임금·공정임금 지급을 꼽았다. 권창준 노동부 차관은 20일 오후 청와대에서 이재명 대통령 주재로 열린 국무회의 겸 비상경제점검회의에서 이같이 보고했다. 이날 국무회의에서는 관계부처 합동으로 ‘1주년 국정성과 보고’가 이어졌다. </p",
+      "date": "2026년 5월 21일",
+      "isoDate": "2026-05-21T06:30:05.000Z",
+      "sourceLabel": "매일노동뉴스"
+    },
+    {
+      "title": "[전재수 더불어민주당 부산시장 후보] “노동 존중받고 좋은 일자리 넘치는 부산 만들겠다”",
+      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234520",
+      "desc": "“부산 경제의 심장인 노동자 여러분, 이제 ‘일 잘하는 시장’과 함께 현장의 정당한 대우와 부산의 재도약을 일궈낼 때입니다. 지금껏 부산을 버텨온 힘은 현장에서 땀 흘려온 여러분의 손끝에서 나왔습니다. 이제는 여러분들과 함께 노동의 가치가 제대로 존중받는 부산, 대기업이 앞다퉈 찾아와 우리 청년들이 자부심을 느끼며 일하는 ‘기회 도시 부산’을 반드시 만들겠습니다. 여러분의 땀방울이 부산의 미래가 되는 시대를 반드시 열겠습니다.”부산 탈환에 나선 전재수(55·사진) 더불어민주당 부산시장 후보의 출사표다. 전재수 후보의 분투로 부산은",
+      "date": "2026년 5월 21일",
+      "isoDate": "2026-05-21T06:30:04.000Z",
+      "sourceLabel": "매일노동뉴스"
     },
     {
       "title": "김영훈 장관 중재로 삼성전자 노사 ‘막판 교섭’",
@@ -187,25 +95,7 @@
       "desc": "삼성전자 노사가 중앙노동원회 조정이 결렬된 지 4시간 만에 교섭석상에 앉았다. 김영훈 고용노동부 장관이 직접 중재에 나섰다.최승호 삼성그룹 초기업노조 삼성전자지부 위원장과 여명구 삼성전자 DS부문 피플팀장은 20일 오후 4시부터 경기도 수원시에 있는 경기지방고용노동청에서 성과급 수준과 지급 방안 등을 놓고 교섭을 시작했다. 이번 교섭은 김영훈 장관이 중재해 마련된 것으로, 교섭 자리에는 김 장관도 함께했다.노동부 관계자는 “이번 교섭은 중노위 사후조정 절차가 아니라 노사 당사자 간 교섭”이라며 “노동부 장관은 이를 지원하는 역할을",
       "date": "2026년 5월 21일",
       "isoDate": "2026-05-20T16:20:57.000Z",
-      "source": "",
-      "region": "국내",
-      "sourceLabel": "매일노동뉴스",
-      "background": "",
-      "main": "삼성전자 노사가 중앙노동원회 조정이 결렬된 지 4시간 만에 교섭석상에 앉았다. 김영훈 고용노동부 장관이 직접 중재에 나섰다.최승호 삼성그룹 초기업노조 삼성전자지부 위원장과 여명구 삼성전자 DS부문 피플팀장은 20일 오후 4시부터 경기도 수원시에 있는 경기지방고용노동청에서 성과급 수준과 지급 방안 등을 놓고 교섭을 시작했다. 이번 교섭은 김영훈 장관이 중재해 마련된 것으로, 교섭 자리에는 김 장관도 함께했다.노동부 관계자는 “이번 교섭은 중노위 사후조정 절차가 아니라 노사 당사자 간 교섭”이라며 “노동부 장관은 이를 지원하는 역할을",
-      "implication": ""
-    },
-    {
-      "title": "노동부 “성과급 배분 사회적 논의”",
-      "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=234434",
-      "desc": "고용노동부가 삼성전자 노조 파업과 관련해 성과급 배분과 관련한 사회적 대화를 하겠다는 뜻을 밝혔다.권창준 노동부 차관은 19일 오전 열린 기후에너지환경노동위원회 전체회의에서 “(삼성전자) 사태가 이것으로 끝나는 게 아니라 향후 전체적으로 기업의 이익과 미래, 이것을 어떻게 배분할 것인지에 대한 사회적 논의도 필요하다”며 “현재의 교섭구조 문제까지 고민해야 한다. 이 사태가 마무리가 되고 나면 사회적 논의를 본격적으로 짤 계획”이라고 말했다.이날 기후노동위 전체회의에서는 국민의힘의 요구로 삼성전자 노조의 총파업을 주제로 현안질의가 열",
-      "date": "2026년 5월 20일",
-      "isoDate": "2026-05-20T06:30:02.000Z",
-      "source": "",
-      "region": "국내",
-      "sourceLabel": "매일노동뉴스",
-      "background": "",
-      "main": "고용노동부가 삼성전자 노조 파업과 관련해 성과급 배분과 관련한 사회적 대화를 하겠다는 뜻을 밝혔다.권창준 노동부 차관은 19일 오전 열린 기후에너지환경노동위원회 전체회의에서 “(삼성전자) 사태가 이것으로 끝나는 게 아니라 향후 전체적으로 기업의 이익과 미래, 이것을 어떻게 배분할 것인지에 대한 사회적 논의도 필요하다”며 “현재의 교섭구조 문제까지 고민해야 한다. 이 사태가 마무리가 되고 나면 사회적 논의를 본격적으로 짤 계획”이라고 말했다.이날 기후노동위 전체회의에서는 국민의힘의 요구로 삼성전자 노조의 총파업을 주제로 현안질의가 열",
-      "implication": ""
+      "sourceLabel": "매일노동뉴스"
     }
   ]
 }
