@@ -206,7 +206,13 @@ function gnewsUrl(q) {
 
 async function summarize(article, catId) {
   if (!GEMINI_API_KEY) {
-    return { background: '', main: article.desc || '', implication: '' };
+    // API 키 없음 → 기본값 생성
+    const titleShort = article.title.split(/[·,/]/)[0].trim();
+    return {
+      background: titleShort.length > 35 ? titleShort.substring(0, 35) + '...' : titleShort,
+      main: article.desc || '',
+      implication: 'HR·노무 트렌드 관점에서 주시 필요',
+    };
   }
 
   const prompt =
@@ -223,51 +229,56 @@ async function summarize(article, catId) {
 
 {"background":"한 줄 소제목 형식","main":"핵심 사실 1~2문장","implication":"실무 영향·대응 방향 1~2문장"}`;
 
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 30000);
-  try {
-    const url =
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { maxOutputTokens: 600, temperature: 0.3 },
-      }),
-      signal: controller.signal,
-    });
-    clearTimeout(timer);
+  // ──────── Gemini 재시도 2회 ────────
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 30000);
+    try {
+      const url =
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { maxOutputTokens: 600, temperature: 0.3 },
+        }),
+        signal: controller.signal,
+      });
+      clearTimeout(timer);
 
-    if (!res.ok) {
-      const err = await res.text();
-      console.warn(`  ⚠ Gemini HTTP ${res.status}:`, err.slice(0, 120));
-      return { background: '', main: article.desc || '', implication: '' };
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      const data = await res.json();
+      const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+
+      let jsonStr = '';
+      const cb = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+      if (cb) jsonStr = cb[1].trim();
+      else { const rw = text.match(/\{[\s\S]*\}/); if (rw) jsonStr = rw[0]; }
+      if (!jsonStr) throw new Error('JSON 추출 실패');
+
+      const j = JSON.parse(jsonStr);
+      return {
+        background:  (j.background  || '').trim(),
+        main:        (j.main        || article.desc || '').trim(),
+        implication: (j.implication || '').trim(),
+      };
+    } catch (e) {
+      clearTimeout(timer);
+      console.warn(`  ⚠ 시도 ${attempt + 1}/2 실패: ${e.message}`);
+      if (attempt < 1) await new Promise(r => setTimeout(r, 500));
     }
-
-    const data = await res.json();
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-
-    let jsonStr = '';
-    const cb = text.match(/```(?:json)?\s*([\s\S]*?)```/);
-    if (cb) jsonStr = cb[1].trim();
-    else { const rw = text.match(/\{[\s\S]*\}/); if (rw) jsonStr = rw[0]; }
-    if (!jsonStr) {
-      console.warn('  ⚠ JSON 추출 실패');
-      return { background: '', main: article.desc || '', implication: '' };
-    }
-
-    const j = JSON.parse(jsonStr);
-    return {
-      background:  (j.background  || '').trim(),
-      main:        (j.main        || article.desc || '').trim(),
-      implication: (j.implication || '').trim(),
-    };
-  } catch (e) {
-    clearTimeout(timer);
-    console.warn('  ⚠ 요약 오류:', e.message);
-    return { background: '', main: article.desc || '', implication: '' };
   }
+
+  // ──────── 재시도 2회 실패 → 기본값 생성 ────────
+  console.warn('  ⚠ Gemini 완전 실패, 기본 요약으로 대체');
+  const titleShort = article.title.split(/[·,/]/)[0].trim();
+  return {
+    background: titleShort.length > 35 ? titleShort.substring(0, 35) + '...' : titleShort,
+    main: article.desc || '',
+    implication: 'HR·노무 트렌드 관점에서 주시 필요',
+  };
 }
 
 // ══════════════════════════════════════════════════════════

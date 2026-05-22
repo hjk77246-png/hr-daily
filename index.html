@@ -571,42 +571,56 @@ async function aiSummarize(article, catId) {
 
 {"background":"한 줄 소제목 형식","main":"핵심 사실 1~2문장","implication":"실무 영향·대응 방향 1~2문장"}`;
 
-  try {
-    const res = await fetch('https://text.pollinations.ai/openai', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'openai',
-        messages: [{ role: 'user', content: prompt }],
-        seed: 42,
-        private: true,
-        jsonMode: true,
-      }),
-      signal: AbortSignal.timeout(35000),
-    });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
+  // ──────── Pollinations 재시도 2회 ────────
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const res = await fetch('https://text.pollinations.ai/openai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'openai',
+          messages: [{ role: 'user', content: prompt }],
+          seed: 42,
+          private: true,
+          jsonMode: true,
+        }),
+        signal: AbortSignal.timeout(35000),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
 
-    const data = await res.json();
-    const text = data.choices?.[0]?.message?.content || '';
+      const data = await res.json();
+      const text = data.choices?.[0]?.message?.content || '';
 
-    let jsonStr = '';
-    const cb = text.match(/```(?:json)?\s*([\s\S]*?)```/);
-    if (cb) jsonStr = cb[1].trim();
-    else { const rw = text.match(/\{[\s\S]*\}/); if (rw) jsonStr = rw[0]; }
-    if (!jsonStr) throw new Error('JSON 없음');
+      let jsonStr = '';
+      const cb = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+      if (cb) jsonStr = cb[1].trim();
+      else { const rw = text.match(/\{[\s\S]*\}/); if (rw) jsonStr = rw[0]; }
+      if (!jsonStr) throw new Error('JSON 없음');
 
-    const j = JSON.parse(jsonStr);
-    return {
-      ...article,
-      background:  (j.background  || '').trim(),
-      main:        (j.main        || article.desc || '').trim(),
-      implication: (j.implication || '').trim(),
-    };
-  } catch(e) {
-    console.warn('[AI]', e.message);
-    // 실패 시에도 desc를 주요내용으로 표시
-    return { ...article, background:'', main: article.desc||'', implication:'' };
+      const j = JSON.parse(jsonStr);
+      return {
+        ...article,
+        background:  (j.background  || '').trim(),
+        main:        (j.main        || article.desc || '').trim(),
+        implication: (j.implication || '').trim(),
+      };
+    } catch(e) {
+      console.warn(`[AI] 시도 ${attempt + 1}/${2} 실패:`, e.message);
+      if (attempt < 1) {
+        await new Promise(r => setTimeout(r, 600 + Math.random() * 400));
+      }
+    }
   }
+
+  // ──────── 재시도 2회 실패 → 기본값 생성 ────────
+  console.warn('[AI] 완전 실패, 기본 요약으로 대체');
+  const titleShort = article.title.split(/[·,/]/)[0].trim();
+  return {
+    ...article,
+    background: titleShort.length > 35 ? titleShort.substring(0, 35) + '...' : titleShort,
+    main: article.desc || '',
+    implication: 'HR·노무 트렌드 관점에서 주시 필요',
+  };
 }
 
 // ══════════════════════════════════════════════════
