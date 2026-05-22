@@ -211,12 +211,18 @@
     /* 아이템 목록 */
     .items { flex: 1; }
 
-    /* 개별 뉴스 아이템 */
+    /* 개별 뉴스 아이템 — 카드 전체가 원문 링크 */
     .nitem {
+      display: block;
       padding: 18px 18px 14px;
       border-bottom: 1px solid #f3f4f6;
+      text-decoration: none;
+      color: inherit;
+      transition: background .15s;
     }
     .nitem:last-child { border-bottom: none; }
+    .nitem:hover { background: #f9fafb; }
+    .nitem:hover .ntitle { color: var(--blue); }
 
     /* 제목 */
     .ntitle {
@@ -224,73 +230,58 @@
       font-weight: 700;
       color: var(--t1);
       line-height: 1.45;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
+      transition: color .15s;
     }
 
-    /* 요약 블록 */
+    /* 요약 블록 — 항상 표시 */
     .summary-block {
-      border-top: 1px solid #f3f4f6;
+      border: 1px solid #f0f0f0;
+      border-radius: 8px;
+      background: #fafafa;
+      overflow: hidden;
       margin-bottom: 12px;
     }
     .srow {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
-      padding: 9px 0;
-      border-bottom: 1px solid #f3f4f6;
+      gap: 0;
+      padding: 8px 12px;
+      border-bottom: 1px solid #f0f0f0;
     }
     .srow:last-child { border-bottom: none; }
     .slabel {
-      font-size: .68rem;
+      font-size: .67rem;
       font-weight: 700;
-      color: var(--t3);
+      color: #fff;
       white-space: nowrap;
       flex-shrink: 0;
-      width: 52px;
-      padding-top: 2px;
-      text-transform: uppercase;
-      letter-spacing: .3px;
+      width: 54px;
+      padding: 2px 0;
+      text-align: center;
+      border-radius: 4px;
+      margin-right: 10px;
+      margin-top: 2px;
+      letter-spacing: .2px;
     }
+    .sl-bg   { background: #3b82f6; }
+    .sl-main { background: #10b981; }
+    .sl-imp  { background: #f59e0b; }
     .stext {
-      font-size: .84rem;
+      font-size: .83rem;
       color: #374151;
       line-height: 1.65;
+      flex: 1;
     }
 
-    /* desc 폴백 */
-    .ndesc {
-      font-size: .84rem;
-      color: var(--t2);
-      line-height: 1.65;
-      margin-bottom: 12px;
-      padding-top: 4px;
-    }
-
-    /* 푸터 */
+    /* 메타 푸터 */
     .nfooter {
       display: flex;
       align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
+      justify-content: space-between;
     }
-    .nmeta {
-      font-size: .7rem;
-      color: var(--t3);
-    }
-    .nlink {
-      margin-left: auto;
-      font-size: .74rem;
-      font-weight: 600;
-      color: var(--blue);
-      text-decoration: none;
-      padding: 3px 10px;
-      border: 1px solid #bfdbfe;
-      border-radius: 6px;
-      background: #eff6ff;
-      transition: all .15s;
-      white-space: nowrap;
-    }
-    .nlink:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .nmeta { font-size: .7rem; color: var(--t3); }
+    .nmore { font-size: .7rem; color: var(--blue); font-weight: 600; }
 
     /* 상태 박스 */
     .statebox {
@@ -408,6 +399,8 @@
 // 설정
 // ══════════════════════════════════════════════════
 
+const DATA_URL = 'data.json';   // GitHub Actions가 매일 생성 (Gemini AI 요약 포함)
+
 const PROXIES = [
   u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
   u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
@@ -437,7 +430,6 @@ const CAT_KW = {
 
 const LABORTODAY = 'http://www.labortoday.co.kr/rss/allArticle.xml';
 
-// 카테고리별 Google 뉴스 쿼리 (국내 전용)
 const GNEWS = {
   law:   ['노동법 개정 입법 법안 시행령 국회',
           '법제처 법령 근로기준법 최저임금 개정'],
@@ -468,15 +460,6 @@ function isRecent(iso) {
   return d >= -(12*3600000) && d <= 48*3600000;
 }
 
-function dedup(arr) {
-  const s = new Set();
-  return arr.filter(x => {
-    const k = x.title.slice(0,40).toLowerCase();
-    return s.has(k) ? false : (s.add(k), true);
-  });
-}
-
-// 외국어 제목 판별 (한글 포함 여부)
 function isKorean(title) {
   return /[가-힣]/.test(title);
 }
@@ -510,7 +493,7 @@ function parseRSS(xml, label) {
 
     const rawTitle = clean(get('title'));
     if (!rawTitle || rawTitle.length < 4) continue;
-    if (!isKorean(rawTitle)) continue;   // 한글 없으면 제외
+    if (!isKorean(rawTitle)) continue;
 
     const parts = rawTitle.split(' - ');
     const title  = parts.length > 1 ? parts.slice(0,-1).join(' - ') : rawTitle;
@@ -533,7 +516,7 @@ function parseRSS(xml, label) {
 }
 
 // ══════════════════════════════════════════════════
-// 기사 수집
+// 기사 수집 (실시간 — ↻ 버튼 전용)
 // ══════════════════════════════════════════════════
 
 async function collect(catId) {
@@ -547,7 +530,6 @@ async function collect(catId) {
     if (!seen.has(k)) { seen.add(k); all.push(item); }
   };
 
-  // 1) 매일노동뉴스 — 키워드 필터
   const ltXml = await fetchProxy(LABORTODAY);
   if (ltXml) {
     parseRSS(ltXml, '매일노동뉴스')
@@ -555,7 +537,6 @@ async function collect(catId) {
       .forEach(add);
   }
 
-  // 2) Google 뉴스 — 카테고리별 다중 쿼리 (국내 전용)
   for (const q of gqs) {
     const url = `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=ko&gl=KR&ceid=KR:ko`;
     const xml = await fetchProxy(url);
@@ -566,7 +547,7 @@ async function collect(catId) {
 }
 
 // ══════════════════════════════════════════════════
-// AI 요약 (Pollinations — 무료, 키 불필요)
+// AI 요약 (Pollinations — 무료, ↻ 버튼 실시간용)
 // ══════════════════════════════════════════════════
 
 async function aiSummarize(article, catId) {
@@ -613,12 +594,14 @@ async function aiSummarize(article, catId) {
     };
   } catch(e) {
     console.warn('[AI]', e.message);
+    // 실패 시에도 desc를 주요내용으로 표시
     return { ...article, background:'', main: article.desc||'', implication:'' };
   }
 }
 
 // ══════════════════════════════════════════════════
-// 렌더링
+// 렌더링 — 항상 배경/주요내용/시사점 3단 구조
+//           카드 전체가 원문 링크
 // ══════════════════════════════════════════════════
 
 function renderItems(catId, items) {
@@ -637,27 +620,27 @@ function renderItems(catId, items) {
 
   cnt.textContent = items.length + '건';
   wrap.innerHTML = items.map(item => {
-    const hasAI = item.background || item.implication;
-    let summaryHtml = '';
+    // 항상 3단 구조 — AI 요약이 없으면 desc를 주요내용에 표시
+    const bg   = (item.background  || '').trim();
+    const main = (item.main        || item.desc || '').trim();
+    const imp  = (item.implication || '').trim();
 
-    if (hasAI) {
-      summaryHtml = `<div class="summary-block">
-        ${item.background  ? `<div class="srow"><span class="slabel">배경</span><span class="stext">${esc(item.background)}</span></div>`  : ''}
-        ${item.main        ? `<div class="srow"><span class="slabel">주요내용</span><span class="stext">${esc(item.main)}</span></div>`       : ''}
-        ${item.implication ? `<div class="srow"><span class="slabel">시사점</span><span class="stext">${esc(item.implication)}</span></div>` : ''}
-      </div>`;
-    } else if (item.desc) {
-      summaryHtml = `<p class="ndesc">${esc(item.desc)}</p>`;
-    }
+    const summaryHtml = `<div class="summary-block">
+      ${bg   ? `<div class="srow"><span class="slabel sl-bg">배경</span><span class="stext">${esc(bg)}</span></div>`        : ''}
+      ${main ? `<div class="srow"><span class="slabel sl-main">주요내용</span><span class="stext">${esc(main)}</span></div>` : ''}
+      ${imp  ? `<div class="srow"><span class="slabel sl-imp">시사점</span><span class="stext">${esc(imp)}</span></div>`     : ''}
+    </div>`;
 
-    return `<div class="nitem">
+    // 카드 전체를 <a> 태그로 — 클릭하면 원문 이동
+    const href = item.url ? ` href="${esc(item.url)}" target="_blank" rel="noopener"` : '';
+    return `<a class="nitem"${href}>
       <p class="ntitle">${esc(item.title)}</p>
       ${summaryHtml}
       <div class="nfooter">
-        <span class="nmeta">${esc(item.sourceLabel||'')}${item.date ? ' · ' + item.date : ''}</span>
-        ${item.url ? `<a class="nlink" href="${esc(item.url)}" target="_blank" rel="noopener">원문 보기 →</a>` : ''}
+        <span class="nmeta">${esc(item.sourceLabel||'')}${item.date ? ' · ' + esc(item.date) : ''}</span>
+        <span class="nmore">원문 보기 →</span>
       </div>
-    </div>`;
+    </a>`;
   }).join('');
 }
 
@@ -674,27 +657,69 @@ function setLoading(catId, msg) {
 }
 
 // ══════════════════════════════════════════════════
-// 브리핑 시작
+// data.json 로드 (GitHub Actions Gemini AI 요약)
+// ══════════════════════════════════════════════════
+
+async function loadDataJson() {
+  try {
+    const r = await fetch(DATA_URL + '?_=' + Date.now(), { cache: 'no-cache' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return await r.json();
+  } catch(e) {
+    console.warn('[data.json]', e.message);
+    return null;
+  }
+}
+
+// ══════════════════════════════════════════════════
+// 브리핑 시작 — data.json 우선 (Gemini 요약)
+//               없으면 실시간 수집 + Pollinations
 // ══════════════════════════════════════════════════
 
 async function startBriefing() {
   const btn = document.getElementById('btn-start');
   btn.disabled = true;
-  btn.textContent = '⏳  수집 중...';
+  btn.textContent = '⏳  불러오는 중...';
 
   document.getElementById('landing').style.display = 'none';
   document.getElementById('news-grid').style.display = 'grid';
-  document.getElementById('header-meta').textContent = '실시간 수집 중...';
+  document.getElementById('header-meta').textContent = '로딩 중...';
 
-  await Promise.all(['law','cases','hr','gov'].map(c => refreshCat(c)));
+  ['law','cases','hr','gov'].forEach(c => setSbar(c, '📡 데이터 로드 중...'));
 
-  const now = new Date().toLocaleTimeString('ko-KR',
-    { timeZone:'Asia/Seoul', hour:'2-digit', minute:'2-digit' });
-  document.getElementById('header-meta').textContent = `${now} 업데이트 · 🤖 AI 요약`;
+  // 1. GitHub Actions가 생성한 data.json 시도 (Gemini AI 요약 포함)
+  const data = await loadDataJson();
+  const hasData = data &&
+    ['law','cases','hr','gov'].some(c => data[c]?.length);
+
+  if (hasData) {
+    // ✅ data.json 성공 → Gemini 요약 즉시 표시
+    const updLabel = data.updated
+      ? new Date(data.updated).toLocaleString('ko-KR',
+          { timeZone:'Asia/Seoul', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit' })
+      : '오늘';
+
+    ['law','cases','hr','gov'].forEach(c => {
+      renderItems(c, data[c] || []);
+      setSbar(c, `✅ ${updLabel} AI 요약 (Gemini) · 매일 09시 자동 갱신`);
+    });
+
+    document.getElementById('header-meta').textContent =
+      `${updLabel} Gemini AI 요약 · ↻ 실시간 새로고침 가능`;
+
+  } else {
+    // ⚠️ data.json 없음 → 실시간 수집 fallback
+    document.getElementById('header-meta').textContent = '실시간 수집 중...';
+    await Promise.all(['law','cases','hr','gov'].map(c => refreshCat(c)));
+    const now = new Date().toLocaleTimeString('ko-KR',
+      { timeZone:'Asia/Seoul', hour:'2-digit', minute:'2-digit' });
+    document.getElementById('header-meta').textContent = `${now} 업데이트 · 🤖 AI 요약`;
+  }
 }
 
 // ══════════════════════════════════════════════════
-// 카테고리 새로고침 (실시간 수집 + AI 요약)
+// 카테고리 새로고침 — ↻ 버튼 클릭 시
+//   실시간 RSS 수집 + Pollinations AI 요약
 // ══════════════════════════════════════════════════
 
 async function refreshCat(catId) {
@@ -721,13 +746,13 @@ async function refreshCat(catId) {
         articles.slice(i, i + 3).map(a => aiSummarize(a, catId))
       );
       results.push(...batch);
-      renderItems(catId, results);   // 진행 중 표시
+      renderItems(catId, results);   // 진행 중간 표시
       setSbar(catId, `🤖 AI 요약 중... (${results.length} / ${articles.length}건)`);
     }
 
     const now = new Date().toLocaleTimeString('ko-KR',
       { timeZone:'Asia/Seoul', hour:'2-digit', minute:'2-digit' });
-    setSbar(catId, `✅ ${now} 수집·요약 완료`);
+    setSbar(catId, `✅ ${now} 실시간 수집·요약 완료`);
 
   } catch(e) {
     console.error(catId, e);
