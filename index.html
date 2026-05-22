@@ -338,8 +338,8 @@
     <div class="date-tag" id="date-tag">📅 로딩 중...</div>
     <h1 class="landing-title">오늘의 HR · 노무<br>핵심 브리핑</h1>
     <p class="landing-desc">
-      노동법 개정 · 판례 · HR 트렌드 · 고용부 가이드<br>
-      국내 기사 실시간 수집 후 배경·주요내용·시사점으로 요약
+      노동법 개정 · 판례 · HR실무 · 고용부·경총·연구원 동향<br>
+      국내 전문 사이트 실시간 수집 → 배경·주요내용·시사점 AI 요약
     </p>
     <button class="btn-start" id="btn-start" onclick="startBriefing()">
       📰&nbsp; 브리핑 시작
@@ -389,7 +389,7 @@
 
   <div class="card card-gov">
     <div class="card-head">
-      <div class="cat-pill"><div class="cat-dot"></div><h2>고용부 행정해석 · 가이드</h2></div>
+      <div class="cat-pill"><div class="cat-dot"></div><h2>고용부 · 경총 · 연구원 동향</h2></div>
       <span class="cnt" id="cnt-gov">-</span>
       <button class="rbtn" id="rb-gov" onclick="refreshCat('gov')" title="새로고침">↻</button>
     </div>
@@ -401,7 +401,7 @@
 
 </div>
 
-<footer>HR 데일리 브리핑 · 출처: 매일노동뉴스, Google 뉴스 (국내) · AI 요약: Pollinations AI</footer>
+<footer>HR 데일리 브리핑 · 매일노동뉴스 · Google 뉴스 (고용노동부 / 대법원·중노위 / 법제처 / 경총 / 한국노동연구원) · AI: Pollinations</footer>
 
 <script>
 // ══════════════════════════════════════════════════
@@ -415,29 +415,39 @@ const PROXIES = [
 
 const CAT_LABEL = {
   law:   '노동법 개정·입법 동향',
-  cases: '대법원·행정법원 판례',
-  hr:    'HR 트렌드·인사관리',
-  gov:   '고용부 행정해석·가이드',
+  cases: '대법원·노동위원회 판례',
+  hr:    'HR·인사관리·노무실무',
+  gov:   '고용부·경총·연구원 동향',
 };
 
 const CAT_KW = {
-  cases: ['판결','판례','대법원','고등법원','지방법원','행정법원','노동위원회',
-          '판정','부당해고','부당노동행위','소송','선고','취소 판결'],
-  gov:   ['고용노동부','노동부','행정해석','가이드라인','지침','고시','공고',
-          '보도자료','근로감독','노동청','지원금','일자리','장관','차관'],
-  law:   ['개정','입법','법안','제정','법률안','시행령','최저임금법','근로기준법',
-          '비정규직','보호법','최저임금','주52시간','탄력근로','연장근로','국회'],
-  hr:    ['채용','인사','복리후생','유연근무','재택근무','직무','역량','승진','연봉',
-          '조직문화','인재','리더십','MZ세대','번아웃','몰입','성과관리'],
+  cases: ['판결','판례','대법원','고등법원','지방법원','행정법원',
+          '노동위원회','중노위','판정','부당해고','부당노동행위',
+          '소송','선고','구제신청','심판','파기환송','취소 판결'],
+  gov:   ['고용노동부','노동부','행정해석','가이드라인','지침','고시',
+          '보도자료','근로감독','노동청','지원금','일자리','장관','차관',
+          '경총','경영계','한국노동연구원','노동연구원'],
+  law:   ['개정','입법','법안','제정','법률안','시행령','시행규칙',
+          '최저임금법','근로기준법','비정규직','보호법',
+          '최저임금','주52시간','탄력근로','연장근로','국회','법제처'],
+  hr:    ['채용','인사','복리후생','유연근무','재택근무','직무','역량',
+          '승진','연봉','조직문화','인재','리더십','MZ세대','번아웃',
+          '몰입','성과관리','취업규칙','복무규정','노무','이레이버'],
 };
 
-// 국내 소스만 사용
 const LABORTODAY = 'http://www.labortoday.co.kr/rss/allArticle.xml';
+
+// 카테고리별 Google 뉴스 쿼리 (국내 전용)
 const GNEWS = {
-  law:   'https://news.google.com/rss/search?q=노동법+개정+입법+법안&hl=ko&gl=KR&ceid=KR:ko',
-  cases: 'https://news.google.com/rss/search?q=대법원+노동+판결+부당해고&hl=ko&gl=KR&ceid=KR:ko',
-  hr:    'https://news.google.com/rss/search?q=HR+인사관리+조직문화+채용&hl=ko&gl=KR&ceid=KR:ko',
-  gov:   'https://news.google.com/rss/search?q=고용노동부+행정해석+지침+가이드라인&hl=ko&gl=KR&ceid=KR:ko',
+  law:   ['노동법 개정 입법 법안 시행령 국회',
+          '법제처 법령 근로기준법 최저임금 개정'],
+  cases: ['대법원 노동 판결 부당해고 취소',
+          '노동위원회 중노위 판정 구제신청 심판'],
+  gov:   ['고용노동부 보도자료 행정해석 지침 정책',
+          '경총 경영계 노동정책 고용 임금 동향',
+          '한국노동연구원 정책 보고서 분석 동향'],
+  hr:    ['HR 인사관리 채용 조직문화 성과관리',
+          '노무 실무 취업규칙 복무규정 직원관리'],
 };
 
 // ══════════════════════════════════════════════════
@@ -527,29 +537,32 @@ function parseRSS(xml, label) {
 // ══════════════════════════════════════════════════
 
 async function collect(catId) {
-  const kws = CAT_KW[catId] || [];
-  const all = [];
+  const kws  = CAT_KW[catId]  || [];
+  const gqs  = GNEWS[catId]   || [];
+  const seen = new Set();
+  const all  = [];
 
-  // 1) 매일노동뉴스 — 키워드 매칭
+  const add = item => {
+    const k = item.title.slice(0, 40).toLowerCase();
+    if (!seen.has(k)) { seen.add(k); all.push(item); }
+  };
+
+  // 1) 매일노동뉴스 — 키워드 필터
   const ltXml = await fetchProxy(LABORTODAY);
   if (ltXml) {
     parseRSS(ltXml, '매일노동뉴스')
       .filter(i => isRecent(i.iso) && kws.some(k => i.title.includes(k)))
-      .forEach(i => all.push(i));
+      .forEach(add);
   }
 
-  // 2) Google 뉴스 국내
-  const gnUrl = GNEWS[catId];
-  if (gnUrl) {
-    const gnXml = await fetchProxy(gnUrl);
-    if (gnXml) {
-      parseRSS(gnXml, 'Google 뉴스')
-        .filter(i => isRecent(i.iso))
-        .forEach(i => all.push(i));
-    }
+  // 2) Google 뉴스 — 카테고리별 다중 쿼리 (국내 전용)
+  for (const q of gqs) {
+    const url = `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=ko&gl=KR&ceid=KR:ko`;
+    const xml = await fetchProxy(url);
+    if (xml) parseRSS(xml, 'Google 뉴스').filter(i => isRecent(i.iso)).forEach(add);
   }
 
-  return dedup(all).slice(0, 5);
+  return all.slice(0, 5);
 }
 
 // ══════════════════════════════════════════════════
