@@ -216,8 +216,12 @@ async function summarize(article, catId) {
 제목: ${article.title}
 내용: ${article.desc || '(없음)'}
 
-【필수】아래 세 항목을 빠짐없이 완성된 한국어 문장(1~2문장)으로 작성하세요.
-{"background":"이 이슈가 등장한 사회적·정책적 배경","main":"기사의 핵심 사실과 내용","implication":"HR/노무 실무자의 구체적 대응 방향과 시사점"}`;
+【형식 규칙 — 반드시 준수】
+- background : 이슈의 핵심 배경을 신문 소제목처럼 한 줄로 작성 (예: "삼성 노조, 성과급 요구 파업 준비...사측과 협의 무산")
+- main       : 기사의 핵심 사실과 경과를 1~2문장으로 설명
+- implication: background·main을 근거로 HR·노무 실무자가 주목해야 할 영향과 대응 방향 1~2문장
+
+{"background":"한 줄 소제목 형식","main":"핵심 사실 1~2문장","implication":"실무 영향·대응 방향 1~2문장"}`;
 
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 30000);
