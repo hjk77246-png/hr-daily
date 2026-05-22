@@ -697,33 +697,69 @@ async function startBriefing() {
 
   ['law','cases','hr','gov'].forEach(c => setSbar(c, '📡 데이터 로드 중...'));
 
-  // 1. GitHub Actions가 생성한 data.json 시도 (Gemini AI 요약 포함)
+  // 1. GitHub Actions가 생성한 data.json 시도
   const data = await loadDataJson();
-  const hasData = data &&
-    ['law','cases','hr','gov'].some(c => data[c]?.length);
+  const hasData = data && ['law','cases','hr','gov'].some(c => data[c]?.length);
 
   if (hasData) {
-    // ✅ data.json 성공 → Gemini 요약 즉시 표시
+    // Gemini AI 요약이 있는지 확인 (background 또는 implication 중 하나라도 있으면 OK)
+    const hasGemini = ['law','cases','hr','gov'].some(c =>
+      data[c]?.some(item => item.background || item.implication)
+    );
+
     const updLabel = data.updated
       ? new Date(data.updated).toLocaleString('ko-KR',
           { timeZone:'Asia/Seoul', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit' })
       : '오늘';
 
-    ['law','cases','hr','gov'].forEach(c => {
-      renderItems(c, data[c] || []);
-      setSbar(c, `✅ ${updLabel} AI 요약 (Gemini) · 매일 09시 자동 갱신`);
-    });
+    if (hasGemini) {
+      // ✅ Gemini 요약 있음 → 즉시 표시
+      ['law','cases','hr','gov'].forEach(c => {
+        renderItems(c, data[c] || []);
+        setSbar(c, `✅ ${updLabel} AI 요약 (Gemini) · 매일 09시 자동 갱신`);
+      });
+      document.getElementById('header-meta').textContent =
+        `${updLabel} Gemini AI 요약 · ↻ 실시간 새로고침 가능`;
 
-    document.getElementById('header-meta').textContent =
-      `${updLabel} Gemini AI 요약 · ↻ 실시간 새로고침 가능`;
+    } else {
+      // ⚠️ 기사는 있지만 AI 요약 없음 → 기사 먼저 표시 후 Pollinations으로 자동 요약
+      ['law','cases','hr','gov'].forEach(c => {
+        renderItems(c, data[c] || []);
+        setSbar(c, '🤖 AI 요약 생성 중...');
+      });
+      document.getElementById('header-meta').textContent = '🤖 배경·주요내용·시사점 생성 중...';
+
+      await Promise.all(['law','cases','hr','gov'].map(async c => {
+        const items = data[c] || [];
+        if (!items.length) { setSbar(c, '기사 없음'); return; }
+
+        const results = [];
+        for (let i = 0; i < items.length; i += 3) {
+          const batch = await Promise.all(
+            items.slice(i, i + 3).map(a => aiSummarize(a, c))
+          );
+          results.push(...batch);
+          renderItems(c, results);
+          setSbar(c, `🤖 AI 요약 중... (${results.length} / ${items.length}건)`);
+        }
+        const t = new Date().toLocaleTimeString('ko-KR',
+          { timeZone:'Asia/Seoul', hour:'2-digit', minute:'2-digit' });
+        setSbar(c, `✅ ${t} AI 요약 완료`);
+      }));
+
+      const t2 = new Date().toLocaleTimeString('ko-KR',
+        { timeZone:'Asia/Seoul', hour:'2-digit', minute:'2-digit' });
+      document.getElementById('header-meta').textContent =
+        `${t2} AI 요약 완료 · ↻ 새로고침 가능`;
+    }
 
   } else {
-    // ⚠️ data.json 없음 → 실시간 수집 fallback
+    // ⚠️ data.json 없음 → 실시간 수집 + AI 요약 fallback
     document.getElementById('header-meta').textContent = '실시간 수집 중...';
     await Promise.all(['law','cases','hr','gov'].map(c => refreshCat(c)));
-    const now = new Date().toLocaleTimeString('ko-KR',
+    const t = new Date().toLocaleTimeString('ko-KR',
       { timeZone:'Asia/Seoul', hour:'2-digit', minute:'2-digit' });
-    document.getElementById('header-meta').textContent = `${now} 업데이트 · 🤖 AI 요약`;
+    document.getElementById('header-meta').textContent = `${t} 업데이트 · 🤖 AI 요약`;
   }
 }
 

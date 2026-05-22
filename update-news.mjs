@@ -335,7 +335,8 @@ async function main() {
 
   // ── Step 5: data.json 저장
   const data = {
-    updated: nowKST,
+    updated: new Date().toISOString(),   // ISO 형식으로 저장 (브라우저 파싱 가능)
+    updatedKST: nowKST,                  // 사람이 읽는 용도
     aiSummary: !!GEMINI_API_KEY,
     sources: '매일노동뉴스 · Google 뉴스 (고용노동부 / 대법원·중노위 / 법제처 / 경총 / 한국노동연구원)',
     ...selected,
