@@ -25,7 +25,12 @@ const MAX_PER_CATEGORY = 5;
 //      hr    : HR 인사관리·이레이버 노무 실무
 // ══════════════════════════════════════════════════════════
 
-const LABORTODAY_RSS = 'http://www.labortoday.co.kr/rss/allArticle.xml';
+// 데이터 소스 (3개 RSS)
+const FEEDS = {
+  labortoday:  'http://www.labortoday.co.kr/rss/allArticle.xml',    // 매일노동뉴스
+  moel:        'https://www.moel.go.kr/rss/policy.do',              // 고용노동부 (정책자료)
+  yonhap:      'https://www.yonhapnewseconomytv.com/news/rss.do',   // 연합뉴스경제TV
+};
 
 const SOURCES = {
   law: {
@@ -287,21 +292,30 @@ async function main() {
     day: 'numeric', weekday: 'long', hour: '2-digit', minute: '2-digit',
   });
   console.log(`\n🚀 HR 데일리 수집 시작 (${nowKST})`);
-  console.log(`📡 소스: 매일노동뉴스 RSS만 사용 (최근 60일)`);
+  console.log(`📡 소스: 매일노동뉴스 + 고용노동부 + 연합뉴스경제TV (최근 60일)`);
   console.log(`🤖 Gemini AI: ${GEMINI_API_KEY ? '활성화' : '비활성화 (GEMINI_API_KEY 미설정)'}\n`);
 
   const buckets = { law: [], cases: [], hr: [], gov: [] };
 
-  // ── Step 1: 매일노동뉴스 RSS → 키워드 카테고리 분류
-  console.log('📰 [매일노동뉴스] 수집 중...');
-  const ltItems = await fetchFeed(LABORTODAY_RSS, '매일노동뉴스');
-  let ltCount = 0;
-  for (const item of ltItems) {
-    if (!isRecent(item.isoDate)) continue;
-    const cat = categorize(item.title);
-    if (cat) { buckets[cat].push(item); ltCount++; }
+  // ── Step 1: 3개 RSS 소스 수집 → 키워드 카테고리 분류
+  let totalCount = 0;
+  for (const [sourceId, rssUrl] of Object.entries(FEEDS)) {
+    const sourceLabel = {
+      labortoday: '📰 매일노동뉴스',
+      moel:       '🏛️  고용노동부',
+      yonhap:     '📡 연합뉴스경제TV',
+    }[sourceId] || sourceId;
+
+    console.log(`${sourceLabel} 수집 중...`);
+    const items = await fetchFeed(rssUrl, sourceLabel);
+    let count = 0;
+    for (const item of items) {
+      if (!isRecent(item.isoDate)) continue;
+      const cat = categorize(item.title);
+      if (cat) { buckets[cat].push(item); count++; totalCount++; }
+    }
+    console.log(`   → ${count}건 분류\n`);
   }
-  console.log(`   → ${ltCount}건 분류\n`);
 
   // ── Step 2: 전체 중복 제거 → 카테고리별 최신순 상위 5건 (Google News 제외)
   globalDedup(buckets);
@@ -334,7 +348,7 @@ async function main() {
     updated: new Date().toISOString(),   // ISO 형식으로 저장 (브라우저 파싱 가능)
     updatedKST: nowKST,                  // 사람이 읽는 용도
     aiSummary: !!GEMINI_API_KEY,
-    sources: '매일노동뉴스 RSS (LaborToday)',
+    sources: '📰 매일노동뉴스 · 🏛️  고용노동부 · 📡 연합뉴스경제TV',
     ...selected,
   };
   writeFileSync('data.json', JSON.stringify(data, null, 2), 'utf-8');
