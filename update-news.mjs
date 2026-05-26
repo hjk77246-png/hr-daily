@@ -97,9 +97,9 @@ const SOURCES = {
 function isRecent(isoDate) {
   if (!isoDate) return false;
   const diff = Date.now() - new Date(isoDate).getTime();
-  // 파싱 오차 및 3~4일 이내 기사 포함 (-12h ~ +96h)
-  // 3~4일 이내면 여전히 RSS에 떠있고 조회수 높은 콘텐츠 캡처
-  return diff >= -(12 * 3600000) && diff <= 96 * 3600000;
+  // 14일 이내 기사 포함 (-12h ~ +336h = 14days)
+  // 각 카테고리 최소 5개 보장
+  return diff >= -(12 * 3600000) && diff <= 336 * 3600000;
 }
 
 // 한글 포함 여부 (외국어 기사 필터)

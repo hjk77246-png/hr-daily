@@ -589,7 +589,7 @@
     </div>
 
     <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); font-size: .75rem; color: var(--t3);">
-      ✓ 매일 08시 KST에 자동 수집 (기사는 최근 4일 기준)
+      ✓ 매일 08시 KST에 자동 수집 (기사는 최근 14일 기준, 카테고리별 최소 5개 보장)
       <br>✓ 한글 기사만 수집 (외국어 제외)
       <br>✓ Gemini 2.0 Flash AI로 주요내용·시사점 요약
     </div>
@@ -663,8 +663,8 @@ function todayStr() {
 function isRecent(iso) {
   if (!iso) return true;
   const d = Date.now() - new Date(iso).getTime();
-  // 3~4일 이내 + 높은 노출 콘텐츠 포함
-  return d >= -(12*3600000) && d <= 96*3600000;
+  // 14일 이내 + 각 카테고리 최소 5개 보장
+  return d >= -(12*3600000) && d <= 336*3600000;
 }
 
 function isKorean(title) {
