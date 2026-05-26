@@ -450,7 +450,7 @@
     <h1 class="landing-title">오늘의 HR · 노무<br>핵심 브리핑</h1>
     <p class="landing-desc">
       노동법 개정 · 판례 · HR실무 · 고용부·경총·연구원 동향<br>
-      국내 전문 사이트 실시간 수집 → 배경·주요내용·시사점 AI 요약
+      국내 전문 사이트 실시간 수집 → 주요내용·시사점 AI 요약
     </p>
     <button class="btn-start" id="btn-start" onclick="startBriefing()">
       📰&nbsp; 브리핑 시작
@@ -825,7 +825,7 @@ async function aiSummarize(article, catId) {
 }
 
 // ══════════════════════════════════════════════════
-// 렌더링 — 항상 배경/주요내용/시사점 3단 구조
+// 렌더링 — 주요내용 + 시사점 2단 구조
 //           카드 전체가 원문 링크
 // ══════════════════════════════════════════════════
 
@@ -940,7 +940,7 @@ async function startBriefing() {
         renderItems(c, data[c] || []);
         setSbar(c, '🤖 AI 요약 생성 중...');
       });
-      document.getElementById('header-meta').textContent = '🤖 배경·주요내용·시사점 생성 중...';
+      document.getElementById('header-meta').textContent = '🤖 AI 요약 생성 중...';
 
       await Promise.all(['law','cases','hr','gov'].map(async c => {
         const items = data[c] || [];
