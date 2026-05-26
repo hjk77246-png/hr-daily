@@ -528,7 +528,7 @@
         </div>
         <div class="criteria-section">
           <div class="criteria-label">수집 소스</div>
-          <div class="criteria-content">📰 매일노동뉴스 · 🏛️  고용노동부 · 📡 연합뉴스경제TV</div>
+          <div class="criteria-content">📰 매일노동뉴스 (relaxed filtering)</div>
         </div>
         <div class="criteria-section">
           <div class="criteria-label">HR가 주목하는 이유</div>
@@ -545,7 +545,7 @@
         </div>
         <div class="criteria-section">
           <div class="criteria-label">수집 소스</div>
-          <div class="criteria-content">📰 매일노동뉴스 · 🏛️  고용노동부 · 📡 연합뉴스경제TV</div>
+          <div class="criteria-content">📰 매일노동뉴스 (relaxed filtering)</div>
         </div>
         <div class="criteria-section">
           <div class="criteria-label">HR가 주목하는 이유</div>
@@ -562,7 +562,7 @@
         </div>
         <div class="criteria-section">
           <div class="criteria-label">수집 소스</div>
-          <div class="criteria-content">📰 매일노동뉴스 · 🏛️  고용노동부 · 📡 연합뉴스경제TV</div>
+          <div class="criteria-content">📰 매일노동뉴스 (relaxed filtering)</div>
         </div>
         <div class="criteria-section">
           <div class="criteria-label">HR가 주목하는 이유</div>
@@ -579,7 +579,7 @@
         </div>
         <div class="criteria-section">
           <div class="criteria-label">수집 소스</div>
-          <div class="criteria-content">📰 매일노동뉴스 · 🏛️  고용노동부 · 📡 연합뉴스경제TV</div>
+          <div class="criteria-content">📰 매일노동뉴스 (relaxed filtering)</div>
         </div>
         <div class="criteria-section">
           <div class="criteria-label">HR가 주목하는 이유</div>
@@ -589,15 +589,16 @@
     </div>
 
     <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); font-size: .75rem; color: var(--t3);">
-      ✓ 매일 08시 KST에 자동 수집 (3개 RSS 소스, 최근 60일)
+      ✓ 매일 08시 KST에 자동 수집 (매일노동뉴스 RSS, 최근 60일)
       <br>✓ 한글 기사만 수집 (외국어 제외)
+      <br>✓ Relaxed 키워드 필터링으로 충분한 기사 수집
       <br>✓ Gemini 2.0 Flash AI로 주요내용·시사점 요약
       <br>✓ 카테고리별 최소 5건 보장
     </div>
   </div>
 </div>
 
-<footer>HR 데일리 브리핑 · 📰 매일노동뉴스 · 🏛️  고용노동부 · 📡 연합뉴스경제TV · AI: Gemini 2.0 Flash</footer>
+<footer>HR 데일리 브리핑 · 📰 매일노동뉴스 · AI: Gemini 2.0 Flash</footer>
 
 <script>
 // ══════════════════════════════════════════════════
@@ -619,27 +620,25 @@ const CAT_LABEL = {
 };
 
 const CAT_KW = {
-  cases: ['판결','판례','대법원','고등법원','지방법원','행정법원',
-          '노동위원회','중노위','판정','부당해고','부당노동행위',
-          '소송','선고','구제신청','심판','파기환송','취소 판결'],
-  gov:   ['고용노동부','노동부','행정해석','가이드라인','지침','고시',
-          '보도자료','근로감독','노동청','지원금','일자리','장관','차관',
-          '경총','경영계','한국노동연구원','노동연구원'],
-  law:   ['개정','입법','법안','제정','법률안','시행령','시행규칙',
-          '최저임금법','근로기준법','산안법','고평법','파견법',
-          '노동조합법','중대재해법','산업안전보건법','근로시간법',
-          '국회','법제처','입법예고','국회상임위','법제사',
-          '통과','발의','제안','의안번호','개정안'],
-  hr:    ['채용','인사','복리후생','유연근무','재택근무','직무','역량',
-          '승진','연봉','조직문화','인재','리더십','MZ세대','번아웃',
-          '몰입','성과관리','취업규칙','복무규정','노무','이레이버'],
+  cases: ['판결','판례','대법원','법원','행정법원',
+          '노동위','중노위','판정','해고','노동행위',
+          '지위','소송','선고','신청','심판','구제','취소'],
+  gov:   ['고용노동부','노동부','해석','지침','고시',
+          '보도','감독','노동','지원','훈련','정책',
+          '일자리','장관','경총','경영','연구원','동향'],
+  law:   ['개정','입법','법안','제정','법령','시행',
+          '최저임금','근로기준','산안','고평','파견',
+          '노동조합','중대재해','안전보건','근로시간',
+          '국회','법제처','통과','발의'],
+  hr:    ['채용','인사','복리','근무','재택','워크',
+          '직무','역량','승진','연봉','문화','인재','리더',
+          '번아웃','성과','규칙','노무','규정',
+          '온보딩','이직','직원','구성원','근로자'],
 };
 
-// RSS 소스 (3개)
+// RSS 소스 (LaborToday)
 const FEEDS = [
   { url: 'http://www.labortoday.co.kr/rss/allArticle.xml', label: '📰 매일노동뉴스' },
-  { url: 'https://www.moel.go.kr/rss/policy.do',           label: '🏛️  고용노동부' },
-  { url: 'https://www.yonhapnewseconomytv.com/news/rss.do', label: '📡 연합뉴스경제TV' },
 ];
 
 // ══════════════════════════════════════════════════
