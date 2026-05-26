@@ -528,7 +528,7 @@
         </div>
         <div class="criteria-section">
           <div class="criteria-label">수집 소스</div>
-          <div class="criteria-content">매일노동뉴스 · Google 뉴스(입법) · Google 뉴스(법제처)</div>
+          <div class="criteria-content">매일노동뉴스 RSS (LaborToday)</div>
         </div>
         <div class="criteria-section">
           <div class="criteria-label">HR가 주목하는 이유</div>
@@ -545,7 +545,7 @@
         </div>
         <div class="criteria-section">
           <div class="criteria-label">수집 소스</div>
-          <div class="criteria-content">매일노동뉴스 · Google 뉴스(대법원) · Google 뉴스(노동위원회)</div>
+          <div class="criteria-content">매일노동뉴스 RSS (LaborToday)</div>
         </div>
         <div class="criteria-section">
           <div class="criteria-label">HR가 주목하는 이유</div>
@@ -562,7 +562,7 @@
         </div>
         <div class="criteria-section">
           <div class="criteria-label">수집 소스</div>
-          <div class="criteria-content">매일노동뉴스 · Google 뉴스(HR/인사관리) · Google 뉴스(노무실무)</div>
+          <div class="criteria-content">매일노동뉴스 RSS (LaborToday)</div>
         </div>
         <div class="criteria-section">
           <div class="criteria-label">HR가 주목하는 이유</div>
@@ -579,7 +579,7 @@
         </div>
         <div class="criteria-section">
           <div class="criteria-label">수집 소스</div>
-          <div class="criteria-content">매일노동뉴스 · Google 뉴스(고용부) · Google 뉴스(경총) · Google 뉴스(KLI)</div>
+          <div class="criteria-content">매일노동뉴스 RSS (LaborToday)</div>
         </div>
         <div class="criteria-section">
           <div class="criteria-label">HR가 주목하는 이유</div>
@@ -589,14 +589,14 @@
     </div>
 
     <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); font-size: .75rem; color: var(--t3);">
-      ✓ 매일 08시 KST에 자동 수집 (기사는 최근 14일 기준, 카테고리별 최소 5개 보장)
+      ✓ 매일 08시 KST에 자동 수집 (매일노동뉴스 RSS, 최근 60일)
       <br>✓ 한글 기사만 수집 (외국어 제외)
       <br>✓ Gemini 2.0 Flash AI로 주요내용·시사점 요약
     </div>
   </div>
 </div>
 
-<footer>HR 데일리 브리핑 · 매일노동뉴스 · Google 뉴스 (고용노동부 / 대법원·중노위 / 법제처 / 경총 / 한국노동연구원) · AI: Gemini</footer>
+<footer>HR 데일리 브리핑 · 매일노동뉴스 RSS · AI: Gemini 2.0 Flash</footer>
 
 <script>
 // ══════════════════════════════════════════════════
@@ -663,8 +663,8 @@ function todayStr() {
 function isRecent(iso) {
   if (!iso) return true;
   const d = Date.now() - new Date(iso).getTime();
-  // 14일 이내 + 각 카테고리 최소 5개 보장
-  return d >= -(12*3600000) && d <= 336*3600000;
+  // 60일 이내 (LaborToday만 사용)
+  return d >= -(12*3600000) && d <= 1440*3600000;
 }
 
 function isKorean(title) {
@@ -744,11 +744,7 @@ async function collect(catId) {
       .forEach(add);
   }
 
-  for (const q of gqs) {
-    const url = `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=ko&gl=KR&ceid=KR:ko`;
-    const xml = await fetchProxy(url);
-    if (xml) parseRSS(xml, 'Google 뉴스').filter(i => isRecent(i.iso)).forEach(add);
-  }
+  // Google News 제외 (LaborToday만 사용)
 
   // 최신순 정렬 후 상위 5건
   return all

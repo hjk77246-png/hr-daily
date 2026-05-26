@@ -97,9 +97,9 @@ const SOURCES = {
 function isRecent(isoDate) {
   if (!isoDate) return false;
   const diff = Date.now() - new Date(isoDate).getTime();
-  // 14일 이내 기사 포함 (-12h ~ +336h = 14days)
-  // 각 카테고리 최소 5개 보장
-  return diff >= -(12 * 3600000) && diff <= 336 * 3600000;
+  // 60일 이내 기사 포함 (-12h ~ +1440h = 60days)
+  // LaborToday만 사용하므로 충분한 범위 필요
+  return diff >= -(12 * 3600000) && diff <= 1440 * 3600000;
 }
 
 // 한글 포함 여부 (외국어 기사 필터)
@@ -287,7 +287,7 @@ async function main() {
     day: 'numeric', weekday: 'long', hour: '2-digit', minute: '2-digit',
   });
   console.log(`\n🚀 HR 데일리 수집 시작 (${nowKST})`);
-  console.log(`📡 소스: 매일노동뉴스 · Google 뉴스(고용부/대법원/법제처/경총/KLI)`);
+  console.log(`📡 소스: 매일노동뉴스 RSS만 사용 (최근 60일)`);
   console.log(`🤖 Gemini AI: ${GEMINI_API_KEY ? '활성화' : '비활성화 (GEMINI_API_KEY 미설정)'}\n`);
 
   const buckets = { law: [], cases: [], hr: [], gov: [] };
@@ -302,21 +302,8 @@ async function main() {
     if (cat) { buckets[cat].push(item); ltCount++; }
   }
   console.log(`   → ${ltCount}건 분류\n`);
-  await new Promise(r => setTimeout(r, 800));
 
-  // ── Step 2: 카테고리별 Google 뉴스 추가 수집
-  for (const [cat, { label, google }] of Object.entries(SOURCES)) {
-    console.log(`📂 [${label}] 추가 수집...`);
-    for (const { q, label: feedLabel } of google) {
-      const items = await fetchFeed(gnewsUrl(q), feedLabel);
-      const recent = items.filter(i => isRecent(i.isoDate));
-      buckets[cat].push(...recent);
-      console.log(`   [${feedLabel}] ${recent.length}건`);
-      await new Promise(r => setTimeout(r, 600));
-    }
-  }
-
-  // ── Step 3: 전체 중복 제거 → 카테고리별 최신순 상위 5건
+  // ── Step 2: 전체 중복 제거 → 카테고리별 최신순 상위 5건 (Google News 제외)
   globalDedup(buckets);
   const selected = {};
   for (const [cat, items] of Object.entries(buckets)) {
@@ -326,7 +313,7 @@ async function main() {
     console.log(`\n✅ [${SOURCES[cat].label}] ${selected[cat].length}건 선택`);
   }
 
-  // ── Step 4: Gemini AI 요약 (배경·주요내용·시사점)
+  // ── Step 3: Gemini AI 요약 (주요내용·시사점)
   if (GEMINI_API_KEY) {
     console.log('\n🤖 Gemini AI 요약 생성 중...');
     for (const [cat, items] of Object.entries(selected)) {
@@ -342,12 +329,12 @@ async function main() {
     }
   }
 
-  // ── Step 5: data.json 저장
+  // ── Step 4: data.json 저장
   const data = {
     updated: new Date().toISOString(),   // ISO 형식으로 저장 (브라우저 파싱 가능)
     updatedKST: nowKST,                  // 사람이 읽는 용도
     aiSummary: !!GEMINI_API_KEY,
-    sources: '매일노동뉴스 · Google 뉴스 (고용노동부 / 대법원·중노위 / 법제처 / 경총 / 한국노동연구원)',
+    sources: '매일노동뉴스 RSS (LaborToday)',
     ...selected,
   };
   writeFileSync('data.json', JSON.stringify(data, null, 2), 'utf-8');
