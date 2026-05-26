@@ -438,7 +438,7 @@
     <span class="logo-text">HR · 노무 데일리 브리핑</span>
   </div>
   <div style="display: flex; align-items: center; gap: 12px;">
-    <span id="header-meta">매일 오전 9시 자동 업데이트</span>
+    <span id="header-meta">매일 오전 8시 자동 업데이트</span>
     <button class="btn-criteria" onclick="openCriteria()" title="수집 기준">?</button>
   </div>
 </header>
@@ -589,9 +589,9 @@
     </div>
 
     <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); font-size: .75rem; color: var(--t3);">
-      ✓ 매일 09시 KST에 자동 수집 (기사는 최근 48시간 기준)
+      ✓ 매일 08시 KST에 자동 수집 (기사는 최근 4일 기준)
       <br>✓ 한글 기사만 수집 (외국어 제외)
-      <br>✓ Gemini 2.0 Flash AI로 배경·주요내용·시사점 요약
+      <br>✓ Gemini 2.0 Flash AI로 주요내용·시사점 요약
     </div>
   </div>
 </div>
@@ -750,7 +750,10 @@ async function collect(catId) {
     if (xml) parseRSS(xml, 'Google 뉴스').filter(i => isRecent(i.iso)).forEach(add);
   }
 
-  return all.slice(0, 5);
+  // 최신순 정렬 후 상위 5건
+  return all
+    .sort((a, b) => new Date(b.iso || 0) - new Date(a.iso || 0))
+    .slice(0, 5);
 }
 
 // ══════════════════════════════════════════════════
@@ -766,11 +769,10 @@ async function aiSummarize(article, catId) {
 내용: ${article.desc || '(내용 없음)'}
 
 【형식 규칙 — 반드시 준수】
-- background : 이슈의 핵심 배경을 신문 소제목처럼 한 줄로 작성 (예: "삼성 노조, 성과급 요구 파업 준비...사측과 협의 무산")
 - main       : 기사의 핵심 사실·경과·판결 내용을 1~2문장으로 정확하게 설명
 - implication: 【HR·노무 실무자 관점】 법적·정책적 위험 + 채용·보상·운영 정책 조정 필요성을 1~2문장으로 구체적으로 기술
 
-{"background":"한 줄 소제목 형식","main":"핵심 사실 1~2문장","implication":"HR 실무 위험·대응 방향 1~2문장"}`;
+{"main":"핵심 사실 1~2문장","implication":"HR 실무 위험·대응 방향 1~2문장"}`;
 
   // ──────── Pollinations 재시도 2회 ────────
   for (let attempt = 0; attempt < 2; attempt++) {
@@ -815,10 +817,8 @@ async function aiSummarize(article, catId) {
 
   // ──────── 재시도 2회 실패 → 기본값 생성 ────────
   console.warn('[AI] 완전 실패, 기본 요약으로 대체');
-  const titleShort = article.title.split(/[·,/]/)[0].trim();
   return {
     ...article,
-    background: titleShort.length > 35 ? titleShort.substring(0, 35) + '...' : titleShort,
     main: article.desc || '',
     implication: 'HR·노무 트렌드 관점에서 주시 필요',
   };
@@ -845,13 +845,11 @@ function renderItems(catId, items) {
 
   cnt.textContent = items.length + '건';
   wrap.innerHTML = items.map(item => {
-    // 항상 3단 구조 — AI 요약이 없으면 desc를 주요내용에 표시
-    const bg   = (item.background  || '').trim();
+    // 2단 구조 — 주요내용 + 시사점
     const main = (item.main        || item.desc || '').trim();
     const imp  = (item.implication || '').trim();
 
     const summaryHtml = `<div class="summary-block">
-      ${bg   ? `<div class="srow srow-bg"><span class="slabel sl-bg">배경</span><span class="stext">${esc(bg)}</span></div>`        : ''}
       ${main ? `<div class="srow"><span class="slabel sl-main">주요내용</span><span class="stext">${esc(main)}</span></div>` : ''}
       ${imp  ? `<div class="srow"><span class="slabel sl-imp">시사점</span><span class="stext">${esc(imp)}</span></div>`     : ''}
     </div>`;

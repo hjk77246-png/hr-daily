@@ -209,9 +209,7 @@ function gnewsUrl(q) {
 async function summarize(article, catId) {
   if (!GEMINI_API_KEY) {
     // API 키 없음 → 기본값 생성
-    const titleShort = article.title.split(/[·,/]/)[0].trim();
     return {
-      background: titleShort.length > 35 ? titleShort.substring(0, 35) + '...' : titleShort,
       main: article.desc || '',
       implication: 'HR·노무 트렌드 관점에서 주시 필요',
     };
@@ -225,11 +223,10 @@ async function summarize(article, catId) {
 내용: ${article.desc || '(없음)'}
 
 【형식 규칙 — 반드시 준수】
-- background : 이슈의 핵심 배경을 신문 소제목처럼 한 줄로 작성 (예: "삼성 노조, 성과급 요구 파업 준비...사측과 협의 무산")
 - main       : 기사의 핵심 사실·경과·판결 내용을 1~2문장으로 정확하게 설명
 - implication: 【HR·노무 실무자 관점】 법적·정책적 위험 + 채용·보상·운영 정책 조정 필요성을 1~2문장으로 구체적으로 기술
 
-{"background":"한 줄 소제목 형식","main":"핵심 사실 1~2문장","implication":"HR 실무 위험·대응 방향 1~2문장"}`;
+{"main":"핵심 사실 1~2문장","implication":"HR 실무 위험·대응 방향 1~2문장"}`;
 
   // ──────── Gemini 재시도 2회 ────────
   for (let attempt = 0; attempt < 2; attempt++) {
@@ -262,7 +259,6 @@ async function summarize(article, catId) {
 
       const j = JSON.parse(jsonStr);
       return {
-        background:  (j.background  || '').trim(),
         main:        (j.main        || article.desc || '').trim(),
         implication: (j.implication || '').trim(),
       };
@@ -275,9 +271,7 @@ async function summarize(article, catId) {
 
   // ──────── 재시도 2회 실패 → 기본값 생성 ────────
   console.warn('  ⚠ Gemini 완전 실패, 기본 요약으로 대체');
-  const titleShort = article.title.split(/[·,/]/)[0].trim();
   return {
-    background: titleShort.length > 35 ? titleShort.substring(0, 35) + '...' : titleShort,
     main: article.desc || '',
     implication: 'HR·노무 트렌드 관점에서 주시 필요',
   };
@@ -322,11 +316,13 @@ async function main() {
     }
   }
 
-  // ── Step 3: 전체 중복 제거 → 카테고리별 상위 5건
+  // ── Step 3: 전체 중복 제거 → 카테고리별 최신순 상위 5건
   globalDedup(buckets);
   const selected = {};
   for (const [cat, items] of Object.entries(buckets)) {
-    selected[cat] = items.slice(0, MAX_PER_CATEGORY);
+    // 최신순 정렬 후 상위 5건 선택
+    const sorted = items.sort((a, b) => new Date(b.isoDate || 0) - new Date(a.isoDate || 0));
+    selected[cat] = sorted.slice(0, MAX_PER_CATEGORY);
     console.log(`\n✅ [${SOURCES[cat].label}] ${selected[cat].length}건 선택`);
   }
 

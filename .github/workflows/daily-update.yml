@@ -2,7 +2,7 @@ name: HR 데일리 뉴스 자동 업데이트
 
 on:
   schedule:
-    - cron: '0 0 * * *'   # 매일 00:00 UTC = 오전 9시 KST
+    - cron: '0 23 * * *'   # 매일 23:00 UTC = 오전 8시 KST (다음날)
   workflow_dispatch:        # GitHub에서 수동 실행 버튼
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
 
       - name: HR 뉴스 수집 & AI 요약 생성
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node update-news.mjs
 
       - name: data.json 커밋 & 푸시
